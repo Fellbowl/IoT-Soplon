@@ -23,7 +23,6 @@ INFLUX_URL = os.getenv('INFLUX_URL')
 INFLUX_TOKEN = os.getenv('INFLUX_TOKEN')
 INFLUX_ORG = os.getenv('INFLUX_ORG')
 INFLUX_BUCKET = os.getenv('INFLUX_BUCKET')
-PORT = int(os.getenv('PORT', 5000))
 ALLOWED_ORIGIN = os.getenv('ALLOWED_ORIGIN')
 
 if not MQTT_BROKER_URL or not INFLUX_URL or not INFLUX_TOKEN or not INFLUX_ORG or not INFLUX_BUCKET:
@@ -197,11 +196,13 @@ def connect_loop():
 
 
 def start_api_server():
+    port = int(os.environ.get("PORT", 5000))
     thread = threading.Thread(
-        target=lambda: app.run(host='0.0.0.0', port=PORT), daemon=True
+        target=lambda: app.run(host='0.0.0.0', port=port, debug=False, use_reloader=False),
+        daemon=True
     )
     thread.start()
-    logging.info('Started Flask API server on port %d', PORT)
+    logging.info('Started Flask API server on port %d', port)
 
 
 if __name__ == '__main__':
