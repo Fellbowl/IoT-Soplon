@@ -18,8 +18,8 @@ export default function App() {
           <main className="px-4 pb-12 sm:px-6 lg:px-8">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/sign-in" element={<SignInPage />} />
-              <Route path="/sign-up" element={<SignUpPage />} />
+              <Route path="/sign-in/*" element={<SignInPage />} />
+              <Route path="/sign-up/*" element={<SignUpPage />} />
               <Route
                 path="/dashboard"
                 element={
