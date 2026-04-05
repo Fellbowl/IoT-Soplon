@@ -13,6 +13,7 @@ function AppRoutes() {
   const navigate = useNavigate();
 
   return (
+    // For production deployment, VITE_CLERK_PUBLISHABLE_KEY should be a pk_live_... key from Clerk dashboard.
     <ClerkProvider publishableKey={clerkPublishableKey} navigate={(to) => navigate(to)}>
       <div className="min-h-screen bg-slate-50 text-slate-900">
         <Navbar />
@@ -38,6 +39,19 @@ function AppRoutes() {
 }
 
 export default function App() {
+  if (!clerkPublishableKey) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4">
+        <div className="w-full max-w-2xl rounded-3xl border border-red-200 bg-red-50 p-10 text-center shadow-sm">
+          <h1 className="text-xl font-semibold text-red-900">Clerk publishable key is missing.</h1>
+          <p className="mt-4 text-sm leading-6 text-red-700">
+            Check your environment variables. VITE_CLERK_PUBLISHABLE_KEY must be configured for authentication to work.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <BrowserRouter>
       <AppRoutes />

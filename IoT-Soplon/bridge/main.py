@@ -2,12 +2,15 @@ import json
 import logging
 import os
 import sys
+import threading
 import time
 from datetime import datetime
 from urllib.parse import urlparse
 
 import paho.mqtt.client as mqtt
 from dotenv import load_dotenv
+from flask import Flask, jsonify, request
+from flask_cors import CORS
 from influxdb_client import InfluxDBClient, Point, WritePrecision
 
 logging.basicConfig(level=logging.INFO, format='[%(asctime)s] %(levelname)s: %(message)s')
@@ -20,10 +23,17 @@ INFLUX_URL = os.getenv('INFLUX_URL')
 INFLUX_TOKEN = os.getenv('INFLUX_TOKEN')
 INFLUX_ORG = os.getenv('INFLUX_ORG')
 INFLUX_BUCKET = os.getenv('INFLUX_BUCKET')
+PORT = int(os.getenv('PORT', 5000))
+ALLOWED_ORIGIN = os.getenv('ALLOWED_ORIGIN')
 
 if not MQTT_BROKER_URL or not INFLUX_URL or not INFLUX_TOKEN or not INFLUX_ORG or not INFLUX_BUCKET:
-    logging.error('Missing required environment variables. Confirm MQTT_BROKER_URL, INFLUX_URL, INFLUX_TOKEN, INFLUX_ORG, and INFLUX_BUCKET are set.')
+    logging.error(
+        'Missing required environment variables. Confirm MQTT_BROKER_URL, INFLUX_URL, INFLUX_TOKEN, INFLUX_ORG, and INFLUX_BUCKET are set.'
+    )
     sys.exit(1)
+
+app = Flask(__name__)
+CORS(app, origins=[ALLOWED_ORIGIN] if ALLOWED_ORIGIN else '*')
 
 
 def parse_broker_url(url):
@@ -82,6 +92,50 @@ def create_point(data):
     return point
 
 
+influx_client = build_influx_client()
+
+
+def query_last_readings(limit=20):
+    query = (
+        f'from(bucket: "{INFLUX_BUCKET}") '
+        f'|> range(start: -24h) '
+        f'|> filter(fn: (r) => r._measurement == "iot_sensor") '
+        f'|> sort(columns: ["_time"], desc: true) '
+        f'|> limit(n: {limit})'
+    )
+    query_api = influx_client.query_api()
+    readings = []
+
+    tables = query_api.query(query, org=INFLUX_ORG)
+    for table in tables:
+        for record in table.records:
+            record_time = record.get_time()
+            readings.append(
+                {
+                    'time': record_time.isoformat() if hasattr(record_time, 'isoformat') else str(record_time),
+                    'field': record.get_field(),
+                    'value': record.get_value(),
+                }
+            )
+
+    return readings
+
+
+@app.route('/api/readings', methods=['GET'])
+def get_readings():
+    try:
+        readings = query_last_readings(limit=20)
+        return jsonify(readings)
+    except Exception as ex:
+        logging.error('Failed to query readings: %s', ex)
+        return jsonify({'error': 'Unable to fetch readings'}), 500
+
+
+@app.route('/api/health', methods=['GET'])
+def health_check():
+    return jsonify({'status': 'ok'})
+
+
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
         logging.info('Connected to MQTT broker successfully.')
@@ -124,7 +178,6 @@ def connect_loop():
     if use_tls:
         client.tls_set()
 
-    influx_client = build_influx_client()
     client.user_data_set({'influx': influx_client})
     client.on_connect = on_connect
     client.on_disconnect = on_disconnect
@@ -143,6 +196,15 @@ def connect_loop():
             time.sleep(5)
 
 
+def start_api_server():
+    thread = threading.Thread(
+        target=lambda: app.run(host='0.0.0.0', port=PORT), daemon=True
+    )
+    thread.start()
+    logging.info('Started Flask API server on port %d', PORT)
+
+
 if __name__ == '__main__':
     logging.info('Starting MQTT bridge service...')
+    start_api_server()
     connect_loop()

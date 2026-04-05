@@ -10,34 +10,20 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-function formatInfluxRows(result) {
-  const series = result?.results?.[0]?.series?.[0];
-  if (series?.columns && Array.isArray(series.values)) {
-    const columns = series.columns;
-    const timeIndex = columns.indexOf('_time');
-    const valueIndex = columns.indexOf('_value');
-    const fieldIndex = columns.indexOf('_field');
-    return series.values.map((entry, index) => ({
-      id: `${entry[timeIndex]}-${index}`,
-      time: entry[timeIndex],
-      field: fieldIndex >= 0 ? entry[fieldIndex] : 'measurement',
-      value: typeof entry[valueIndex] === 'number' ? entry[valueIndex] : parseFloat(entry[valueIndex]) || 0,
-    }));
+function parseReadings(result) {
+  if (!Array.isArray(result)) {
+    return [];
   }
-  const tables = result?.tables?.[0]?.records;
-  if (Array.isArray(tables)) {
-    return tables.map((record, index) => ({
-      id: `record-${index}`,
-      time: record._time || record.time || new Date().toISOString(),
-      field: record._field || 'measurement',
-      value: typeof record._value === 'number' ? record._value : parseFloat(record._value) || 0,
-    }));
-  }
-  return [];
+  return result.map((item, index) => ({
+    id: item.id || `${item.time}-${index}`,
+    time: item.time,
+    field: item.field || 'measurement',
+    value: typeof item.value === 'number' ? item.value : parseFloat(item.value) || 0,
+  }));
 }
 
 export default function Dashboard() {
-  const { getToken, isLoaded } = useAuth();
+  const { isLoaded } = useAuth();
   const [readings, setReadings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -48,38 +34,34 @@ export default function Dashboard() {
         return;
       }
 
+      const bridgeUrl = import.meta.env.VITE_BRIDGE_URL;
+      if (!bridgeUrl) {
+        setError('Bridge URL is missing. Set VITE_BRIDGE_URL in the frontend environment.');
+        setLoading(false);
+        return;
+      }
+
       try {
         setLoading(true);
         setError('');
-        const token = await getToken();
-        const query = `from(bucket: "${import.meta.env.VITE_INFLUX_BUCKET || 'sensor_data'}") |> range(start: -24h) |> filter(fn: (r) => r._measurement == "iot_sensor") |> sort(columns:["_time"], desc: true) |> limit(n: 20)`;
-        const response = await fetch(import.meta.env.VITE_INFLUX_URL, {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-          body: JSON.stringify({ query }),
-        });
+        const response = await fetch(`${bridgeUrl}/api/readings`);
 
         if (!response.ok) {
-          throw new Error(`InfluxDB request failed with status ${response.status}`);
+          throw new Error(`Bridge request failed with status ${response.status}`);
         }
 
         const result = await response.json();
-        const rows = formatInfluxRows(result);
-        setReadings(rows);
+        setReadings(parseReadings(result));
       } catch (err) {
         console.error(err);
-        setError('Unable to load sensor readings. Confirm your Influx URL and auth settings.');
+        setError('Unable to load sensor readings. Confirm your bridge service is running and VITE_BRIDGE_URL is correct.');
       } finally {
         setLoading(false);
       }
     }
 
     loadData();
-  }, [getToken, isLoaded]);
+  }, [isLoaded]);
 
   const chartData = useMemo(
     () => readings.slice().reverse().map((reading) => ({

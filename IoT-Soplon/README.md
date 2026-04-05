@@ -6,13 +6,15 @@ IoT-Soplon is a full-stack proof-of-concept for an IoT telemetry platform. It in
 
 ```
 [IoT Device] -- MQTT --> [Bridge service (Python)] -- HTTP --> [InfluxDB Cloud]
-                                  |
-                                  v
-                               [Logging / stdout]
-
-[User browser] -- HTTPS --> [Vercel frontend (React + Clerk)]
-                                \__ fetches sensor readings via InfluxDB REST API
+                                  |                            ^
+                                  |                            |
+                                  v                            |
+                           [Flask API] <-- Browser requests -- [Vercel frontend]
 ```
+
+## Architecture note: why the dashboard queries the bridge
+
+InfluxDB Cloud does not allow direct browser requests from a public frontend due to CORS restrictions and the security risk of exposing an API token in client-side code. The React dashboard therefore calls the bridge service at `/api/readings`, and the bridge service queries InfluxDB securely on the backend.
 
 ## Prerequisites
 
@@ -38,7 +40,7 @@ IoT-Soplon is a full-stack proof-of-concept for an IoT telemetry platform. It in
    ```
 4. Set your values in `.env`:
    - `VITE_CLERK_PUBLISHABLE_KEY`
-   - `VITE_INFLUX_URL`
+   - `VITE_BRIDGE_URL`
 5. Run the frontend locally:
    ```bash
    npm run dev
@@ -67,6 +69,8 @@ IoT-Soplon is a full-stack proof-of-concept for an IoT telemetry platform. It in
    - `INFLUX_TOKEN`
    - `INFLUX_ORG`
    - `INFLUX_BUCKET`
+   - `PORT`
+   - `ALLOWED_ORIGIN`
 5. Run the bridge:
    ```bash
    python main.py
@@ -76,14 +80,16 @@ IoT-Soplon is a full-stack proof-of-concept for an IoT telemetry platform. It in
 
 | Variable | Description |
 |---|---|
-| `VITE_CLERK_PUBLISHABLE_KEY` | Clerk publishable key for frontend auth | 
-| `VITE_INFLUX_URL` | Full InfluxDB Cloud query endpoint | 
-| `MQTT_BROKER_URL` | MQTT broker address, e.g. `mqtt://broker.hivemq.com:1883` | 
-| `MQTT_TOPIC` | Topic to subscribe to for sensor payloads | 
-| `INFLUX_URL` | InfluxDB Cloud base URL | 
-| `INFLUX_TOKEN` | InfluxDB API token with write permission | 
-| `INFLUX_ORG` | InfluxDB organization name | 
-| `INFLUX_BUCKET` | InfluxDB bucket name | 
+| `VITE_CLERK_PUBLISHABLE_KEY` | Clerk publishable key for frontend auth |
+| `VITE_BRIDGE_URL` | URL for the deployed bridge API |
+| `MQTT_BROKER_URL` | MQTT broker address, e.g. `mqtt://broker.hivemq.com:1883` |
+| `MQTT_TOPIC` | Topic to subscribe to for sensor payloads |
+| `INFLUX_URL` | InfluxDB Cloud base URL |
+| `INFLUX_TOKEN` | InfluxDB API token with write permission |
+| `INFLUX_ORG` | InfluxDB organization name |
+| `INFLUX_BUCKET` | InfluxDB bucket name |
+| `PORT` | HTTP port for the Flask bridge API |
+| `ALLOWED_ORIGIN` | Optional origin allowed by CORS for the bridge API |
 
 ## Deployment
 
@@ -92,23 +98,32 @@ IoT-Soplon is a full-stack proof-of-concept for an IoT telemetry platform. It in
 1. Create a Vercel project from the `frontend` directory.
 2. Set environment variables in Vercel:
    - `VITE_CLERK_PUBLISHABLE_KEY`
-   - `VITE_INFLUX_URL`
+   - `VITE_BRIDGE_URL`
 3. Deploy.
 
-### Bridge service (Railway or Render)
+### Bridge service (Railway)
 
 1. Use the `bridge` directory as the deployment source.
-2. Add environment variables in the service dashboard:
+2. Add environment variables in the Railway dashboard:
    - `MQTT_BROKER_URL`
    - `MQTT_TOPIC`
    - `INFLUX_URL`
    - `INFLUX_TOKEN`
    - `INFLUX_ORG`
    - `INFLUX_BUCKET`
-3. Ensure the service runs with `python main.py`.
+   - `PORT`
+   - `ALLOWED_ORIGIN`
+3. Ensure the service runs with `python main.py` and expose the configured `PORT`.
+
+### Bridge service (Render)
+
+1. Use the `bridge` directory as the deployment source.
+2. Add the same environment variables to Render.
+3. Render sets the `PORT` environment variable automatically.
+4. Ensure the service runs with `python main.py`.
 
 ## Notes
 
 - The frontend uses Clerk for authentication and route protection.
-- The bridge service is agnostic to the MQTT broker URL and will connect to MQTT brokers configured via environment variables.
-- The dashboard fetches live readings from InfluxDB Cloud and renders them in a table and line chart.
+- The dashboard now queries the bridge service at `/api/readings` instead of calling InfluxDB directly.
+- The bridge service handles MQTT ingestion and also exposes a secure API for browser dashboards.
