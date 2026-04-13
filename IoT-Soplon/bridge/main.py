@@ -64,17 +64,14 @@ def create_point(data):
 
     point = Point(measurement).tag('device', device_id)
 
-    if 'temperature' in data:
-        point = point.field('temperature', float(data['temperature']))
-    if 'humidity' in data:
-        point = point.field('humidity', float(data['humidity']))
-    if 'pressure' in data:
-        point = point.field('pressure', float(data['pressure']))
-    if 'value' in data:
-        point = point.field('value', float(data['value']))
+    METADATA_KEYS = {'device_id', 'device', 'measurement', 'timestamp'}
 
-    if not point.to_line_protocol().count('='):
-        point = point.field('value', float(data.get('reading', 0)))
+    for key, value in data.items():
+        if key not in METADATA_KEYS:
+            try:
+                point = point.field(key, float(value))
+            except (TypeError, ValueError):
+                pass
 
     timestamp = data.get('timestamp')
     if timestamp:
