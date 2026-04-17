@@ -91,7 +91,7 @@ def create_point(data):
 influx_client = build_influx_client()
 
 
-def query_last_readings(limit=20):
+def query_last_readings(limit=100):
     query = (
         f'from(bucket: "{INFLUX_BUCKET}") '
         f'|> range(start: -24h) '
@@ -120,7 +120,7 @@ def query_last_readings(limit=20):
 @app.route('/api/readings', methods=['GET'])
 def get_readings():
     try:
-        readings = query_last_readings(limit=20)
+        readings = query_last_readings(limit=100)
         return jsonify(readings)
     except Exception as ex:
         logging.error('Failed to query readings: %s', ex)

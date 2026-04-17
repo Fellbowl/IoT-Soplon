@@ -6,6 +6,7 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
+  Legend,
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
@@ -135,13 +136,19 @@ export default function Dashboard() {
     resetPolling();
   };
 
-  const chartData = useMemo(
-    () => readings.slice().reverse().map((reading) => ({
-      time: new Date(reading.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      value: reading.value,
-    })),
-    [readings]
-  );
+  const chartData = useMemo(() => {
+    const pivot = {};
+
+    readings.forEach((reading) => {
+      const t = reading.time;
+      if (!pivot[t]) {
+        pivot[t] = { time: t };
+      }
+      pivot[t][reading.field] = reading.value;
+    });
+
+    return Object.values(pivot).sort((a, b) => new Date(a.time) - new Date(b.time));
+  }, [readings]);
 
   return (
     <div className="mx-auto max-w-7xl py-12">
@@ -208,16 +215,66 @@ export default function Dashboard() {
           </div>
         ) : (
           <div className="space-y-10">
-            <div className="h-[320px] rounded-3xl border border-slate-200 bg-slate-50 p-6">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={chartData} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#cbd5e1" />
-                  <XAxis dataKey="time" stroke="#475569" />
-                  <YAxis stroke="#475569" />
-                  <Tooltip />
-                  <Line type="monotone" dataKey="value" stroke="#0ea5e9" strokeWidth={3} dot={false} />
-                </LineChart>
-              </ResponsiveContainer>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="rounded-xl border border-slate-200 bg-white p-4">
+                <h2 className="mb-4 text-sm font-semibold text-slate-900">Temperature (°C)</h2>
+                <ResponsiveContainer width="100%" height={220}>
+                  <LineChart data={chartData} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#cbd5e1" />
+                    <XAxis dataKey="time" stroke="#475569" tickFormatter={(t) => new Date(t).toLocaleTimeString()} />
+                    <YAxis stroke="#475569" />
+                    <Tooltip />
+                    <Legend />
+                    <Line type="monotone" dataKey="temperature" stroke="#E8593C" strokeWidth={3} dot={false} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+
+              <div className="rounded-xl border border-slate-200 bg-white p-4">
+                <h2 className="mb-4 text-sm font-semibold text-slate-900">Pressure (kPa)</h2>
+                <ResponsiveContainer width="100%" height={220}>
+                  <LineChart data={chartData} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#cbd5e1" />
+                    <XAxis dataKey="time" stroke="#475569" tickFormatter={(t) => new Date(t).toLocaleTimeString()} />
+                    <YAxis stroke="#475569" />
+                    <Tooltip />
+                    <Legend />
+                    <Line type="monotone" dataKey="pressure" stroke="#3B8BD4" strokeWidth={3} dot={false} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+
+              <div className="rounded-xl border border-slate-200 bg-white p-4">
+                <h2 className="mb-4 text-sm font-semibold text-slate-900">Acceleration (m/s²)</h2>
+                <ResponsiveContainer width="100%" height={220}>
+                  <LineChart data={chartData} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#cbd5e1" />
+                    <XAxis dataKey="time" stroke="#475569" tickFormatter={(t) => new Date(t).toLocaleTimeString()} />
+                    <YAxis stroke="#475569" />
+                    <Tooltip />
+                    <Legend />
+                    <Line type="monotone" dataKey="accel_x" stroke="#1D9E75" strokeWidth={3} dot={false} />
+                    <Line type="monotone" dataKey="accel_y" stroke="#7F77DD" strokeWidth={3} dot={false} />
+                    <Line type="monotone" dataKey="accel_z" stroke="#D85A30" strokeWidth={3} dot={false} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+
+              <div className="rounded-xl border border-slate-200 bg-white p-4">
+                <h2 className="mb-4 text-sm font-semibold text-slate-900">Gyroscope (°/s)</h2>
+                <ResponsiveContainer width="100%" height={220}>
+                  <LineChart data={chartData} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#cbd5e1" />
+                    <XAxis dataKey="time" stroke="#475569" tickFormatter={(t) => new Date(t).toLocaleTimeString()} />
+                    <YAxis stroke="#475569" />
+                    <Tooltip />
+                    <Legend />
+                    <Line type="monotone" dataKey="gyro_x" stroke="#1D9E75" strokeWidth={3} dot={false} />
+                    <Line type="monotone" dataKey="gyro_y" stroke="#7F77DD" strokeWidth={3} dot={false} />
+                    <Line type="monotone" dataKey="gyro_z" stroke="#D85A30" strokeWidth={3} dot={false} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
             </div>
 
             <div className="overflow-hidden rounded-3xl border border-slate-200">
