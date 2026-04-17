@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useAuth } from '@clerk/clerk-react';
 import {
   LineChart,
@@ -23,45 +23,117 @@ function parseReadings(result) {
 }
 
 export default function Dashboard() {
+  const REFRESH_INTERVAL = 5000;
   const { isLoaded } = useAuth();
+  const bridgeUrl = import.meta.env.VITE_BRIDGE_URL;
   const [readings, setReadings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [lastUpdated, setLastUpdated] = useState(null);
+  const [secondsSinceUpdate, setSecondsSinceUpdate] = useState(null);
+  const [lastFetchHadError, setLastFetchHadError] = useState(false);
+  const [showStaleWarning, setShowStaleWarning] = useState(false);
+  const pollingIntervalRef = useRef(null);
+
+  const loadData = useCallback(async () => {
+    if (!isLoaded) {
+      return;
+    }
+
+    if (!bridgeUrl) {
+      setError('Bridge URL is missing. Set VITE_BRIDGE_URL in the frontend environment.');
+      setLastFetchHadError(true);
+      setShowStaleWarning(readings.length > 0);
+      setLoading(false);
+      return;
+    }
+
+    try {
+      if (readings.length === 0) {
+        setLoading(true);
+      }
+      const response = await fetch(`${bridgeUrl}/api/readings`);
+
+      if (!response.ok) {
+        throw new Error(`Bridge request failed with status ${response.status}`);
+      }
+
+      const result = await response.json();
+      setReadings(parseReadings(result));
+      setError('');
+      setLastFetchHadError(false);
+      setShowStaleWarning(false);
+      setLastUpdated(new Date());
+    } catch (err) {
+      console.error(err);
+      setError('Unable to load sensor readings. Confirm your bridge service is running and VITE_BRIDGE_URL is correct.');
+      setLastFetchHadError(true);
+      setShowStaleWarning(readings.length > 0);
+    } finally {
+      setLoading(false);
+    }
+  }, [bridgeUrl, isLoaded, readings.length]);
+
+  const resetPolling = useCallback(() => {
+    if (pollingIntervalRef.current) {
+      clearInterval(pollingIntervalRef.current);
+    }
+    pollingIntervalRef.current = setInterval(() => {
+      loadData();
+    }, REFRESH_INTERVAL);
+  }, [REFRESH_INTERVAL, loadData]);
 
   useEffect(() => {
-    async function loadData() {
-      if (!isLoaded) {
-        return;
-      }
-
-      const bridgeUrl = import.meta.env.VITE_BRIDGE_URL;
-      if (!bridgeUrl) {
-        setError('Bridge URL is missing. Set VITE_BRIDGE_URL in the frontend environment.');
-        setLoading(false);
-        return;
-      }
-
-      try {
-        setLoading(true);
-        setError('');
-        const response = await fetch(`${bridgeUrl}/api/readings`);
-
-        if (!response.ok) {
-          throw new Error(`Bridge request failed with status ${response.status}`);
-        }
-
-        const result = await response.json();
-        setReadings(parseReadings(result));
-      } catch (err) {
-        console.error(err);
-        setError('Unable to load sensor readings. Confirm your bridge service is running and VITE_BRIDGE_URL is correct.');
-      } finally {
-        setLoading(false);
-      }
+    if (!isLoaded) {
+      return undefined;
     }
 
     loadData();
-  }, [isLoaded]);
+    resetPolling();
+
+    return () => {
+      if (pollingIntervalRef.current) {
+        clearInterval(pollingIntervalRef.current);
+      }
+    };
+  }, [isLoaded, loadData, resetPolling]);
+
+  useEffect(() => {
+    if (!lastUpdated) {
+      setSecondsSinceUpdate(null);
+      return undefined;
+    }
+
+    const tick = () => {
+      const elapsed = Math.max(0, Math.floor((Date.now() - lastUpdated.getTime()) / 1000));
+      setSecondsSinceUpdate(elapsed);
+    };
+
+    tick();
+    const timer = setInterval(tick, 1000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [lastUpdated]);
+
+  const lastUpdatedText = useMemo(() => {
+    if (secondsSinceUpdate === null) {
+      return 'waiting for first update';
+    }
+    if (secondsSinceUpdate < 5) {
+      return 'just now';
+    }
+    if (secondsSinceUpdate < 60) {
+      return `${secondsSinceUpdate}s ago`;
+    }
+    return `${Math.floor(secondsSinceUpdate / 60)}m ago`;
+  }, [secondsSinceUpdate]);
+
+  const handleManualRefresh = async () => {
+    await loadData();
+    resetPolling();
+  };
 
   const chartData = useMemo(
     () => readings.slice().reverse().map((reading) => ({
@@ -76,7 +148,32 @@ export default function Dashboard() {
       <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
         <div className="mb-8 sm:flex sm:items-end sm:justify-between">
           <div>
-            <h1 className="text-2xl font-semibold text-slate-900">Dashboard</h1>
+            <div className="flex items-center gap-3">
+              <h1 className="text-2xl font-semibold text-slate-900">Dashboard</h1>
+              <span
+                className={`inline-flex items-center gap-2 rounded-full px-2.5 py-1 text-xs font-medium ${
+                  lastFetchHadError ? 'bg-slate-100 text-slate-500' : 'bg-emerald-50 text-emerald-700'
+                }`}
+              >
+                {lastFetchHadError ? (
+                  <span className="h-2 w-2 rounded-full bg-slate-400" aria-hidden="true" />
+                ) : (
+                  <span className="relative flex h-2 w-2" aria-hidden="true">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                  </span>
+                )}
+                {lastFetchHadError ? 'Paused' : 'Live'}
+              </span>
+              <button
+                type="button"
+                onClick={handleManualRefresh}
+                className="rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-700 transition hover:bg-slate-50"
+              >
+                Refresh
+              </button>
+            </div>
+            <p className="mt-2 text-sm text-slate-600">Last updated: {lastUpdatedText}</p>
             <p className="mt-2 text-sm text-slate-600">Recent sensor readings from InfluxDB Cloud and a simple performance chart.</p>
           </div>
           <div className="mt-4 rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-700 sm:mt-0">
@@ -84,11 +181,24 @@ export default function Dashboard() {
           </div>
         </div>
 
+        {showStaleWarning ? (
+          <div className="mb-6 flex items-start justify-between rounded-2xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+            <span>Connection lost — showing last known data</span>
+            <button
+              type="button"
+              onClick={() => setShowStaleWarning(false)}
+              className="ml-4 font-medium text-amber-900 underline underline-offset-2"
+            >
+              Dismiss
+            </button>
+          </div>
+        ) : null}
+
         {loading ? (
           <div className="rounded-3xl border border-dashed border-slate-200 p-12 text-center text-slate-600">
             Loading recent sensor readings...
           </div>
-        ) : error ? (
+        ) : error && readings.length === 0 ? (
           <div className="rounded-3xl border border-red-200 bg-red-50 p-8 text-red-700">
             {error}
           </div>
