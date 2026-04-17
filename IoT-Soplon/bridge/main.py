@@ -91,13 +91,12 @@ def create_point(data):
 influx_client = build_influx_client()
 
 
-def query_last_readings(limit=100):
+def query_last_readings():
     query = (
         f'from(bucket: "{INFLUX_BUCKET}") '
-        f'|> range(start: -24h) '
+        f'|> range(start: -5m) '
         f'|> filter(fn: (r) => r._measurement == "iot_sensor") '
-        f'|> sort(columns: ["_time"], desc: true) '
-        f'|> limit(n: {limit})'
+        f'|> sort(columns: ["_time"], desc: false)'
     )
     query_api = influx_client.query_api()
     readings = []
@@ -120,7 +119,7 @@ def query_last_readings(limit=100):
 @app.route('/api/readings', methods=['GET'])
 def get_readings():
     try:
-        readings = query_last_readings(limit=100)
+        readings = query_last_readings()
         return jsonify(readings)
     except Exception as ex:
         logging.error('Failed to query readings: %s', ex)
