@@ -24,7 +24,7 @@ function parseReadings(result) {
 }
 
 export default function Dashboard() {
-  const REFRESH_INTERVAL = 5000;
+  const REFRESH_INTERVAL = 1000;
   const { isLoaded } = useAuth();
   const bridgeUrl = import.meta.env.VITE_BRIDGE_URL;
   const [readings, setReadings] = useState([]);
