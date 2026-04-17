@@ -3,6 +3,7 @@ import { ClerkProvider } from '@clerk/clerk-react';
 import Navbar from './components/Navbar.jsx';
 import Home from './pages/Home.jsx';
 import Dashboard from './pages/Dashboard.jsx';
+import Proyecto from './pages/Proyecto.jsx';
 import SignInPage from './pages/SignInPage.jsx';
 import SignUpPage from './pages/SignUpPage.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
@@ -20,6 +21,7 @@ function AppRoutes() {
         <main className="px-4 pb-12 sm:px-6 lg:px-8">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/proyecto" element={<Proyecto />} />
             <Route path="/sign-in/*" element={<SignInPage />} />
             <Route path="/sign-up/*" element={<SignUpPage />} />
             <Route

@@ -22,6 +22,9 @@ export default function Navbar() {
           <Link className="text-sm font-medium text-slate-600 transition hover:text-slate-900" to="/">
             Home
           </Link>
+          <Link className="text-sm font-medium text-slate-600 transition hover:text-slate-900" to="/proyecto">
+            Proyecto
+          </Link>
           <Link className="text-sm font-medium text-slate-600 transition hover:text-slate-900" to="/dashboard">
             Dashboard
           </Link>
