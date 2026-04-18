@@ -29,14 +29,12 @@ export default function Proyecto() {
       
       {/* 1. HERO SECTION: PORTADA DE LA EXPOSICIÓN (Imagen Nítida) */}
       <section className="relative overflow-hidden px-6 py-20 lg:py-32 shadow-2xl flex items-center min-h-[85vh]">
-        {/* Imagen de fondo nítida de los ciclistas */}
         <div className="absolute inset-0 z-0">
           <img 
             src="/Fondo PROYECTO.jpg" 
             alt="Ciclistas compitiendo - Soplón" 
             className="w-full h-full object-cover object-top" 
           />
-          {/* Degradado para que el texto resalte, pero sin borrar la imagen */}
           <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/60 to-slate-900/90"></div>
         </div>
 
@@ -51,7 +49,6 @@ export default function Proyecto() {
             "El que te sopla la estrategia, no el secreto"
           </p>
           
-          {/* Equipo e info de la Universidad */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-slate-200 text-sm font-semibold">
             <div className="bg-black/40 p-4 rounded-2xl border border-white/10 backdrop-blur-md hover:bg-black/60 transition">Samuel S. Castrillón</div>
             <div className="bg-black/40 p-4 rounded-2xl border border-white/10 backdrop-blur-md hover:bg-black/60 transition">Juan Pablo Arenas</div>
@@ -112,12 +109,11 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* 3. EL PROBLEMA Y LA COMPETENCIA (Efecto Parallax con la imagen de ciclistas) */}
+      {/* 3. EL PROBLEMA Y LA COMPETENCIA */}
       <section 
         className="py-24 relative bg-fixed bg-center bg-cover overflow-hidden" 
         style={{ backgroundImage: "url('/Fondo PROYECTO.jpg')" }}
       >
-        {/* Capa oscura translúcida para que resalte el texto sobre los ciclistas */}
         <div className="absolute inset-0 bg-slate-900/85 backdrop-blur-sm"></div>
         
         <div className="mx-auto max-w-7xl px-6 relative z-10 text-center">
@@ -127,21 +123,18 @@ export default function Proyecto() {
           </p>
           
           <div className="grid md:grid-cols-3 gap-8 text-left">
-            {/* Competencia 1 */}
             <div className="bg-slate-900/60 backdrop-blur-md border border-slate-700/50 p-8 rounded-3xl hover:bg-slate-800 transition">
               <h3 className="text-2xl font-bold text-slate-200 mb-4">Garmin / Potenciómetros</h3>
               <p className="text-slate-400 mb-6 leading-relaxed">Solo miden dinámica del pedaleo y esfuerzo mecánico (Vatios).</p>
               <span className="inline-block bg-red-500/20 text-red-400 text-xs font-bold px-3 py-1.5 rounded uppercase tracking-wider">No miden el viento</span>
             </div>
             
-            {/* Competencia 2 */}
             <div className="bg-slate-900/60 backdrop-blur-md border border-slate-700/50 p-8 rounded-3xl hover:bg-slate-800 transition">
               <h3 className="text-2xl font-bold text-slate-200 mb-4">Velocomp / Notio</h3>
               <p className="text-slate-400 mb-6 leading-relaxed">Calculan CdA y resistencia al aire, pero son extremadamente costosos.</p>
               <span className="inline-block bg-red-500/20 text-red-400 text-xs font-bold px-3 py-1.5 rounded uppercase tracking-wider">Análisis posterior</span>
             </div>
             
-            {/* Soplón */}
             <div className="bg-sky-900/60 backdrop-blur-md border-2 border-sky-400 p-8 rounded-3xl shadow-[0_0_40px_rgba(14,165,233,0.3)] transform md:-translate-y-4">
               <h3 className="text-2xl font-extrabold text-white mb-4">SOPLÓN</h3>
               <p className="text-sky-100 mb-6 leading-relaxed">
@@ -193,44 +186,67 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* 5. INTELIGENCIA Y EVENTOS */}
-      <section className="py-24 bg-white border-t border-slate-200">
+      {/* 5. INTELIGENCIA Y EVENTOS (AQUÍ VA LA NUEVA IMAGEN VERTICAL) */}
+      <section className="py-24 bg-slate-100 border-t border-slate-200">
         <div className="mx-auto max-w-7xl px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-extrabold text-slate-900 mb-6">Inteligencia del Sistema</h2>
+            <h2 className="text-4xl font-extrabold text-slate-900 mb-6">Inteligencia en el Terreno</h2>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-              El algoritmo evalúa continuamente umbrales para "soplar" la mejor táctica, convirtiendo datos crudos en estrategias.
+              El algoritmo evalúa continuamente umbrales para "soplar" la mejor táctica, convirtiendo datos crudos en estrategias mientras el deportista está en acción.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {eventos.map((evento, index) => (
-              <div key={index} className="group rounded-3xl border border-slate-100 bg-slate-50 p-6 shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-3xl">{evento.icono}</span>
-                  <h3 className="font-bold text-slate-900 leading-tight">{evento.titulo}</h3>
-                </div>
-                <div className="mb-4">
-                  <span className="text-[11px] font-mono text-sky-700 bg-sky-100 px-2.5 py-1 rounded-md font-semibold border border-sky-200">
-                    {evento.umbral}
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+            
+            {/* IMAGEN VERTICAL - USO SOPLON */}
+            <div className="lg:col-span-4 flex justify-center relative group">
+              <div className="rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white relative z-10 w-full max-w-sm transform transition-transform duration-500 group-hover:scale-[1.02]">
+                <img 
+                  src="/Uso SOPLON.jpg" 
+                  alt="Usuario con el casco SOPLÓN instalado" 
+                  className="w-full h-auto object-cover aspect-[3/4] sm:aspect-[9/16]"
+                />
+                <div className="absolute bottom-6 left-0 right-0 flex justify-center">
+                  <span className="bg-black/75 backdrop-blur-md px-4 py-2 rounded-full text-white text-xs font-bold flex items-center gap-2 shadow-lg border border-white/20">
+                    <span className="w-2.5 h-2.5 rounded-full bg-sky-400 animate-pulse"></span>
+                    Lectura de Sensores Activa
                   </span>
                 </div>
-                <p className="text-sm text-slate-600 leading-relaxed">{evento.accion}</p>
               </div>
-            ))}
+              <div className="absolute -inset-2 rounded-[3rem] bg-gradient-to-br from-sky-500/30 to-violet-500/30 blur-2xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            </div>
+
+            {/* TARJETAS DE ALERTAS */}
+            <div className="lg:col-span-8 grid sm:grid-cols-2 gap-6">
+              {eventos.map((evento, index) => (
+                <div key={index} className="group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="text-3xl">{evento.icono}</span>
+                    <h3 className="font-bold text-slate-900 leading-tight">{evento.titulo}</h3>
+                  </div>
+                  <div className="mb-4">
+                    <span className="text-[11px] font-mono text-sky-700 bg-sky-50 px-2.5 py-1 rounded-md font-semibold border border-sky-100">
+                      {evento.umbral}
+                    </span>
+                  </div>
+                  <p className="text-sm text-slate-600 leading-relaxed">{evento.accion}</p>
+                </div>
+              ))}
+            </div>
+
           </div>
         </div>
       </section>
 
       {/* 6. ARQUITECTURA DE LA SOLUCIÓN (IMAGEN) */}
-      <section className="py-24 bg-slate-50 border-t border-slate-200">
+      <section className="py-24 bg-white border-t border-slate-200">
         <div className="mx-auto max-w-6xl px-6 text-center">
           <h2 className="text-4xl font-extrabold text-slate-900 mb-6">Arquitectura Centralizada</h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-16 leading-relaxed">
             Adquisición local de datos por I2C/2-Wire, procesamiento en Raspberry Pi y transmisión a la nube mediante MQTT para visualización en el Dashboard React.
           </p>
           
-          <div className="relative inline-block rounded-[2.5rem] p-4 bg-white border border-slate-200 shadow-xl transition-transform duration-500 hover:scale-[1.02]">
+          <div className="relative inline-block rounded-[2.5rem] p-4 bg-slate-50 border border-slate-200 shadow-xl transition-transform duration-500 hover:scale-[1.02]">
             <img 
               src="/Arq SOPLON.jpeg" 
               alt="Diagrama de Arquitectura Soplón" 
@@ -277,73 +293,37 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* 8. IMPLEMENTACIÓN Y PRUEBA DE CONCEPTO (Imagen Vertical + Video) */}
+      {/* 8. VIDEO DEMOSTRATIVO FINAL (PROTOTIPO) */}
       <section 
         className="py-24 relative bg-fixed bg-center bg-cover border-t border-slate-800"
         style={{ backgroundImage: "url('/Fondo PROYECTO.jpg')" }}
       >
         <div className="absolute inset-0 bg-slate-950/85 backdrop-blur-sm"></div>
         
-        <div className="mx-auto max-w-7xl px-6 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-extrabold text-white mb-6 drop-shadow-md">Implementación y Prueba de Concepto</h2>
-            <p className="text-xl text-sky-200 font-medium max-w-3xl mx-auto">
-              Integración física de la Raspberry Pi y el ecosistema de sensores en un casco aerodinámico real.
-            </p>
+        <div className="mx-auto max-w-5xl px-6 text-center relative z-10">
+          <h2 className="text-4xl font-extrabold text-white mb-6 drop-shadow-md">Prueba de Concepto (Prototipo)</h2>
+          <p className="text-xl text-sky-200 mb-16 font-medium">Integración física de la Raspberry Pi y sensores en casco aerodinámico.</p>
+          
+          <div className="rounded-[2.5rem] overflow-hidden shadow-[0_0_50px_rgba(14,165,233,0.3)] border-4 border-slate-700 bg-black relative group max-w-4xl mx-auto">
+            <video 
+              className="w-full h-auto aspect-video object-cover"
+              src="/Prototipo SOPLON.mp4" 
+              autoPlay loop muted controls playsInline
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-500 pointer-events-none flex items-end justify-center pb-8">
+              <span className="px-6 py-2 bg-black/50 backdrop-blur rounded-full text-white font-bold tracking-widest text-sm border border-white/20">
+                SOPLÓN V1.0
+              </span>
+            </div>
           </div>
-
-          <div className="grid lg:grid-cols-12 gap-12 items-center">
-            
-            {/* COLUMNA IZQUIERDA: Imagen Vertical de Uso */}
-            <div className="lg:col-span-5 relative group">
-              <div className="rounded-[2.5rem] overflow-hidden shadow-[0_0_40px_rgba(14,165,233,0.3)] border-4 border-slate-700 bg-slate-900 relative z-10 aspect-[3/4] sm:aspect-[4/5] lg:aspect-auto lg:h-[600px]">
-                <img 
-                  src="/Uso SOPON.jpg" 
-                  alt="Usuario con el dispositivo SOPLÓN" 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute bottom-6 left-6 right-6">
-                  <div className="bg-black/60 backdrop-blur-md rounded-2xl p-4 border border-white/20 shadow-lg">
-                    <span className="flex items-center gap-2 text-sky-400 font-bold text-xs uppercase tracking-widest mb-1">
-                      <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
-                      Hardware en Acción
-                    </span>
-                    <p className="text-white text-sm">Validación del sistema aerodinámico en postura de carrera real.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* COLUMNA DERECHA: Video del Prototipo y CTA */}
-            <div className="lg:col-span-7 flex flex-col justify-center">
-              
-              <div className="rounded-[2rem] overflow-hidden shadow-[0_0_40px_rgba(139,92,246,0.2)] border-4 border-slate-700 bg-black relative group w-full mb-8">
-                <video 
-                  className="w-full h-auto aspect-video object-cover"
-                  src="/Prototipo SOPLON.mp4" 
-                  autoPlay loop muted controls playsInline
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-500 pointer-events-none flex items-end justify-center pb-6">
-                  <span className="px-5 py-2 bg-black/50 backdrop-blur rounded-full text-white font-bold tracking-widest text-xs border border-white/20">
-                    SOPLÓN V1.0 FUNCIONANDO
-                  </span>
-                </div>
-              </div>
-              
-              <div className="bg-slate-900/60 p-8 rounded-3xl border border-slate-800/80 backdrop-blur-md text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6">
-                <div>
-                  <h3 className="text-xl font-bold text-white mb-2">Telemetría lista para la ruta</h3>
-                  <p className="text-slate-400 text-sm">El sistema está capturando datos. Ingresa para ver el flujo en vivo.</p>
-                </div>
-                <Link
-                  to="/dashboard"
-                  className="inline-flex items-center justify-center rounded-full bg-sky-500 px-8 py-4 text-sm font-bold text-white shadow-[0_0_20px_rgba(14,165,233,0.5)] transition-all hover:bg-sky-400 hover:scale-105 whitespace-nowrap flex-shrink-0"
-                >
-                  Ir al Dashboard
-                </Link>
-              </div>
-
-            </div>
+          
+          <div className="mt-16 text-center">
+            <Link
+              to="/dashboard"
+              className="inline-flex items-center justify-center rounded-full bg-sky-500 px-10 py-5 text-base font-bold text-white shadow-[0_0_20px_rgba(14,165,233,0.5)] transition-all hover:bg-sky-400 hover:scale-105"
+            >
+              Iniciar Telemetría en Vivo
+            </Link>
           </div>
         </div>
       </section>
