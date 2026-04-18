@@ -2,72 +2,69 @@ import { Link } from 'react-router-dom';
 
 const features = [
   {
-    title: 'Acceso y Privacidad',
-    description: 'Autenticación segura mediante Clerk para proteger el acceso a tus métricas de rendimiento y rutas.',
-    icon: '🔒',
+    title: 'Análisis de Postura y Viento',
+    description: 'Descubre exactamente cuándo tu postura te está frenando y cuánto esfuerzo estás perdiendo contra el viento.',
+    icon: '🌪️',
   },
   {
-    title: 'Telemetría en Ruta',
-    description: 'Captura datos del casco vía MQTT y almacénalos en InfluxDB Cloud para un análisis de series temporales sin latencia.',
-    icon: '📡',
+    title: 'Progreso y Rutas Guardadas',
+    description: 'Tu perfil almacena de forma segura tu historial de rendimiento para que tú o tu entrenador evalúen tu evolución.',
+    icon: '📊',
   },
   {
-    title: 'Dashboard Estratégico',
-    description: 'Gráficas React en tiempo real que traducen variables complejas (Pitch, Viento, Gs) en estrategias claras.',
-    icon: '📈',
+    title: 'Alertas Inteligentes en Ruta',
+    description: 'Recibe notificaciones inmediatas sobre ráfagas peligrosas, oportunidades de sprint o posibles caídas.',
+    icon: '🔔',
   },
 ];
 
 export default function Home() {
   return (
-    <div className="mx-auto max-w-7xl py-12 px-4 sm:px-6 sm:py-16 lg:px-8">
+    <div className="bg-slate-50 min-h-screen font-sans">
       
-      {/* HERO SECTION CON VIDEO VERTICAL */}
-      <section className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-slate-900 via-slate-800 to-black px-6 py-16 shadow-2xl sm:px-12 lg:px-16 lg:py-20">
-        
-        {/* Efecto de brillo de fondo */}
-        <div className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-sky-500/20 blur-3xl"></div>
-        <div className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-violet-500/20 blur-3xl"></div>
+      {/* HERO SECTION: Atractivo y enfocado en el deportista */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-black px-6 py-20 lg:py-24 shadow-2xl">
+        {/* Luces de fondo */}
+        <div className="absolute top-0 right-0 h-[500px] w-[500px] rounded-full bg-sky-500/10 blur-[100px]"></div>
+        <div className="absolute bottom-0 left-0 h-[500px] w-[500px] rounded-full bg-violet-500/10 blur-[100px]"></div>
 
-        <div className="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 lg:grid-cols-12">
+        <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 lg:grid-cols-12">
           
-          {/* Columna de Texto (Izquierda) */}
-          <div className="text-center lg:col-span-7 lg:text-left">
-            <p className="inline-block rounded-full bg-slate-800/50 border border-slate-700 px-4 py-1.5 text-xs uppercase tracking-[0.2em] text-sky-400 font-semibold mb-6 shadow-sm">
-              Plataforma IoT de Alto Rendimiento
-            </p>
-            <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl xl:text-6xl">
-              Tu estratega digital, <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-sky-200">
-                ahora en tiempo real.
+          {/* Texto Motivacional (Izquierda) */}
+          <div className="text-center lg:col-span-7 lg:text-left z-10">
+            <span className="inline-block rounded-full bg-slate-800/80 border border-slate-700 px-5 py-2 text-xs uppercase tracking-widest text-sky-400 font-bold mb-6 backdrop-blur-sm">
+              Tu Ventaja Competitiva
+            </span>
+            <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-6xl xl:text-7xl mb-6">
+              Domina el viento. <br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-white">
+                Maximiza tu energía.
               </span>
             </h1>
-            <p className="mt-6 text-lg leading-8 text-slate-300 max-w-2xl mx-auto lg:mx-0">
-              SOPLÓN combina autenticación Clerk, analítica en InfluxDB y un servicio Bridge MQTT para convertir los datos crudos de tus sensores aerodinámicos en ventajas competitivas en la carretera.
+            <p className="text-lg leading-relaxed text-slate-300 max-w-2xl mx-auto lg:mx-0 mb-10">
+              Bienvenido a SOPLÓN. Deja de pedalear a ciegas y lleva la tecnología de un túnel de viento directamente a tu casco. Regístrate hoy y transforma tu esfuerzo en pura velocidad.
             </p>
             
-            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start">
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
               <Link
                 to="/sign-up"
-                className="inline-flex items-center justify-center rounded-full bg-sky-500 px-8 py-3.5 text-sm font-bold text-white shadow-[0_0_15px_rgba(14,165,233,0.4)] transition hover:bg-sky-400 hover:scale-105"
+                className="w-full sm:w-auto inline-flex items-center justify-center rounded-full bg-sky-500 px-8 py-4 text-sm font-bold text-white shadow-[0_0_20px_rgba(14,165,233,0.4)] transition-all hover:bg-sky-400 hover:scale-105"
               >
-                Comenzar ahora
+                Crear cuenta y empezar
               </Link>
-              <a
-                href="#features"
-                className="inline-flex items-center justify-center rounded-full border border-slate-600 bg-slate-800/50 px-8 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-slate-700 hover:border-slate-400"
+              <Link
+                to="/sign-in"
+                className="w-full sm:w-auto inline-flex items-center justify-center rounded-full border border-slate-600 bg-slate-800/50 px-8 py-4 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:bg-slate-700 hover:border-slate-400"
               >
-                Conoce la tecnología
-              </a>
+                Iniciar sesión
+              </Link>
             </div>
           </div>
 
-          {/* Columna de Video Vertical (Derecha) */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <div className="relative mx-auto w-full max-w-[280px] sm:max-w-[320px]">
-              {/* Marco simulando un celular moderno */}
-              <div className="relative z-10 overflow-hidden rounded-[2.5rem] border-[6px] border-slate-800 bg-slate-900 shadow-2xl ring-1 ring-white/10">
-                {/* Agregamos el video vertical desde la carpeta public */}
+          {/* Celular Flotante con Video Vertical (Derecha) */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end z-10">
+            <div className="relative mx-auto w-full max-w-[280px] sm:max-w-[320px] transform transition-transform hover:scale-105 duration-500">
+              <div className="relative z-10 overflow-hidden rounded-[2.5rem] border-[6px] border-slate-800 bg-black shadow-2xl ring-1 ring-white/10">
                 <video 
                   className="w-full h-auto aspect-[9/16] object-cover"
                   src="/Ciclista con SOPLON.mp4" 
@@ -76,39 +73,81 @@ export default function Home() {
                   muted 
                   playsInline
                 />
-                {/* Elementos decorativos (simulación de interfaz encima del video si lo deseas) */}
-                <div className="absolute bottom-4 left-0 right-0 flex justify-center">
-                  <span className="bg-black/60 backdrop-blur-md text-white text-xs px-3 py-1.5 rounded-full border border-white/20 flex items-center gap-2 font-medium">
-                    <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-                    Grabación en Ruta
+                <div className="absolute bottom-6 left-0 right-0 flex justify-center">
+                  <span className="bg-black/70 backdrop-blur-md text-white text-xs px-4 py-2 rounded-full border border-white/20 flex items-center gap-2 font-bold shadow-lg">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    Sincronizado en Ruta
                   </span>
                 </div>
               </div>
-              
-              {/* Sombra proyectada del "celular" */}
-              <div className="absolute -inset-1 -z-10 rounded-[3rem] bg-gradient-to-br from-sky-500 to-violet-500 opacity-30 blur-2xl"></div>
+              <div className="absolute -inset-2 -z-10 rounded-[3rem] bg-gradient-to-br from-sky-500 to-slate-800 opacity-40 blur-2xl"></div>
             </div>
           </div>
 
         </div>
       </section>
 
-      {/* SECCIÓN DE CARACTERÍSTICAS TÉCNICAS */}
-      <section id="features" className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {features.map((feature) => (
-          <div 
-            key={feature.title} 
-            className="group relative rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-all hover:shadow-xl hover:-translate-y-1"
-          >
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-900 text-2xl shadow-lg transition-transform group-hover:scale-110 group-hover:bg-sky-500">
-              {feature.icon}
-            </div>
-            <h2 className="mt-6 text-xl font-bold text-slate-900">{feature.title}</h2>
-            <p className="mt-3 text-slate-600 leading-relaxed">{feature.description}</p>
+      {/* SECCIÓN INTRODUCTORIA: Entrenadores y Deportistas */}
+      <section className="py-24 bg-white">
+        <div className="mx-auto max-w-7xl px-6 text-center">
+          <h2 className="text-4xl font-extrabold text-slate-900 mb-6">El secreto mejor guardado de los campeones</h2>
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-16">
+            Ya seas un ciclista amateur buscando romper sus propias marcas, o un entrenador analizando el rendimiento de tu equipo, <strong>SOPLÓN</strong> traduce los datos de la carretera en una estrategia clara y fácil de leer.
+          </p>
+
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 text-left">
+            {features.map((feature) => (
+              <div 
+                key={feature.title} 
+                className="group rounded-3xl border border-slate-100 bg-slate-50 p-8 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:bg-white"
+              >
+                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-900 text-3xl shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:bg-sky-500">
+                  {feature.icon}
+                </div>
+                <h3 className="mt-8 text-xl font-bold text-slate-900 group-hover:text-sky-600 transition-colors">{feature.title}</h3>
+                <p className="mt-4 text-slate-600 leading-relaxed">{feature.description}</p>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </section>
-      
+
+      {/* NUEVA SECCIÓN: VIDEO FINAL HORIZONTAL (SOPLON en acción) */}
+      <section className="py-24 bg-slate-900 border-t border-slate-800">
+        <div className="mx-auto max-w-5xl px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-white mb-4">Descubre SOPLÓN en acción</h2>
+            <p className="text-slate-400">Mira cómo nuestra tecnología acompaña al deportista en el terreno real.</p>
+          </div>
+
+          {/* Contenedor del video horizontal */}
+          <div className="relative rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.5)] border border-slate-700 bg-black group">
+            <video 
+              className="w-full h-auto aspect-video object-cover"
+              src="/SOPLON en accion.mp4" 
+              autoPlay 
+              loop 
+              muted 
+              controls
+              playsInline
+            />
+            {/* Overlay sutil que desaparece al hacer hover (opcional para estilo) */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-500 pointer-events-none"></div>
+          </div>
+          
+          {/* Call to action final debajo del video */}
+          <div className="mt-16 text-center">
+            <h3 className="text-2xl font-bold text-white mb-6">¿Listo para mejorar tu tiempo?</h3>
+            <Link
+              to="/dashboard"
+              className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-sm font-bold text-slate-900 shadow-lg transition-all hover:bg-slate-200 hover:scale-105"
+            >
+              Ir a mi Dashboard
+            </Link>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }
