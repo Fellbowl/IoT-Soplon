@@ -25,32 +25,38 @@ export default function Home() {
   return (
     <div className="bg-slate-50 min-h-screen font-sans">
       
-      {/* 1. HERO SECTION: Impacto Visual */}
-      <section className="relative bg-slate-900 text-white py-28 overflow-hidden">
-        <img 
-          src="/Fondo PROYECTO.jpg" 
-          alt="Fondo Proyecto Soplón" 
-          className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-overlay" 
-        />
-        <div className="relative mx-auto max-w-6xl px-6 text-center z-10">
-          <span className="rounded-full bg-sky-500/20 px-4 py-1.5 text-sm font-semibold text-sky-300 uppercase tracking-widest border border-sky-500/30">
+      {/* 1. HERO SECTION: Impacto Visual Mejorado */}
+      <section className="relative text-white py-32 overflow-hidden flex items-center min-h-[75vh]">
+        {/* Contenedor de la imagen de fondo sin filtros de color que la opaquen */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="/Fondo PROYECTO.jpg" 
+            alt="Fondo Proyecto Soplón" 
+            className="w-full h-full object-cover" 
+          />
+          {/* Capa oscura sutil solo para dar contraste al texto blanco */}
+          <div className="absolute inset-0 bg-black/40"></div>
+        </div>
+
+        <div className="relative mx-auto max-w-6xl px-6 text-center z-10 w-full">
+          <span className="backdrop-blur-sm rounded-full bg-sky-500/30 px-5 py-2 text-sm font-bold text-sky-100 uppercase tracking-widest border border-sky-400/50 shadow-lg">
             IoT para Alto Rendimiento Deportivo
           </span>
-          <h1 className="mt-8 text-6xl font-extrabold tracking-tight sm:text-8xl bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400 drop-shadow-lg">
+          <h1 className="mt-8 text-6xl font-extrabold tracking-tight sm:text-8xl text-white drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
             SOPLÓN
           </h1>
-          <p className="mt-6 text-2xl italic text-sky-400 font-light drop-shadow-md">
+          <p className="mt-6 text-2xl md:text-3xl italic text-sky-300 font-medium drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
             "El que te sopla la estrategia, no el secreto"
           </p>
           <div className="mt-12 flex justify-center gap-6">
-            <Link to="/dashboard" className="rounded-full bg-sky-500 px-8 py-4 text-base font-bold text-white shadow-lg shadow-sky-500/30 hover:bg-sky-400 hover:scale-105 transition-all">
+            <Link to="/dashboard" className="rounded-full bg-sky-500 hover:bg-sky-400 px-8 py-4 text-base font-bold text-white shadow-[0_0_20px_rgba(14,165,233,0.5)] hover:scale-105 transition-all">
               Ver Dashboard en Vivo
             </Link>
           </div>
         </div>
       </section>
 
-      {/* 2. QUIÉNES SOMOS & QUÉ ES LA SOLUCIÓN */}
+      {/* 2. QUIÉNES SOMOS & QUÉ ES LA SOLUCIÓN (Enfoque Empresarial) */}
       <section className="py-20 bg-slate-100 border-b border-slate-200">
         <div className="mx-auto max-w-6xl px-6">
           <div className="flex flex-col md:flex-row items-center gap-12">
@@ -62,12 +68,15 @@ export default function Home() {
               />
             </div>
             <div className="w-full md:w-2/3">
-              <h2 className="text-4xl font-bold text-slate-900 mb-6">¿Qué es SOPLÓN y Quiénes Somos?</h2>
+              <h2 className="text-4xl font-bold text-slate-900 mb-6">¿Quiénes somos y qué hacemos?</h2>
               <p className="text-lg text-slate-600 leading-relaxed mb-4">
-                <strong>SOPLÓN</strong> es una solución IoT diseñada para optimizar el desempeño en ciclismo de ruta, triatlón y deportes al aire libre. Consiste en un sistema de sensores integrados estratégicamente en el casco que capturan variables físicas y ambientales con alta precisión, procesándolas en tiempo real para facilitar la toma de decisiones.
+                <strong>Soplón</strong> es una empresa tecnológica emergente nacida en la Pontificia Universidad Javeriana, cuyo fin principal es democratizar el acceso a la telemetría profesional en el deporte. Nos apasiona la intersección entre el alto rendimiento físico y las tecnologías de vanguardia.
               </p>
               <p className="text-lg text-slate-600 leading-relaxed mb-4">
-                Detrás de este proyecto estamos <strong>Samuel Castrillón, Juan Pablo Arenas, David Alvarez y Samuel Montoya</strong>; un equipo de estudiantes de Ingeniería de la Pontificia Universidad Javeriana. Nuestra meta es democratizar la telemetría profesional, llevando el análisis aerodinámico del túnel de viento directamente a la carretera.
+                Nuestro propósito es transformar datos complejos en decisiones estratégicas claras. A través de soluciones de Internet de las Cosas (IoT) accesibles, portátiles y precisas, buscamos empoderar a atletas y entrenadores para que alcancen su máximo potencial, llevando el análisis aerodinámico de un costoso túnel de viento directamente a la carretera.
+              </p>
+              <p className="text-lg text-slate-600 leading-relaxed">
+                Nuestra primera línea de desarrollo se centra en un sistema de sensores estratégicamente integrados en el casco del ciclista, que capturan variables físicas y ambientales procesándolas en tiempo real para optimizar la eficiencia energética durante la ruta.
               </p>
             </div>
           </div>
