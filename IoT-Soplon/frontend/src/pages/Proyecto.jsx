@@ -277,37 +277,73 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* 8. VIDEO DEMOSTRATIVO FINAL (PROTOTIPO) - Efecto Parallax de Cierre */}
+      {/* 8. IMPLEMENTACIÓN Y PRUEBA DE CONCEPTO (Imagen Vertical + Video) */}
       <section 
         className="py-24 relative bg-fixed bg-center bg-cover border-t border-slate-800"
         style={{ backgroundImage: "url('/Fondo PROYECTO.jpg')" }}
       >
         <div className="absolute inset-0 bg-slate-950/85 backdrop-blur-sm"></div>
         
-        <div className="mx-auto max-w-5xl px-6 text-center relative z-10">
-          <h2 className="text-4xl font-extrabold text-white mb-6 drop-shadow-md">Prueba de Concepto (Prototipo)</h2>
-          <p className="text-xl text-sky-200 mb-16 font-medium">Integración física de la Raspberry Pi y sensores en casco aerodinámico.</p>
-          
-          <div className="rounded-[2.5rem] overflow-hidden shadow-[0_0_50px_rgba(14,165,233,0.3)] border-4 border-slate-700 bg-black relative group max-w-4xl mx-auto">
-            <video 
-              className="w-full h-auto aspect-video object-cover"
-              src="/Prototipo SOPLON.mp4" 
-              autoPlay loop muted controls playsInline
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-500 pointer-events-none flex items-end justify-center pb-8">
-              <span className="px-6 py-2 bg-black/50 backdrop-blur rounded-full text-white font-bold tracking-widest text-sm border border-white/20">
-                SOPLÓN V1.0
-              </span>
-            </div>
+        <div className="mx-auto max-w-7xl px-6 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-extrabold text-white mb-6 drop-shadow-md">Implementación y Prueba de Concepto</h2>
+            <p className="text-xl text-sky-200 font-medium max-w-3xl mx-auto">
+              Integración física de la Raspberry Pi y el ecosistema de sensores en un casco aerodinámico real.
+            </p>
           </div>
-          
-          <div className="mt-16 text-center">
-            <Link
-              to="/dashboard"
-              className="inline-flex items-center justify-center rounded-full bg-sky-500 px-10 py-5 text-base font-bold text-white shadow-[0_0_20px_rgba(14,165,233,0.5)] transition-all hover:bg-sky-400 hover:scale-105"
-            >
-              Iniciar Telemetría en Vivo
-            </Link>
+
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+            
+            {/* COLUMNA IZQUIERDA: Imagen Vertical de Uso */}
+            <div className="lg:col-span-5 relative group">
+              <div className="rounded-[2.5rem] overflow-hidden shadow-[0_0_40px_rgba(14,165,233,0.3)] border-4 border-slate-700 bg-slate-900 relative z-10 aspect-[3/4] sm:aspect-[4/5] lg:aspect-auto lg:h-[600px]">
+                <img 
+                  src="/Uso SOPON.jpg" 
+                  alt="Usuario con el dispositivo SOPLÓN" 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute bottom-6 left-6 right-6">
+                  <div className="bg-black/60 backdrop-blur-md rounded-2xl p-4 border border-white/20 shadow-lg">
+                    <span className="flex items-center gap-2 text-sky-400 font-bold text-xs uppercase tracking-widest mb-1">
+                      <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
+                      Hardware en Acción
+                    </span>
+                    <p className="text-white text-sm">Validación del sistema aerodinámico en postura de carrera real.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* COLUMNA DERECHA: Video del Prototipo y CTA */}
+            <div className="lg:col-span-7 flex flex-col justify-center">
+              
+              <div className="rounded-[2rem] overflow-hidden shadow-[0_0_40px_rgba(139,92,246,0.2)] border-4 border-slate-700 bg-black relative group w-full mb-8">
+                <video 
+                  className="w-full h-auto aspect-video object-cover"
+                  src="/Prototipo SOPLON.mp4" 
+                  autoPlay loop muted controls playsInline
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-500 pointer-events-none flex items-end justify-center pb-6">
+                  <span className="px-5 py-2 bg-black/50 backdrop-blur rounded-full text-white font-bold tracking-widest text-xs border border-white/20">
+                    SOPLÓN V1.0 FUNCIONANDO
+                  </span>
+                </div>
+              </div>
+              
+              <div className="bg-slate-900/60 p-8 rounded-3xl border border-slate-800/80 backdrop-blur-md text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6">
+                <div>
+                  <h3 className="text-xl font-bold text-white mb-2">Telemetría lista para la ruta</h3>
+                  <p className="text-slate-400 text-sm">El sistema está capturando datos. Ingresa para ver el flujo en vivo.</p>
+                </div>
+                <Link
+                  to="/dashboard"
+                  className="inline-flex items-center justify-center rounded-full bg-sky-500 px-8 py-4 text-sm font-bold text-white shadow-[0_0_20px_rgba(14,165,233,0.5)] transition-all hover:bg-sky-400 hover:scale-105 whitespace-nowrap flex-shrink-0"
+                >
+                  Ir al Dashboard
+                </Link>
+              </div>
+
+            </div>
           </div>
         </div>
       </section>
