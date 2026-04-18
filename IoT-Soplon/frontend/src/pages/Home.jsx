@@ -112,16 +112,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* NUEVA SECCIÓN: VIDEO FINAL HORIZONTAL (SOPLON en acción) */}
-      <section className="py-24 bg-slate-900 border-t border-slate-800">
-        <div className="mx-auto max-w-5xl px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-4">Descubre SOPLÓN en acción</h2>
-            <p className="text-slate-400">Mira cómo nuestra tecnología acompaña al deportista en el terreno real.</p>
-          </div>
+      {/* CIERRE: VIDEO FINAL, CRÉDITOS Y FOOTER (Igual a Proyecto.jsx) */}
+      <section 
+        className="py-24 relative bg-fixed bg-center bg-cover border-t border-slate-800"
+        style={{ backgroundImage: "url('/Fondo PROYECTO.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-slate-950/90 backdrop-blur-sm"></div>
+        
+        <div className="mx-auto max-w-5xl px-6 text-center relative z-10">
+          <h2 className="text-4xl font-extrabold text-white mb-6 drop-shadow-md">Descubre SOPLÓN en acción</h2>
+          <p className="text-xl text-sky-200 mb-16 font-medium">Mira cómo nuestra tecnología acompaña al deportista en el terreno real.</p>
 
           {/* Contenedor del video horizontal */}
-          <div className="relative rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.5)] border border-slate-700 bg-black group">
+          <div className="rounded-[2.5rem] overflow-hidden shadow-[0_0_50px_rgba(14,165,233,0.3)] border-4 border-slate-700 bg-black relative group max-w-4xl mx-auto">
             <video 
               className="w-full h-auto aspect-video object-cover"
               src="/SOPLON en accion.mp4" 
@@ -131,16 +134,24 @@ export default function Home() {
               controls
               playsInline
             />
-            {/* Overlay sutil que desaparece al hacer hover (opcional para estilo) */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-500 pointer-events-none"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-500 pointer-events-none"></div>
           </div>
           
-          {/* Call to action final debajo del video */}
-          <div className="mt-16 text-center">
-            <h3 className="text-2xl font-bold text-white mb-6">¿Listo para mejorar tu tiempo?</h3>
+          {/* NOMBRES DEL EQUIPO EN EL CIERRE */}
+          <div className="mt-16 pt-10 border-t border-white/10">
+            <h3 className="text-sm text-slate-400 font-bold tracking-[0.2em] uppercase mb-6">Desarrollado por el equipo SOPLÓN</h3>
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-8 text-slate-200 font-medium">
+              <span className="bg-white/5 border border-white/10 px-5 py-2 rounded-full">Samuel S. Castrillón</span>
+              <span className="bg-white/5 border border-white/10 px-5 py-2 rounded-full">Juan Pablo Arenas</span>
+              <span className="bg-white/5 border border-white/10 px-5 py-2 rounded-full">David E. Alvarez</span>
+              <span className="bg-white/5 border border-white/10 px-5 py-2 rounded-full">Samuel Montoya</span>
+            </div>
+          </div>
+
+          <div className="mt-12 text-center">
             <Link
               to="/dashboard"
-              className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-sm font-bold text-slate-900 shadow-lg transition-all hover:bg-slate-200 hover:scale-105"
+              className="inline-flex items-center justify-center rounded-full bg-sky-500 px-10 py-5 text-base font-bold text-white shadow-[0_0_20px_rgba(14,165,233,0.5)] transition-all hover:bg-sky-400 hover:scale-105"
             >
               Ir a mi Dashboard
             </Link>
@@ -148,6 +159,18 @@ export default function Home() {
         </div>
       </section>
 
+      {/* FOOTER ACADÉMICO */}
+      <footer className="py-12 bg-black text-slate-500 text-center">
+        <div className="mx-auto max-w-6xl px-6">
+          <p className="uppercase tracking-[0.2em] text-xs font-bold mb-4 text-slate-600">
+            Pontificia Universidad Javeriana - Facultad de Ingeniería
+          </p>
+          <p className="text-sm italic">
+            Proyecto: Fundamentos en IoT y Aplicaciones • Tutor: Wilder Eduardo Castellanos Hernández, PhD
+          </p>
+          <p className="mt-4 text-xs font-mono text-slate-700">Bogotá DC, Colombia</p>
+        </div>
+      </footer>
     </div>
   );
 }
