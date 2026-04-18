@@ -151,7 +151,7 @@ export default function Dashboard() {
   }, [readings]);
 
   return (
-    <div className="bg-slate-50 min-h-screen font-sans pb-20">
+    <div className="bg-slate-50 min-h-screen font-sans flex flex-col">
       
       {/* CABECERA (HERO) DEL DASHBOARD */}
       <section className="relative bg-slate-900 pt-16 pb-32 px-6 overflow-hidden">
@@ -209,7 +209,7 @@ export default function Dashboard() {
       </section>
 
       {/* CONTENIDO PRINCIPAL */}
-      <div className="mx-auto max-w-7xl px-6 -mt-16 relative z-20">
+      <div className="mx-auto max-w-7xl w-full px-6 -mt-16 relative z-20 flex-grow pb-20">
         
         {/* Alerta de pérdida de conexión */}
         {showStaleWarning && (
@@ -366,6 +366,40 @@ export default function Dashboard() {
           </div>
         )}
       </div>
+
+      {/* CIERRE: CRÉDITOS Y FOOTER ACADÉMICO PARA EL DASHBOARD */}
+      <section 
+        className="py-16 relative bg-fixed bg-center bg-cover mt-auto border-t border-slate-800"
+        style={{ backgroundImage: "url('/Fondo PROYECTO.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-slate-950/90 backdrop-blur-sm"></div>
+        
+        <div className="mx-auto max-w-5xl px-6 text-center relative z-10">
+          <div>
+            <h3 className="text-sm text-slate-400 font-bold tracking-[0.2em] uppercase mb-6">Desarrollado por el equipo SOPLÓN</h3>
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-8 text-slate-200 font-medium">
+              <span className="bg-white/5 border border-white/10 px-5 py-2 rounded-full">Samuel S. Castrillón</span>
+              <span className="bg-white/5 border border-white/10 px-5 py-2 rounded-full">Juan Pablo Arenas</span>
+              <span className="bg-white/5 border border-white/10 px-5 py-2 rounded-full">David E. Alvarez</span>
+              <span className="bg-white/5 border border-white/10 px-5 py-2 rounded-full">Samuel Montoya</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER ACADÉMICO */}
+      <footer className="py-12 bg-black text-slate-500 text-center">
+        <div className="mx-auto max-w-6xl px-6">
+          <p className="uppercase tracking-[0.2em] text-xs font-bold mb-4 text-slate-600">
+            Pontificia Universidad Javeriana - Facultad de Ingeniería
+          </p>
+          <p className="text-sm italic">
+            Proyecto: Fundamentos en IoT y Aplicaciones • Tutor: Wilder Eduardo Castellanos Hernández, PhD
+          </p>
+          <p className="mt-4 text-xs font-mono text-slate-700">Bogotá DC, Colombia</p>
+        </div>
+      </footer>
+
     </div>
   );
 }
