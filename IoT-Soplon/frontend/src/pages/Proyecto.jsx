@@ -1,122 +1,159 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
 const variables = [
-  ['Temperatura (temp)', 'Numérica', '0-50 °C'],
-  ['Presión (pressure)', 'Numérica', '-10-10 kPa'],
-  ['Aceleración (ax, ay, az)', 'Numérica', '±2g / ±4g / ±8g / ±16g'],
-  ['Giroscopio (gx, gy, gz)', 'Numérica', '±250 a ±2000 °/s'],
-  ['Velocidad del viento', 'Numérica', '0-150+ km/h (Bernoulli)'],
-  ['Pitch', 'Numérica', '-90° a 90°'],
-  ['Roll', 'Numérica', '-180° a 180°'],
-  ['Potencia aerodinámica', 'Numérica', '0-2000 W'],
-  ['Magnitud G', 'Numerica', '0-16g'],
-  ['Eventos', 'Texto', 'Umbrales (Viento fuerte, Sprint, Caída...)'],
-  ['Estrategia', 'Texto', 'Lógica de recomendaciones'],
+  ['Temperatura', 'Numérica', '0-50 °C', 'LM75A'],
+  ['Presión / Viento', 'Numérica', '0-150+ km/h', 'MPS20N0040D'],
+  ['Biomecánica (Pitch/Roll)', 'Numérica', '-180° a 180°', 'MPU-6050'],
+  ['Potencia Aerodinámica', 'Numérica', '0-2000 W', 'Calculada'],
+  ['Magnitud G (Impactos)', 'Numérica', '0-16g', 'MPU-6050'],
+  ['Eventos y Estrategia', 'Texto', 'Alertas y Correcciones', 'Algoritmo IoT'],
 ];
 
-const pasos = [
-  'Calcular pitch y roll a partir del acelerómetro y mostrarlos en el dashboard',
-  'Implementar cálculo de velocidad de viento con la fórmula de Bernoulli',
-  'Implementar lógica de eventos y alertas estratégicas (viento crítico, caída, sprint)',
-  'Calcular pérdida de potencia aerodinámica en vatios',
-  'Almacenamiento local en CSV como respaldo en la Raspberry Pi',
-  'Optimizar consumo energético para uso portátil en carrera',
-];
-
-export default function Proyecto() {
+export default function Home() {
   return (
-    <div className="pb-12">
-      <section className="bg-slate-900">
-        <div className="mx-auto max-w-6xl px-6 py-16 text-center">
-          <h1 className="text-5xl font-semibold tracking-tight text-white sm:text-6xl">Soplón</h1>
-          <p className="mt-4 text-xl italic text-slate-200">El que te sopla la estrategia, no el secreto</p>
-          <p className="mx-auto mt-8 max-w-4xl text-lg leading-8 text-slate-200">
-            Soplón es un sistema IoT portátil para ciclistas que mide condiciones aerodinámicas en tiempo real y
-            transmite los datos a un dashboard en la nube para apoyar decisiones de postura y estrategia durante el
-            pedaleo.
+    <div className="bg-slate-50 min-h-screen font-sans">
+      
+      {/* 1. HERO SECTION: Impacto Visual y Promesa de Valor */}
+      <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-black text-white py-24 overflow-hidden">
+        {/* Si tienes una imagen de fondo, descomenta la siguiente línea y ponla en la carpeta public */}
+        {/* <img src="/fondo_ciclismo.jpg" alt="Fondo" className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay" /> */}
+        
+        <div className="relative mx-auto max-w-6xl px-6 text-center z-10">
+          <span className="rounded-full bg-sky-500/20 px-4 py-1 text-sm font-semibold text-sky-300 uppercase tracking-wider border border-sky-500/30">
+            IoT para Alto Rendimiento
+          </span>
+          <h1 className="mt-6 text-6xl font-extrabold tracking-tight sm:text-8xl bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
+            SOPLÓN
+          </h1>
+          <p className="mt-4 text-2xl italic text-sky-400 font-light">
+            "El que te sopla la estrategia, no el secreto"
           </p>
+          <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-slate-300">
+            Eliminamos el túnel de viento y lo llevamos a la carretera. Un estratega digital integrado en tu casco que procesa variables aerodinámicas al instante para indicarte qué hacer en el momento exacto.
+          </p>
+          <div className="mt-10 flex justify-center gap-4">
+            <Link to="/dashboard" className="rounded-full bg-sky-500 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-sky-500/30 hover:bg-sky-400 hover:scale-105 transition-all">
+              Ver Dashboard en Vivo
+            </Link>
+          </div>
         </div>
       </section>
 
-      <section className="bg-slate-100">
-        <div className="mx-auto grid max-w-6xl gap-10 px-6 py-16 lg:grid-cols-2 lg:gap-12">
-          <div>
-            <h2 className="text-3xl font-semibold text-slate-900">El problema</h2>
-            <p className="mt-6 text-lg leading-8 text-slate-700">
-              A velocidades superiores a 25 km/h, el viento representa entre el 70% y el 90% de la resistencia total.
-              Hoy, la mayoría de ciclistas no cuenta con una medición de viento en tiempo real y no puede saber con
-              precisión cuándo adoptar una postura aerodinámica o cuándo conviene ahorrar energía.
-            </p>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-              <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Limitaciones actuales</h3>
-              <ul className="mt-4 space-y-3 text-sm text-slate-700">
-                <li>Sin medición de viento en tiempo real</li>
-                <li>Sin guía de postura en carrera</li>
-                <li>Sin estrategia energética basada en datos</li>
-              </ul>
+      {/* 2. EL PROBLEMA Y LA INNOVACIÓN */}
+      <section className="py-20 bg-white">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <h2 className="text-4xl font-bold text-slate-900 mb-6">El "Punto Ciego" Aerodinámico</h2>
+              <p className="text-lg text-slate-600 leading-relaxed mb-6">
+                El viento es el factor que mayor influencia ejerce sobre el rendimiento. Representa entre el <strong>70% y el 90% de la resistencia total</strong>. Sin embargo, los ciclistas corren a ciegas: no tienen datos objetivos en tiempo real para saber cuándo adoptar una postura más aerodinámica o cuándo conservar energía.
+              </p>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">La Innovación</h3>
+              <p className="text-slate-600 leading-relaxed border-l-4 border-sky-500 pl-4 bg-slate-50 p-4 rounded-r-lg">
+                A diferencia de otros equipos (como Garmin o Velocomp) que cuestan miles de dólares o solo guardan datos para análisis posterior, <strong>SOPLÓN genera alertas y estrategias en tiempo real</strong> mediante un sistema embebido de bajo costo y conexión a la nube.
+              </p>
             </div>
-            <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-              <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Consecuencias</h3>
-              <ul className="mt-4 space-y-3 text-sm text-slate-700">
-                <li>Mayor fatiga</li>
-                <li>Estrategia ineficiente</li>
-                <li>Pérdida de rendimiento</li>
-              </ul>
+            
+            {/* AQUÍ VA TU VIDEO LOCAL */}
+            <div className="rounded-3xl shadow-2xl overflow-hidden bg-slate-900 border-4 border-slate-100 relative group">
+              {/* Cambia "Prototipo_SOPLON.mp4" por el nombre exacto de tu archivo en la carpeta public */}
+              <video 
+                className="w-full h-auto object-cover aspect-video" 
+                autoPlay 
+                loop 
+                muted 
+                playsInline
+                controls
+              >
+                <source src="/Prototipo_SOPLON.mp4" type="video/mp4" />
+                Tu navegador no soporta la etiqueta de video.
+              </video>
+              <div className="absolute top-4 left-4 bg-black/60 backdrop-blur px-3 py-1 rounded-full text-white text-xs font-semibold flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                PROTOTIPO EN ACCIÓN
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-white">
-        <div className="mx-auto max-w-6xl px-6 py-16">
-          <h2 className="text-3xl font-semibold text-slate-900">Estado actual del sistema</h2>
-          <div className="mt-8 grid gap-6 lg:grid-cols-3">
-            <article className="rounded-xl border border-slate-200 border-t-4 border-t-sky-500 p-6 shadow-sm">
-              <p className="text-3xl">🌐</p>
-              <h3 className="mt-4 text-xl font-semibold text-slate-900">Plataforma web</h3>
-              <p className="mt-3 text-slate-700">
-                Aplicación React desplegada en Vercel con autenticación mediante Clerk. Incluye página de inicio,
-                registro, inicio de sesión y dashboard protegido.
-              </p>
-            </article>
-            <article className="rounded-xl border border-slate-200 border-t-4 border-t-emerald-500 p-6 shadow-sm">
-              <p className="text-3xl">📡</p>
-              <h3 className="mt-4 text-xl font-semibold text-slate-900">Pipeline de datos</h3>
-              <p className="mt-3 text-slate-700">
-                El dispositivo Raspberry Pi publica lecturas de sensores por MQTT a HiveMQ Cloud cada segundo. Un
-                servicio bridge en Python (Railway) suscribe los datos y los escribe en InfluxDB Cloud.
-              </p>
-            </article>
-            <article className="rounded-xl border border-slate-200 border-t-4 border-t-violet-500 p-6 shadow-sm">
-              <p className="text-3xl">📊</p>
-              <h3 className="mt-4 text-xl font-semibold text-slate-900">Dashboard en tiempo real</h3>
-              <p className="mt-3 text-slate-700">
-                El dashboard consulta los últimos 5 minutos de datos cada segundo y los visualiza en 4 gráficas en
-                vivo: temperatura, presión, aceleración (3 ejes) y giroscopio (3 ejes).
-              </p>
-            </article>
+      {/* 3. USUARIO OBJETIVO */}
+      <section className="py-16 bg-slate-100">
+        <div className="mx-auto max-w-6xl px-6 text-center">
+          <h2 className="text-3xl font-bold text-slate-900 mb-10">¿Para quién está diseñado?</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition">
+              <div className="text-4xl mb-4">🚴‍♂️</div>
+              <h3 className="text-xl font-bold text-slate-900">Ciclistas y Triatletas</h3>
+              <p className="mt-3 text-slate-600">Aficionados avanzados y élites que buscan maximizar su eficiencia adaptándose al viento en ruta.</p>
+            </div>
+            <div className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition">
+              <div className="text-4xl mb-4">⏱️</div>
+              <h3 className="text-xl font-bold text-slate-900">Entrenadores</h3>
+              <p className="mt-3 text-slate-600">Directores de clubes de alto rendimiento que requieren telemetría para corregir la técnica de sus deportistas.</p>
+            </div>
+            <div className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition">
+              <div className="text-4xl mb-4">🛡️</div>
+              <h3 className="text-xl font-bold text-slate-900">Seguridad en Ruta</h3>
+              <p className="mt-3 text-slate-600">Detecta magnitudes G extremas e inclinaciones inusuales para generar alertas inmediatas de caídas o baches.</p>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-slate-100">
-        <div className="mx-auto max-w-6xl px-6 py-16">
-          <h2 className="text-3xl font-semibold text-slate-900">Variables del sistema</h2>
-          <div className="mt-8 overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
-            <table className="w-full table-auto border-collapse">
-              <thead>
-                <tr className="bg-slate-800 text-white">
-                  <th className="px-4 py-3 text-left text-sm font-semibold">Variable</th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold">Tipo</th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold">Rango</th>
+      {/* 4. ARQUITECTURA DE INGENIERÍA */}
+      <section className="py-20 bg-slate-900 text-white">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold">Arquitectura IoT Centralizada</h2>
+            <p className="mt-4 text-slate-400">Flujo de datos de extremo a extremo: desde el hardware en el casco hasta la toma de decisiones.</p>
+          </div>
+          
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6 relative">
+            {/* Linea conectora fondo (solo en desktop) */}
+            <div className="hidden lg:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-sky-500 via-violet-500 to-emerald-500 -z-0 transform -translate-y-1/2 opacity-30"></div>
+
+            {/* Nodos */}
+            {[
+              { titulo: "Capa Percepción", desc: "Sensores I2C/2-Wire (LM75, MPU6050, Presión)", color: "border-sky-500", bg: "bg-sky-900/30" },
+              { titulo: "Nodo Máster", desc: "Raspberry Pi 3 B+ procesa EMA y Bernoulli", color: "border-violet-500", bg: "bg-violet-900/30" },
+              { titulo: "Nube & Broker", desc: "MQTT via HiveMQ Cloud", color: "border-fuchsia-500", bg: "bg-fuchsia-900/30" },
+              { titulo: "Backend DB", desc: "Bridge Python + InfluxDB Cloud", color: "border-amber-500", bg: "bg-amber-900/30" },
+              { titulo: "Dashboard UI", desc: "React + Vercel + Clerk", color: "border-emerald-500", bg: "bg-emerald-900/30" }
+            ].map((nodo, index) => (
+              <div key={index} className={`relative z-10 w-full lg:w-48 bg-slate-800 rounded-xl border-t-4 ${nodo.color} ${nodo.bg} p-5 text-center shadow-2xl`}>
+                <h3 className="font-bold text-sm text-white">{nodo.titulo}</h3>
+                <p className="mt-2 text-xs text-slate-400">{nodo.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. TABLA DE VARIABLES (Diseño Limpio) */}
+      <section className="py-20 bg-white">
+        <div className="mx-auto max-w-5xl px-6">
+          <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">Variables Sensadas y Procesadas</h2>
+          <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-lg">
+            <table className="w-full text-left text-sm">
+              <thead className="bg-slate-900 text-white">
+                <tr>
+                  <th className="px-6 py-4 font-semibold">Variable</th>
+                  <th className="px-6 py-4 font-semibold">Tipo</th>
+                  <th className="px-6 py-4 font-semibold">Rango / Lógica</th>
+                  <th className="px-6 py-4 font-semibold">Origen</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-slate-100 bg-white">
                 {variables.map((row, index) => (
-                  <tr key={row[0]} className={index % 2 === 0 ? 'bg-slate-50' : 'bg-white'}>
-                    <td className="border-t border-slate-200 px-4 py-3 text-sm text-slate-800">{row[0]}</td>
-                    <td className="border-t border-slate-200 px-4 py-3 text-sm text-slate-700">{row[1]}</td>
-                    <td className="border-t border-slate-200 px-4 py-3 text-sm text-slate-700">{row[2]}</td>
+                  <tr key={index} className="hover:bg-slate-50 transition-colors">
+                    <td className="px-6 py-4 font-medium text-slate-900">{row[0]}</td>
+                    <td className="px-6 py-4 text-slate-600">
+                      <span className="bg-slate-100 px-2 py-1 rounded text-xs">{row[1]}</span>
+                    </td>
+                    <td className="px-6 py-4 text-slate-600">{row[2]}</td>
+                    <td className="px-6 py-4 text-sky-600 font-mono text-xs">{row[3]}</td>
                   </tr>
                 ))}
               </tbody>
@@ -125,88 +162,23 @@ export default function Proyecto() {
         </div>
       </section>
 
-      <section className="bg-white">
-        <div className="mx-auto max-w-6xl px-6 py-16">
-          <h2 className="text-3xl font-semibold text-slate-900">Arquitectura del despliegue</h2>
-          <div className="mt-8 overflow-x-auto">
-            <div className="flex min-w-[980px] items-start justify-between gap-3">
-              <div className="w-44 text-center">
-                <div className="rounded-xl border border-teal-200 bg-teal-100 p-4 shadow-sm">
-                  <p className="font-semibold text-teal-900">Raspberry Pi</p>
-                </div>
-                <p className="mt-2 text-xs text-slate-500">Sensores + publisher.py</p>
-              </div>
-              <div className="pt-4 text-2xl text-slate-400">→</div>
-              <div className="w-44 text-center">
-                <div className="rounded-xl border border-violet-200 bg-violet-100 p-4 shadow-sm">
-                  <p className="font-semibold text-violet-900">HiveMQ Cloud</p>
-                </div>
-                <p className="mt-2 text-xs text-slate-500">Broker MQTT</p>
-              </div>
-              <div className="pt-4 text-2xl text-slate-400">→</div>
-              <div className="w-44 text-center">
-                <div className="rounded-xl border border-orange-200 bg-orange-100 p-4 shadow-sm">
-                  <p className="font-semibold text-orange-900">Bridge (Railway)</p>
-                </div>
-                <p className="mt-2 text-xs text-slate-500">Python + Flask API</p>
-              </div>
-              <div className="pt-4 text-2xl text-slate-400">→</div>
-              <div className="w-44 text-center">
-                <div className="rounded-xl border border-amber-200 bg-amber-100 p-4 shadow-sm">
-                  <p className="font-semibold text-amber-900">InfluxDB Cloud</p>
-                </div>
-                  <p className="mt-2 text-xs text-slate-500">Base de datos de serie temporal</p>
-              </div>
-              <div className="pt-4 text-2xl text-slate-400">→</div>
-              <div className="w-44 text-center">
-                <div className="rounded-xl border border-sky-200 bg-sky-100 p-4 shadow-sm">
-                  <p className="font-semibold text-sky-900">Dashboard (Vercel)</p>
-                </div>
-                <p className="mt-2 text-xs text-slate-500">React + Clerk</p>
-              </div>
-            </div>
+      {/* FOOTER ACADÉMICO */}
+      <footer className="py-12 bg-slate-900 text-slate-400 text-center border-t border-slate-800">
+        <div className="mx-auto max-w-6xl px-6">
+          <p className="uppercase tracking-widest text-xs font-semibold mb-4 text-slate-500">
+            Pontificia Universidad Javeriana - Facultad de Ingeniería
+          </p>
+          <p className="text-sm italic">
+            Proyecto: Fundamentos en IoT y aplicaciones • Tutor: Wilder Eduardo Castellanos Hernández, PhD
+          </p>
+          <div className="mt-6 flex flex-wrap justify-center gap-6 text-sm">
+            <span>S. Castrillón</span>
+            <span>J.P. Arenas</span>
+            <span>D. Alvarez</span>
+            <span>S. Montoya</span>
           </div>
         </div>
-      </section>
-
-      <section className="bg-slate-100">
-        <div className="mx-auto max-w-6xl px-6 py-16">
-          <h2 className="text-3xl font-semibold text-slate-900">Sensores conectados</h2>
-          <div className="mt-8 grid gap-6 lg:grid-cols-3">
-            <article className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h3 className="text-xl font-semibold text-slate-900">LM75A</h3>
-              <p className="mt-3 text-slate-700">Temperatura ambiente</p>
-              <p className="mt-2 text-sm text-slate-600">Protocolo I2C</p>
-              <p className="mt-1 text-sm text-slate-600">Dirección 0x48</p>
-              <p className="mt-1 text-sm text-slate-600">Rango 0-50 °C</p>
-            </article>
-            <article className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h3 className="text-xl font-semibold text-slate-900">MPU-6050</h3>
-              <p className="mt-3 text-slate-700">IMU (aceleración e inclinación)</p>
-              <p className="mt-2 text-sm text-slate-600">Protocolo I2C</p>
-              <p className="mt-1 text-sm text-slate-600">Dirección 0x68</p>
-              <p className="mt-1 text-sm text-slate-600">Entrega accel_x/y/z y gyro_x/y/z calibrados</p>
-            </article>
-            <article className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h3 className="text-xl font-semibold text-slate-900">MPS20N0040D-S</h3>
-              <p className="mt-3 text-slate-700">Presión barométrica</p>
-              <p className="mt-2 text-sm text-slate-600">Protocolo 2-Wire (GPIO 5/6)</p>
-              <p className="mt-1 text-sm text-slate-600">Conversion Bernoulli a velocidad de viento en km/h</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-white">
-        <div className="mx-auto max-w-6xl px-6 py-16">
-          <h2 className="text-3xl font-semibold text-slate-900">Próximos pasos</h2>
-          <ol className="mt-8 grid list-decimal gap-4 pl-5 text-slate-700 md:grid-cols-2">
-            {pasos.map((paso) => (
-              <li key={paso}>{paso}</li>
-            ))}
-          </ol>
-        </div>
-      </section>
+      </footer>
     </div>
   );
 }
