@@ -35,24 +35,16 @@ export default function Proyecto() {
             alt="Ciclistas compitiendo - Soplón" 
             className="w-full h-full object-cover object-top" 
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/70 to-slate-900/95"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/60 to-slate-900/90"></div>
         </div>
 
         <div className="relative mx-auto max-w-5xl text-center z-10 w-full mt-10">
-          <span className="inline-block rounded-full bg-sky-500/20 border border-sky-400/50 px-5 py-2 text-xs uppercase tracking-widest text-sky-300 font-bold mb-8 backdrop-blur-md">
+          <span className="inline-block rounded-full bg-sky-500/20 border border-sky-400/50 px-5 py-2 text-xs uppercase tracking-widest text-sky-300 font-bold mb-6 backdrop-blur-md">
             Fundamentos en IoT y Aplicaciones
           </span>
           
-          {/* TÍTULO ULTRA-MODERNO Y DEPORTIVO */}
-          <h1 
-            className="text-[5rem] sm:text-8xl xl:text-[10rem] font-sans font-black tracking-[0.25em] uppercase mb-4"
-            style={{
-              background: 'linear-gradient(to bottom right, #ffffff, #e0f2fe, #7dd3fc)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              filter: 'drop-shadow(0px 10px 15px rgba(0,0,0,0.6))'
-            }}
-          >
+          {/* TÍTULO ELEGANTE */}
+          <h1 className="text-6xl sm:text-8xl xl:text-[9rem] font-serif font-light tracking-[0.15em] text-white mb-6 drop-shadow-2xl">
             SOPLÓN
           </h1>
           
@@ -61,13 +53,13 @@ export default function Proyecto() {
           </p>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-slate-200 text-sm font-semibold">
-            <div className="bg-black/40 p-4 rounded-2xl border border-white/10 backdrop-blur-md hover:bg-black/60 transition shadow-lg">Samuel S. Castrillón</div>
-            <div className="bg-black/40 p-4 rounded-2xl border border-white/10 backdrop-blur-md hover:bg-black/60 transition shadow-lg">Juan Pablo Arenas</div>
-            <div className="bg-black/40 p-4 rounded-2xl border border-white/10 backdrop-blur-md hover:bg-black/60 transition shadow-lg">David E. Alvarez</div>
-            <div className="bg-black/40 p-4 rounded-2xl border border-white/10 backdrop-blur-md hover:bg-black/60 transition shadow-lg">Samuel Montoya</div>
+            <div className="bg-black/40 p-4 rounded-2xl border border-white/10 backdrop-blur-md hover:bg-black/60 transition">Samuel S. Castrillón</div>
+            <div className="bg-black/40 p-4 rounded-2xl border border-white/10 backdrop-blur-md hover:bg-black/60 transition">Juan Pablo Arenas</div>
+            <div className="bg-black/40 p-4 rounded-2xl border border-white/10 backdrop-blur-md hover:bg-black/60 transition">David E. Alvarez</div>
+            <div className="bg-black/40 p-4 rounded-2xl border border-white/10 backdrop-blur-md hover:bg-black/60 transition">Samuel Montoya</div>
           </div>
           
-          <div className="mt-8 text-slate-300 text-xs tracking-[0.1em] uppercase flex flex-col sm:flex-row justify-center gap-4 sm:gap-12">
+          <div className="mt-8 text-slate-300 text-xs tracking-wider uppercase flex flex-col sm:flex-row justify-center gap-4 sm:gap-12">
             <p className="drop-shadow-md">Pontificia Universidad Javeriana</p>
             <p className="text-sky-400 font-bold drop-shadow-md">Tutor: Wilder E. Castellanos, PhD</p>
           </div>
@@ -95,7 +87,7 @@ export default function Proyecto() {
             {/* Texto de Quiénes Somos */}
             <div className="w-full md:w-7/12 text-center md:text-left">
               <span className="text-sky-500 font-bold tracking-[0.2em] text-sm uppercase mb-3 block">Nuestra Identidad</span>
-              <h2 className="text-4xl sm:text-5xl font-extrabold text-slate-900 mb-8 tracking-tight">¿Quiénes Somos?</h2>
+              <h2 className="text-4xl sm:text-5xl font-serif font-light text-slate-900 mb-8">¿Quiénes Somos?</h2>
               
               <div className="space-y-6 text-lg text-slate-600 leading-relaxed">
                 <p>
@@ -104,7 +96,7 @@ export default function Proyecto() {
                 <p>
                   Nuestro propósito es transformar datos complejos en decisiones estratégicas claras. A través de soluciones de Internet de las Cosas (IoT) accesibles, portátiles y precisas, buscamos empoderar a atletas y entrenadores para que alcancen su máximo potencial.
                 </p>
-                <p className="pl-6 border-l-4 border-sky-500 text-slate-700 italic font-medium bg-slate-50 py-3 pr-4 rounded-r-xl">
+                <p className="pl-6 border-l-4 border-sky-500 text-slate-700 italic font-medium">
                   "Llevamos el análisis aerodinámico de un costoso túnel de viento directamente a la carretera."
                 </p>
               </div>
