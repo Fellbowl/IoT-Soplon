@@ -27,7 +27,7 @@ export default function Proyecto() {
   return (
     <div className="bg-slate-50 min-h-screen font-sans">
       
-      {/* 1. HERO SECTION: PORTADA DE LA EXPOSICIÓN (Imagen Nítida) */}
+      {/* 1. HERO SECTION: PORTADA DE LA EXPOSICIÓN */}
       <section className="relative overflow-hidden px-6 py-20 lg:py-32 shadow-2xl flex items-center min-h-[85vh]">
         <div className="absolute inset-0 z-0">
           <img 
@@ -42,9 +42,12 @@ export default function Proyecto() {
           <span className="inline-block rounded-full bg-sky-500/20 border border-sky-400/50 px-5 py-2 text-xs uppercase tracking-widest text-sky-300 font-bold mb-6 backdrop-blur-md">
             Fundamentos en IoT y Aplicaciones
           </span>
-          <h1 className="text-6xl font-extrabold tracking-tight text-white sm:text-8xl xl:text-9xl mb-6 drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)]">
+          
+          {/* TÍTULO ELEGANTE */}
+          <h1 className="text-6xl sm:text-8xl xl:text-[9rem] font-serif font-light tracking-[0.15em] text-white mb-6 drop-shadow-2xl">
             SOPLÓN
           </h1>
+          
           <p className="text-2xl md:text-4xl italic leading-relaxed text-sky-300 max-w-3xl mx-auto mb-16 font-light drop-shadow-lg">
             "El que te sopla la estrategia, no el secreto"
           </p>
@@ -63,8 +66,48 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* 2. CONTEXTO Y USUARIO OBJETIVO */}
+      {/* 2. NUEVA SECCIÓN: QUIÉNES SOMOS */}
       <section className="py-24 bg-white border-b border-slate-200">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="flex flex-col md:flex-row items-center gap-16">
+            
+            {/* Logo de la empresa */}
+            <div className="w-full md:w-5/12 flex justify-center">
+              <div className="relative group">
+                <div className="absolute -inset-4 bg-sky-500/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition duration-700"></div>
+                <img 
+                  src="/Logo SOPLON.png" 
+                  alt="Logo de Soplón" 
+                  className="relative w-72 max-w-full drop-shadow-2xl transition-transform duration-500 group-hover:scale-105"
+                  onError={(e) => { e.target.src = '/Logo SOPLON.jpg'; }} // Fallback por si la extensión es .jpg
+                />
+              </div>
+            </div>
+
+            {/* Texto de Quiénes Somos */}
+            <div className="w-full md:w-7/12 text-center md:text-left">
+              <span className="text-sky-500 font-bold tracking-[0.2em] text-sm uppercase mb-3 block">Nuestra Identidad</span>
+              <h2 className="text-4xl sm:text-5xl font-serif font-light text-slate-900 mb-8">¿Quiénes Somos?</h2>
+              
+              <div className="space-y-6 text-lg text-slate-600 leading-relaxed">
+                <p>
+                  <strong>SOPLÓN</strong> es una empresa tecnológica emergente nacida en la Pontificia Universidad Javeriana, cuyo fin principal es democratizar el acceso a la telemetría profesional en el deporte. Nos apasiona la intersección entre el alto rendimiento físico y las tecnologías de vanguardia.
+                </p>
+                <p>
+                  Nuestro propósito es transformar datos complejos en decisiones estratégicas claras. A través de soluciones de Internet de las Cosas (IoT) accesibles, portátiles y precisas, buscamos empoderar a atletas y entrenadores para que alcancen su máximo potencial.
+                </p>
+                <p className="pl-6 border-l-4 border-sky-500 text-slate-700 italic font-medium">
+                  "Llevamos el análisis aerodinámico de un costoso túnel de viento directamente a la carretera."
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 3. CONTEXTO Y USUARIO OBJETIVO */}
+      <section className="py-24 bg-slate-50 border-b border-slate-200">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
@@ -74,14 +117,14 @@ export default function Proyecto() {
               </p>
               
               <div className="space-y-4">
-                <div className="flex items-start gap-4 bg-slate-50 p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition">
+                <div className="flex items-start gap-4 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition">
                   <div className="text-4xl">🚴</div>
                   <div>
                     <h3 className="font-bold text-slate-900">Deportistas de Alto Rendimiento</h3>
                     <p className="text-slate-600 text-sm mt-1">Élites y amateurs avanzados que buscan maximizar su eficiencia adaptándose al viento en ruta.</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-4 bg-slate-50 p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition">
+                <div className="flex items-start gap-4 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition">
                   <div className="text-4xl">⏱️</div>
                   <div>
                     <h3 className="font-bold text-slate-900">Entrenadores y Clubes</h3>
@@ -93,13 +136,13 @@ export default function Proyecto() {
             
             {/* VIDEO: Ciclista High-Tech */}
             <div className="relative group">
-              <div className="rounded-[2.5rem] overflow-hidden bg-slate-900 border-8 border-slate-100 shadow-2xl relative z-10">
+              <div className="rounded-[2.5rem] overflow-hidden bg-slate-900 border-8 border-white shadow-2xl relative z-10">
                 <video 
                   className="w-full h-auto object-cover aspect-video" 
                   autoPlay loop muted playsInline
                   src="/a-high-tech-cycling-helmet-with-a-small-sleek-iot-.mp4" 
                 />
-                <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full text-white text-xs font-bold flex items-center gap-2">
+                <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full text-white text-xs font-bold flex items-center gap-2 border border-white/10">
                   <span className="text-sky-400">⚡</span> VISIÓN DEL PRODUCTO
                 </div>
               </div>
@@ -109,7 +152,7 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* 3. EL PROBLEMA Y LA COMPETENCIA */}
+      {/* 4. EL PROBLEMA Y LA COMPETENCIA */}
       <section 
         className="py-24 relative bg-fixed bg-center bg-cover overflow-hidden" 
         style={{ backgroundImage: "url('/Fondo PROYECTO.jpg')" }}
@@ -146,7 +189,7 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* 4. LÓGICA DE CÁLCULO E INGENIERÍA */}
+      {/* 5. LÓGICA DE CÁLCULO E INGENIERÍA */}
       <section className="py-24 bg-slate-50">
         <div className="mx-auto max-w-7xl px-6 text-center">
           <h2 className="text-4xl font-extrabold text-slate-900 mb-6">Ingeniería y Procesamiento Digital</h2>
@@ -186,7 +229,7 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* 5. INTELIGENCIA Y EVENTOS (AQUÍ VA LA NUEVA IMAGEN VERTICAL) */}
+      {/* 6. INTELIGENCIA Y EVENTOS */}
       <section className="py-24 bg-slate-100 border-t border-slate-200">
         <div className="mx-auto max-w-7xl px-6">
           <div className="text-center mb-16">
@@ -238,7 +281,7 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* 6. ARQUITECTURA DE LA SOLUCIÓN (IMAGEN) */}
+      {/* 7. ARQUITECTURA DE LA SOLUCIÓN */}
       <section className="py-24 bg-white border-t border-slate-200">
         <div className="mx-auto max-w-6xl px-6 text-center">
           <h2 className="text-4xl font-extrabold text-slate-900 mb-6">Arquitectura Centralizada</h2>
@@ -256,7 +299,7 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* 7. TABLA DE ENTIDADES TÉCNICAS */}
+      {/* 8. TABLA DE ENTIDADES TÉCNICAS */}
       <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
         <div className="absolute top-0 left-0 h-[400px] w-[400px] rounded-full bg-sky-500/10 blur-[100px]"></div>
         
@@ -293,12 +336,12 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* 8. VIDEO DEMOSTRATIVO FINAL (PROTOTIPO) */}
+      {/* 9. VIDEO DEMOSTRATIVO FINAL (PROTOTIPO) - Efecto Parallax de Cierre */}
       <section 
         className="py-24 relative bg-fixed bg-center bg-cover border-t border-slate-800"
         style={{ backgroundImage: "url('/Fondo PROYECTO.jpg')" }}
       >
-        <div className="absolute inset-0 bg-slate-950/85 backdrop-blur-sm"></div>
+        <div className="absolute inset-0 bg-slate-950/90 backdrop-blur-sm"></div>
         
         <div className="mx-auto max-w-5xl px-6 text-center relative z-10">
           <h2 className="text-4xl font-extrabold text-white mb-6 drop-shadow-md">Prueba de Concepto (Prototipo)</h2>
@@ -317,7 +360,18 @@ export default function Proyecto() {
             </div>
           </div>
           
-          <div className="mt-16 text-center">
+          {/* NOMBRES DEL EQUIPO EN EL CIERRE */}
+          <div className="mt-16 pt-10 border-t border-white/10">
+            <h3 className="text-sm text-slate-400 font-bold tracking-[0.2em] uppercase mb-6">Desarrollado por el equipo SOPLÓN</h3>
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-8 text-slate-200 font-medium">
+              <span className="bg-white/5 border border-white/10 px-5 py-2 rounded-full">Samuel S. Castrillón</span>
+              <span className="bg-white/5 border border-white/10 px-5 py-2 rounded-full">Juan Pablo Arenas</span>
+              <span className="bg-white/5 border border-white/10 px-5 py-2 rounded-full">David E. Alvarez</span>
+              <span className="bg-white/5 border border-white/10 px-5 py-2 rounded-full">Samuel Montoya</span>
+            </div>
+          </div>
+
+          <div className="mt-12 text-center">
             <Link
               to="/dashboard"
               className="inline-flex items-center justify-center rounded-full bg-sky-500 px-10 py-5 text-base font-bold text-white shadow-[0_0_20px_rgba(14,165,233,0.5)] transition-all hover:bg-sky-400 hover:scale-105"
