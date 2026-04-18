@@ -27,39 +27,46 @@ export default function Proyecto() {
   return (
     <div className="bg-slate-50 min-h-screen font-sans">
       
-      {/* 1. HERO SECTION: PORTADA DE LA EXPOSICIÓN */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-black px-6 py-20 lg:py-32 shadow-2xl flex items-center min-h-[85vh]">
-        {/* Luces de fondo estilo Home.jsx */}
-        <div className="absolute top-0 right-0 h-[500px] w-[500px] rounded-full bg-sky-500/10 blur-[100px]"></div>
-        <div className="absolute bottom-0 left-0 h-[500px] w-[500px] rounded-full bg-violet-500/10 blur-[100px]"></div>
+      {/* 1. HERO SECTION: PORTADA DE LA EXPOSICIÓN (Imagen Nítida) */}
+      <section className="relative overflow-hidden px-6 py-20 lg:py-32 shadow-2xl flex items-center min-h-[85vh]">
+        {/* Imagen de fondo nítida de los ciclistas */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="/Fondo PROYECTO.jpg" 
+            alt="Ciclistas compitiendo - Soplón" 
+            className="w-full h-full object-cover object-top" 
+          />
+          {/* Degradado para que el texto resalte, pero sin borrar la imagen */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/60 to-slate-900/90"></div>
+        </div>
 
-        <div className="relative mx-auto max-w-5xl text-center z-10 w-full">
-          <span className="inline-block rounded-full bg-slate-800/80 border border-slate-700 px-5 py-2 text-xs uppercase tracking-widest text-sky-400 font-bold mb-6 backdrop-blur-sm">
+        <div className="relative mx-auto max-w-5xl text-center z-10 w-full mt-10">
+          <span className="inline-block rounded-full bg-sky-500/20 border border-sky-400/50 px-5 py-2 text-xs uppercase tracking-widest text-sky-300 font-bold mb-6 backdrop-blur-md">
             Fundamentos en IoT y Aplicaciones
           </span>
-          <h1 className="text-6xl font-extrabold tracking-tight text-white sm:text-8xl xl:text-9xl mb-6 drop-shadow-2xl">
+          <h1 className="text-6xl font-extrabold tracking-tight text-white sm:text-8xl xl:text-9xl mb-6 drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)]">
             SOPLÓN
           </h1>
-          <p className="text-2xl md:text-4xl italic leading-relaxed text-sky-300 max-w-3xl mx-auto mb-16 font-light">
+          <p className="text-2xl md:text-4xl italic leading-relaxed text-sky-300 max-w-3xl mx-auto mb-16 font-light drop-shadow-lg">
             "El que te sopla la estrategia, no el secreto"
           </p>
           
           {/* Equipo e info de la Universidad */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-slate-300 text-sm font-medium">
-            <div className="bg-slate-800/40 p-4 rounded-2xl border border-slate-700/50 backdrop-blur-md hover:bg-slate-700/50 transition">Samuel S. Castrillón</div>
-            <div className="bg-slate-800/40 p-4 rounded-2xl border border-slate-700/50 backdrop-blur-md hover:bg-slate-700/50 transition">Juan Pablo Arenas</div>
-            <div className="bg-slate-800/40 p-4 rounded-2xl border border-slate-700/50 backdrop-blur-md hover:bg-slate-700/50 transition">David E. Alvarez</div>
-            <div className="bg-slate-800/40 p-4 rounded-2xl border border-slate-700/50 backdrop-blur-md hover:bg-slate-700/50 transition">Samuel Montoya</div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-slate-200 text-sm font-semibold">
+            <div className="bg-black/40 p-4 rounded-2xl border border-white/10 backdrop-blur-md hover:bg-black/60 transition">Samuel S. Castrillón</div>
+            <div className="bg-black/40 p-4 rounded-2xl border border-white/10 backdrop-blur-md hover:bg-black/60 transition">Juan Pablo Arenas</div>
+            <div className="bg-black/40 p-4 rounded-2xl border border-white/10 backdrop-blur-md hover:bg-black/60 transition">David E. Alvarez</div>
+            <div className="bg-black/40 p-4 rounded-2xl border border-white/10 backdrop-blur-md hover:bg-black/60 transition">Samuel Montoya</div>
           </div>
           
-          <div className="mt-8 text-slate-400 text-xs tracking-wider uppercase flex flex-col sm:flex-row justify-center gap-4 sm:gap-12">
-            <p>Pontificia Universidad Javeriana</p>
-            <p className="text-sky-500 font-semibold">Tutor: Wilder E. Castellanos, PhD</p>
+          <div className="mt-8 text-slate-300 text-xs tracking-wider uppercase flex flex-col sm:flex-row justify-center gap-4 sm:gap-12">
+            <p className="drop-shadow-md">Pontificia Universidad Javeriana</p>
+            <p className="text-sky-400 font-bold drop-shadow-md">Tutor: Wilder E. Castellanos, PhD</p>
           </div>
         </div>
       </section>
 
-      {/* 2. CONTEXTO Y USUARIO OBJETIVO (Con el NUEVO VIDEO) */}
+      {/* 2. CONTEXTO Y USUARIO OBJETIVO */}
       <section className="py-24 bg-white border-b border-slate-200">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -87,7 +94,7 @@ export default function Proyecto() {
               </div>
             </div>
             
-            {/* NUEVO VIDEO: Ciclista High-Tech */}
+            {/* VIDEO: Ciclista High-Tech */}
             <div className="relative group">
               <div className="rounded-[2.5rem] overflow-hidden bg-slate-900 border-8 border-slate-100 shadow-2xl relative z-10">
                 <video 
@@ -105,38 +112,42 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* 3. EL PROBLEMA Y LA COMPETENCIA */}
-      <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 h-96 w-96 rounded-full bg-sky-500/10 blur-[120px]"></div>
+      {/* 3. EL PROBLEMA Y LA COMPETENCIA (Efecto Parallax con la imagen de ciclistas) */}
+      <section 
+        className="py-24 relative bg-fixed bg-center bg-cover overflow-hidden" 
+        style={{ backgroundImage: "url('/Fondo PROYECTO.jpg')" }}
+      >
+        {/* Capa oscura translúcida para que resalte el texto sobre los ciclistas */}
+        <div className="absolute inset-0 bg-slate-900/85 backdrop-blur-sm"></div>
         
         <div className="mx-auto max-w-7xl px-6 relative z-10 text-center">
-          <h2 className="text-4xl font-extrabold mb-6">El "Punto Ciego" Aerodinámico</h2>
-          <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed mb-16">
+          <h2 className="text-4xl font-extrabold text-white mb-6">El "Punto Ciego" Aerodinámico</h2>
+          <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed mb-16">
             El viento representa entre el <strong>70% y el 90% de la resistencia total</strong>. Actualmente los ciclistas corren a ciegas: no saben cuándo adoptar una postura más aerodinámica o conservar energía.
           </p>
           
           <div className="grid md:grid-cols-3 gap-8 text-left">
             {/* Competencia 1 */}
-            <div className="bg-slate-800/40 border border-slate-700 p-8 rounded-3xl hover:bg-slate-800 transition">
-              <h3 className="text-2xl font-bold text-slate-300 mb-4">Garmin / Potenciómetros</h3>
+            <div className="bg-slate-900/60 backdrop-blur-md border border-slate-700/50 p-8 rounded-3xl hover:bg-slate-800 transition">
+              <h3 className="text-2xl font-bold text-slate-200 mb-4">Garmin / Potenciómetros</h3>
               <p className="text-slate-400 mb-6 leading-relaxed">Solo miden dinámica del pedaleo y esfuerzo mecánico (Vatios).</p>
               <span className="inline-block bg-red-500/20 text-red-400 text-xs font-bold px-3 py-1.5 rounded uppercase tracking-wider">No miden el viento</span>
             </div>
             
             {/* Competencia 2 */}
-            <div className="bg-slate-800/40 border border-slate-700 p-8 rounded-3xl hover:bg-slate-800 transition">
-              <h3 className="text-2xl font-bold text-slate-300 mb-4">Velocomp / Notio</h3>
+            <div className="bg-slate-900/60 backdrop-blur-md border border-slate-700/50 p-8 rounded-3xl hover:bg-slate-800 transition">
+              <h3 className="text-2xl font-bold text-slate-200 mb-4">Velocomp / Notio</h3>
               <p className="text-slate-400 mb-6 leading-relaxed">Calculan CdA y resistencia al aire, pero son extremadamente costosos.</p>
               <span className="inline-block bg-red-500/20 text-red-400 text-xs font-bold px-3 py-1.5 rounded uppercase tracking-wider">Análisis posterior</span>
             </div>
             
             {/* Soplón */}
-            <div className="bg-sky-900/40 border-2 border-sky-500 p-8 rounded-3xl shadow-[0_0_30px_rgba(14,165,233,0.2)] transform md:-translate-y-4">
-              <h3 className="text-2xl font-extrabold text-sky-400 mb-4">SOPLÓN</h3>
-              <p className="text-slate-300 mb-6 leading-relaxed">
+            <div className="bg-sky-900/60 backdrop-blur-md border-2 border-sky-400 p-8 rounded-3xl shadow-[0_0_40px_rgba(14,165,233,0.3)] transform md:-translate-y-4">
+              <h3 className="text-2xl font-extrabold text-white mb-4">SOPLÓN</h3>
+              <p className="text-sky-100 mb-6 leading-relaxed">
                 Integra biomecánica y variables ambientales. <strong>Procesa todo al instante</strong> para indicar qué hacer en el momento exacto.
               </p>
-              <span className="inline-block bg-emerald-500/20 text-emerald-400 text-xs font-bold px-3 py-1.5 rounded uppercase tracking-wider">Estratega en Tiempo Real</span>
+              <span className="inline-block bg-emerald-500/30 text-emerald-300 text-xs font-bold px-3 py-1.5 rounded uppercase tracking-wider border border-emerald-400/50">Estratega en Tiempo Real</span>
             </div>
           </div>
         </div>
@@ -230,8 +241,8 @@ export default function Proyecto() {
       </section>
 
       {/* 7. TABLA DE ENTIDADES TÉCNICAS */}
-      <section className="py-24 bg-slate-900 text-white relative">
-        <div className="absolute top-0 left-0 h-[400px] w-[400px] rounded-full bg-sky-500/5 blur-[100px]"></div>
+      <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
+        <div className="absolute top-0 left-0 h-[400px] w-[400px] rounded-full bg-sky-500/10 blur-[100px]"></div>
         
         <div className="mx-auto max-w-6xl px-6 relative z-10">
           <div className="text-center mb-16">
@@ -266,13 +277,18 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* 8. VIDEO DEMOSTRATIVO FINAL (PROTOTIPO) */}
-      <section className="py-24 bg-black border-t border-slate-800">
-        <div className="mx-auto max-w-5xl px-6 text-center">
-          <h2 className="text-4xl font-extrabold text-white mb-6">Prueba de Concepto (Prototipo)</h2>
-          <p className="text-xl text-slate-400 mb-16">Integración física de la Raspberry Pi y sensores en casco aerodinámico.</p>
+      {/* 8. VIDEO DEMOSTRATIVO FINAL (PROTOTIPO) - Efecto Parallax de Cierre */}
+      <section 
+        className="py-24 relative bg-fixed bg-center bg-cover border-t border-slate-800"
+        style={{ backgroundImage: "url('/Fondo PROYECTO.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-slate-950/85 backdrop-blur-sm"></div>
+        
+        <div className="mx-auto max-w-5xl px-6 text-center relative z-10">
+          <h2 className="text-4xl font-extrabold text-white mb-6 drop-shadow-md">Prueba de Concepto (Prototipo)</h2>
+          <p className="text-xl text-sky-200 mb-16 font-medium">Integración física de la Raspberry Pi y sensores en casco aerodinámico.</p>
           
-          <div className="rounded-[2.5rem] overflow-hidden shadow-[0_0_50px_rgba(14,165,233,0.3)] border border-slate-700 bg-slate-900 relative group max-w-4xl mx-auto">
+          <div className="rounded-[2.5rem] overflow-hidden shadow-[0_0_50px_rgba(14,165,233,0.3)] border-4 border-slate-700 bg-black relative group max-w-4xl mx-auto">
             <video 
               className="w-full h-auto aspect-video object-cover"
               src="/Prototipo SOPLON.mp4" 
@@ -288,7 +304,7 @@ export default function Proyecto() {
           <div className="mt-16 text-center">
             <Link
               to="/dashboard"
-              className="inline-flex items-center justify-center rounded-full bg-sky-500 px-10 py-5 text-base font-bold text-white shadow-lg transition-all hover:bg-sky-400 hover:scale-105"
+              className="inline-flex items-center justify-center rounded-full bg-sky-500 px-10 py-5 text-base font-bold text-white shadow-[0_0_20px_rgba(14,165,233,0.5)] transition-all hover:bg-sky-400 hover:scale-105"
             >
               Iniciar Telemetría en Vivo
             </Link>
@@ -297,7 +313,7 @@ export default function Proyecto() {
       </section>
 
       {/* FOOTER ACADÉMICO */}
-      <footer className="py-12 bg-slate-950 text-slate-500 text-center border-t border-slate-900">
+      <footer className="py-12 bg-black text-slate-500 text-center">
         <div className="mx-auto max-w-6xl px-6">
           <p className="uppercase tracking-[0.2em] text-xs font-bold mb-4 text-slate-600">
             Pontificia Universidad Javeriana - Facultad de Ingeniería
