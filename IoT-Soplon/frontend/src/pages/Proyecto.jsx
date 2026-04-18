@@ -1,106 +1,88 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// Datos de variables para la tabla
+// Datos extraídos del Documento Oficial
 const variables = [
-  ['Temperatura', 'Numérica', '0-50 °C', 'LM75A'],
-  ['Presión / Viento', 'Numérica', '0-150+ km/h', 'MPS20N0040D'],
-  ['Biomecánica (Pitch/Roll)', 'Numérica', '-180° a 180°', 'MPU-6050'],
-  ['Potencia Aerodinámica', 'Numérica', '0-2000 W', 'Calculada (Pérdida por viento)'],
-  ['Magnitud G (Impactos)', 'Numérica', '0-16g', 'MPU-6050'],
-  ['Eventos y Estrategia', 'Texto', 'Alertas y Correcciones', 'Algoritmo IoT / Master'],
+  ['Temperatura (temp)', 'Numérica', '0 – 50 °C', 'LM75A/B'],
+  ['Presión (pressure)', 'Numérica', '-10 – 10 kPa', 'MPS20N0040D + HX710B'],
+  ['Aceleración (ax, ay, az)', 'Numérica', '±2g / ±4g / ±8g / ±16g', 'MPU6050'],
+  ['Giroscopio (gx, gy, gz)', 'Numérica', '±250 a ±2000 °/s', 'MPU6050'],
+  ['Velocidad del viento', 'Numérica', '0 -150+ km/h (Ecuación Bernoulli)', 'Cálculo RPi'],
+  ['Pitch & Roll', 'Numérica', 'Pitch: ±90° / Roll: ±180°', 'Trigonometría (MPU)'],
+  ['Potencia Aerodinámica', 'Numérica', '0 – 2000W (Estimación de pérdida)', 'Cálculo RPi'],
+  ['Magnitud G', 'Numérica', '0 – 16g (Suma Vectorial)', 'Cálculo RPi'],
 ];
 
-// Datos de eventos para las tarjetas
 const eventos = [
-  { icono: '💨', titulo: 'Viento Crítico', umbral: '> 25 km/h', accion: 'Aviso: "Viento fuerte" - Sugiere postura compacta' },
-  { icono: '💥', titulo: 'Detección de Caída', umbral: '> 2.7g y Pitch > 60°', accion: 'Alerta Prioritaria: "!!! CAÍDA DETECTADA !!!"' },
-  { icono: '🚀', titulo: 'Notificación de Sprint', umbral: 'Aceleración X > 1.3g', accion: 'Registra alta intensidad - Motiva mantener cadencia' },
-  { icono: '⚠️', titulo: 'Irregularidad / Bache', umbral: 'Magnitud > 3.0g', accion: 'Identifica vibración severa en la superficie' },
+  { icono: '💨', titulo: 'Alerta Viento Crítico', umbral: 'Viento > 25 km/h', accion: 'Aviso: "Viento fuerte" - Sugiere postura compacta' },
+  { icono: '💥', titulo: 'Detección de Caída', umbral: 'Mag > 2.7g Y Pitch > 60°', accion: 'Activa alerta prioritaria: "!!! CAIDA DETECTADA !!!"' },
+  { icono: '🚀', titulo: 'Notificación Sprint', umbral: 'Acel X > 1.3g', accion: 'Registra alta intensidad - Motiva mantener cadencia' },
+  { icono: '⚖️', titulo: 'Alerta Inestabilidad', umbral: 'Acel Y > 1.2g', accion: 'Notifica oscilación lateral - Sugiere línea estable' },
+  { icono: '⚠️', titulo: 'Irregularidad (Bache)', umbral: 'Magnitud > 3.0g', accion: 'Identifica vibración severa en la rodadura' },
   { icono: '🚴‍♂️', titulo: 'Corrección Postura', umbral: 'Pitch > -15°', accion: 'Recomendación: "Inclínate más hacia adelante"' },
-  { icono: '🎯', titulo: 'Oportunidad de Ataque', umbral: 'Viento < 5 km/h', accion: 'Notifica condiciones favorables para aumentar el ritmo' },
+  { icono: '🎯', titulo: 'Oportunidad Ataque', umbral: 'Viento < 5 km/h', accion: 'Condiciones favorables para aumentar el ritmo' },
 ];
 
-export default function Home() {
+export default function Proyecto() {
   return (
     <div className="bg-slate-50 min-h-screen font-sans">
       
-      {/* 1. HERO SECTION: Impacto Visual Mejorado */}
-      <section className="relative text-white py-32 overflow-hidden flex items-center min-h-[75vh]">
-        {/* Contenedor de la imagen de fondo sin filtros de color que la opaquen */}
+      {/* 1. HERO SECTION: Portada de la Exposición */}
+      <section className="relative text-white py-32 overflow-hidden flex items-center min-h-[70vh]">
         <div className="absolute inset-0 z-0">
           <img 
             src="/Fondo PROYECTO.jpg" 
             alt="Fondo Proyecto Soplón" 
             className="w-full h-full object-cover" 
           />
-          {/* Capa oscura sutil solo para dar contraste al texto blanco */}
-          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]"></div>
         </div>
 
         <div className="relative mx-auto max-w-6xl px-6 text-center z-10 w-full">
-          <span className="backdrop-blur-sm rounded-full bg-sky-500/30 px-5 py-2 text-sm font-bold text-sky-100 uppercase tracking-widest border border-sky-400/50 shadow-lg">
-            IoT para Alto Rendimiento Deportivo
+          <span className="rounded-full bg-sky-500/20 px-5 py-2 text-sm font-bold text-sky-300 uppercase tracking-widest border border-sky-400/30">
+            Fundamentos en IoT y Aplicaciones
           </span>
-          <h1 className="mt-8 text-6xl font-extrabold tracking-tight sm:text-8xl text-white drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
+          <h1 className="mt-8 text-6xl font-extrabold tracking-tight sm:text-8xl text-white drop-shadow-lg">
             SOPLÓN
           </h1>
-          <p className="mt-6 text-2xl md:text-3xl italic text-sky-300 font-medium drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+          <p className="mt-6 text-2xl md:text-3xl italic text-sky-400 font-medium drop-shadow-md">
             "El que te sopla la estrategia, no el secreto"
           </p>
-          <div className="mt-12 flex justify-center gap-6">
-            <Link to="/dashboard" className="rounded-full bg-sky-500 hover:bg-sky-400 px-8 py-4 text-base font-bold text-white shadow-[0_0_20px_rgba(14,165,233,0.5)] hover:scale-105 transition-all">
-              Ver Dashboard en Vivo
-            </Link>
+          
+          <div className="mt-12 text-slate-300 text-sm md:text-base font-medium flex flex-wrap justify-center gap-x-8 gap-y-4">
+            <p>Samuel Castrillón</p>
+            <p>Juan Pablo Arenas</p>
+            <p>David Alvarez</p>
+            <p>Samuel Montoya</p>
           </div>
         </div>
       </section>
 
-      {/* 2. QUIÉNES SOMOS & QUÉ ES LA SOLUCIÓN (Enfoque Empresarial) */}
-      <section className="py-20 bg-slate-100 border-b border-slate-200">
+      {/* 2. CONTEXTO Y USUARIO OBJETIVO */}
+      <section className="py-24 bg-white border-b border-slate-200">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="flex flex-col md:flex-row items-center gap-12">
-            <div className="w-full md:w-1/3 flex justify-center">
-              <img 
-                src="/Logo SOPLON.png" 
-                alt="Logo Empresa Soplón" 
-                className="w-64 h-auto drop-shadow-2xl hover:scale-105 transition-transform duration-300" 
-              />
-            </div>
-            <div className="w-full md:w-2/3">
-              <h2 className="text-4xl font-bold text-slate-900 mb-6">¿Quiénes somos y qué hacemos?</h2>
-              <p className="text-lg text-slate-600 leading-relaxed mb-4">
-                <strong>Soplón</strong> es una empresa tecnológica emergente nacida en la Pontificia Universidad Javeriana, cuyo fin principal es democratizar el acceso a la telemetría profesional en el deporte. Nos apasiona la intersección entre el alto rendimiento físico y las tecnologías de vanguardia.
-              </p>
-              <p className="text-lg text-slate-600 leading-relaxed mb-4">
-                Nuestro propósito es transformar datos complejos en decisiones estratégicas claras. A través de soluciones de Internet de las Cosas (IoT) accesibles, portátiles y precisas, buscamos empoderar a atletas y entrenadores para que alcancen su máximo potencial, llevando el análisis aerodinámico de un costoso túnel de viento directamente a la carretera.
-              </p>
-              <p className="text-lg text-slate-600 leading-relaxed">
-                Nuestra primera línea de desarrollo se centra en un sistema de sensores estratégicamente integrados en el casco del ciclista, que capturan variables físicas y ambientales procesándolas en tiempo real para optimizar la eficiencia energética durante la ruta.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. EL PROBLEMA Y EL VIDEO DEMOSTRATIVO */}
-      <section className="py-20 bg-white">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-4xl font-bold text-slate-900 mb-6">El "Punto Ciego" Aerodinámico</h2>
+              <h2 className="text-4xl font-extrabold text-slate-900 mb-6">El Contexto Deportivo</h2>
               <p className="text-lg text-slate-600 leading-relaxed mb-6">
-                Durante el desplazamiento, el deportista debe vencer la resistencia aerodinámica. El viento representa entre el <strong>70% y el 90% de la resistencia total</strong>. Esto impacta directamente el consumo de energía y la velocidad.
+                SOPLÓN es una solución IoT desplegada en entornos abiertos para deportes como el <strong>ciclismo de ruta, duatlón y triatlón</strong>. 
+                En estos escenarios, la eficiencia no depende solo de la potencia física, sino de la capacidad del atleta para adaptarse a factores aerodinámicos (ráfagas de viento, inclinaciones) que impactan directamente su consumo energético.
               </p>
-              <div className="bg-red-50 border-l-4 border-red-500 p-5 rounded-r-lg mb-6">
-                <h3 className="font-bold text-red-800 mb-2">El Problema Actual</h3>
-                <p className="text-red-700 text-sm">
-                  Los deportistas corren a ciegas: no cuentan con herramientas accesibles para medir el viento relativo en tiempo real. No saben cuándo adoptar una postura más aerodinámica, o cuándo conservar energía frente a una ráfaga frontal.
-                </p>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">Usuario Objetivo</h3>
+              <div className="flex flex-col gap-4 mt-4">
+                <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100">
+                  <div className="text-3xl">🚴</div>
+                  <p className="text-slate-700">Ciclistas amateurs avanzados, élites y triatletas que buscan maximizar eficiencia.</p>
+                </div>
+                <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100">
+                  <div className="text-3xl">⏱️</div>
+                  <p className="text-slate-700">Entrenadores y clubes de alto rendimiento que evalúan la técnica en tiempo real.</p>
+                </div>
               </div>
             </div>
             
-            <div className="rounded-3xl shadow-2xl overflow-hidden bg-slate-900 border-4 border-slate-100 relative group">
+            {/* Video del prototipo a un lado */}
+            <div className="rounded-[2rem] shadow-2xl overflow-hidden bg-slate-900 border-[6px] border-slate-100 relative group">
               <video 
                 className="w-full h-auto object-cover aspect-video" 
                 autoPlay loop muted playsInline controls
@@ -108,144 +90,162 @@ export default function Home() {
                 <source src="/Prototipo SOPLON.mp4" type="video/mp4" />
                 Tu navegador no soporta la etiqueta de video.
               </video>
-              <div className="absolute top-4 left-4 bg-black/60 backdrop-blur px-3 py-1 rounded-full text-white text-xs font-semibold flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-                PROTOTIPO EN ACCIÓN
+              <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-sm px-3 py-1.5 rounded-full text-white text-xs font-bold flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span>
+                PROTOTIPO SOPLÓN
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 4. LA INNOVACIÓN (Comparativa de Mercado) */}
-      <section className="py-20 bg-slate-900 text-white">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold">Nuestra Innovación</h2>
-            <p className="mt-4 text-slate-400 text-lg max-w-3xl mx-auto">
-              A diferencia de equipos costosos que solo guardan datos para revisarlos después, SOPLÓN procesa todo al instante para indicar qué hacer en el momento.
+      {/* 3. EL PROBLEMA Y LA INNOVACIÓN (Punto Ciego y Comparativa) */}
+      <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
+        {/* Efectos de luz de fondo */}
+        <div className="absolute top-0 right-0 h-96 w-96 rounded-full bg-sky-500/10 blur-[120px]"></div>
+        
+        <div className="mx-auto max-w-6xl px-6 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-white">El "Punto Ciego" Aerodinámico</h2>
+            <p className="mt-4 text-lg text-slate-400 max-w-3xl mx-auto">
+              El viento genera entre el <strong>70% y el 90%</strong> de la resistencia total. Actualmente, los deportistas no cuentan con herramientas en tiempo real para medir el viento relativo y saber cuándo adoptar una postura aerodinámica.
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-slate-800/50 border border-slate-700 p-6 rounded-2xl">
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-slate-800/50 border border-slate-700 p-8 rounded-3xl">
               <h3 className="text-xl font-bold text-slate-300 mb-2">Garmin / Potenciómetros</h3>
-              <p className="text-sm text-slate-400 mb-4">Miden dinámica de pedaleo y esfuerzo mecánico (Vatios).</p>
-              <span className="inline-block bg-red-500/20 text-red-400 text-xs px-2 py-1 rounded border border-red-500/30">Limitación: No miden el viento.</span>
+              <p className="text-sm text-slate-400 mb-6 leading-relaxed">Se enfocan en la dinámica del pedaleo y esfuerzo mecánico (Vatios), pero <strong>no analizan el ambiente ni miden el viento.</strong></p>
             </div>
-            <div className="bg-slate-800/50 border border-slate-700 p-6 rounded-2xl">
+            <div className="bg-slate-800/50 border border-slate-700 p-8 rounded-3xl">
               <h3 className="text-xl font-bold text-slate-300 mb-2">Velocomp / Notio</h3>
-              <p className="text-sm text-slate-400 mb-4">Calculan resistencia al aire y CdA.</p>
-              <span className="inline-block bg-red-500/20 text-red-400 text-xs px-2 py-1 rounded border border-red-500/30">Limitación: Alto costo / Análisis posterior.</span>
+              <p className="text-sm text-slate-400 mb-6 leading-relaxed">Miden el coeficiente aerodinámico (CdA) y la resistencia, pero son de <strong>alto costo y se orientan a análisis posterior</strong>.</p>
             </div>
-            <div className="bg-sky-900/40 border border-sky-500 p-6 rounded-2xl shadow-[0_0_30px_rgba(14,165,233,0.2)] transform scale-105">
-              <h3 className="text-xl font-bold text-sky-400 mb-2">SOPLÓN (Nuestra Solución)</h3>
-              <p className="text-sm text-slate-300 mb-4">Integra biomecánica, variables ambientales y genera alertas en tiempo real.</p>
-              <span className="inline-block bg-emerald-500/20 text-emerald-400 text-xs px-2 py-1 rounded border border-emerald-500/30">Ventaja: Estratega digital de bajo costo.</span>
+            
+            {/* Destacado: La solución Soplón */}
+            <div className="bg-sky-900/40 border-2 border-sky-500 p-8 rounded-3xl shadow-[0_0_30px_rgba(14,165,233,0.2)] transform scale-105">
+              <h3 className="text-xl font-extrabold text-sky-400 mb-2 flex items-center gap-2">
+                <span>⚡</span> La Innovación de SOPLÓN
+              </h3>
+              <p className="text-sm text-slate-300 mb-4 leading-relaxed">
+                Eliminamos el túnel de viento llevándolo a la carretera de forma económica. <strong>SOPLÓN procesa todo al instante</strong>, funcionando como un estratega digital que entrega consejos tácticos y alertas durante el pedaleo.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 5. INTELIGENCIA DEL SISTEMA: EVENTOS Y ALERTAS */}
-      <section className="py-20 bg-slate-50">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-slate-900">Inteligencia y Detección de Eventos</h2>
-            <p className="mt-4 text-slate-600">El sistema evalúa continuamente los datos para "soplar" la mejor estrategia.</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {eventos.map((evento, index) => (
-              <div key={index} className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm hover:shadow-md transition">
-                <div className="text-3xl mb-3">{evento.icono}</div>
-                <h3 className="text-lg font-bold text-slate-900 mb-1">{evento.titulo}</h3>
-                <p className="text-xs font-mono text-sky-600 mb-3 bg-sky-50 inline-block px-2 py-1 rounded">Condición: {evento.umbral}</p>
-                <p className="text-sm text-slate-600">{evento.accion}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 6. ¿CÓMO SE ESTÁ HACIENDO? (Arquitectura Técnica) */}
-      <section className="py-20 bg-white border-t border-slate-200">
-        <div className="mx-auto max-w-6xl px-6">
-          <h2 className="text-4xl font-bold text-slate-900 mb-12 text-center">Diseño e Ingeniería del Sistema</h2>
-          
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
-            {/* Detalles de Hardware y Procesamiento */}
+      {/* 4. INTELIGENCIA Y LÓGICA (Matemáticas y Filtrado) */}
+      <section className="py-24 bg-slate-50 border-b border-slate-200">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            
             <div>
-              <h3 className="text-2xl font-bold text-slate-800 mb-6">Procesamiento y Lógica</h3>
-              <ul className="space-y-6">
-                <li className="flex gap-4">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-sky-100 flex items-center justify-center text-sky-600 font-bold">1</div>
-                  <div>
-                    <h4 className="font-bold text-slate-900">Ecuación de Bernoulli</h4>
-                    <p className="text-sm text-slate-600 mt-1">Transformamos la presión diferencial (sensor MPS20N0040D) en velocidad de viento integrando la densidad del aire de Bogotá.</p>
+              <h2 className="text-4xl font-extrabold text-slate-900 mb-8">Procesamiento y Lógica de Cálculo</h2>
+              
+              <div className="space-y-6">
+                {/* Bernoulli */}
+                <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                  <h4 className="font-bold text-sky-600 text-lg mb-2">1. Velocidad del Viento (Bernoulli)</h4>
+                  <p className="text-sm text-slate-600 mb-4">Simplificamos la ecuación para flujo incompresible utilizando la presión diferencial del sensor MPS20N0040D y la densidad del aire en Bogotá (0.9 kg/m³).</p>
+                  <div className="bg-slate-900 text-sky-300 p-4 rounded-xl font-mono text-center text-sm">
+                    v = √( 2 · ΔP / ρ ) * 3.6  [km/h]
                   </div>
-                </li>
-                <li className="flex gap-4">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-sky-100 flex items-center justify-center text-sky-600 font-bold">2</div>
-                  <div>
-                    <h4 className="font-bold text-slate-900">Biomecánica (Pitch & Roll)</h4>
-                    <p className="text-sm text-slate-600 mt-1">Usamos el acelerómetro triaxial del MPU6050 y funciones trigonométricas (arctan2) para saber la inclinación exacta del casco.</p>
-                  </div>
-                </li>
-                <li className="flex gap-4">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-sky-100 flex items-center justify-center text-sky-600 font-bold">3</div>
-                  <div>
-                    <h4 className="font-bold text-slate-900">Filtrado Digital EMA</h4>
-                    <p className="text-sm text-slate-600 mt-1">Para evitar lecturas erráticas por vibraciones o baches, implementamos un Filtro de Media Exponencial (EMA) a 10 Hz.</p>
-                  </div>
-                </li>
-              </ul>
-            </div>
+                </div>
 
-            {/* Arquitectura de Red */}
-            <div className="bg-slate-50 p-8 rounded-3xl border border-slate-200">
-              <h3 className="text-2xl font-bold text-slate-800 mb-6">Topología Centralizada</h3>
-              <div className="space-y-4">
-                <div className="p-4 bg-white border border-slate-200 rounded-xl shadow-sm">
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Capa Física (Sensores)</span>
-                  <p className="font-medium text-slate-800 mt-1">Módulos I2C y 2-Wire (LM75, MPU6050, HX710B)</p>
+                {/* Pitch & Roll */}
+                <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                  <h4 className="font-bold text-sky-600 text-lg mb-2">2. Biomecánica (Pitch & Roll)</h4>
+                  <p className="text-sm text-slate-600 mb-4">Utilizando el acelerómetro triaxial (MPU6050), calculamos la orientación exacta del casco mediante funciones trigonométricas para validar la postura aerodinámica.</p>
+                  <div className="bg-slate-900 text-sky-300 p-4 rounded-xl font-mono text-center text-sm flex flex-col gap-2">
+                    <span>Pitch (θ) = arctan2(ax, √(ay² + az²))</span>
+                    <span>Roll (∅) = arctan2(ay, √(ax² + az²))</span>
+                  </div>
                 </div>
-                <div className="text-center text-slate-400">⬇</div>
-                <div className="p-4 bg-white border-l-4 border-l-violet-500 rounded-xl shadow-sm">
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Nodo Máster</span>
-                  <p className="font-medium text-slate-800 mt-1">Raspberry Pi 3 B+ (Procesamiento y almacenamiento local CSV)</p>
-                </div>
-                <div className="text-center text-slate-400">⬇</div>
-                <div className="p-4 bg-white border-l-4 border-l-sky-500 rounded-xl shadow-sm">
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Cloud & UI</span>
-                  <p className="font-medium text-slate-800 mt-1">MQTT (HiveMQ) → InfluxDB → React Dashboard</p>
+
+                {/* Filtro EMA */}
+                <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                  <h4 className="font-bold text-sky-600 text-lg mb-2">3. Filtrado Digital (EMA)</h4>
+                  <p className="text-sm text-slate-600 mb-4">Para evitar lecturas erráticas por baches o vibraciones, implementamos un Filtro de Media Exponencial (EMA) con α = 0.3.</p>
+                  <div className="bg-slate-900 text-sky-300 p-4 rounded-xl font-mono text-center text-sm">
+                    P_filtrada = (α * P_actual) + ((1 - α) * P_anterior)
+                  </div>
                 </div>
               </div>
             </div>
+
+            {/* Eventos y Alertas */}
+            <div>
+              <h3 className="text-3xl font-bold text-slate-900 mb-6">Detección de Eventos</h3>
+              <p className="text-slate-600 mb-8">El sistema evalúa estos cálculos a 10Hz para "soplar" la estrategia en tiempo real.</p>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {eventos.map((evento, index) => (
+                  <div key={index} className="bg-white border border-slate-200 p-5 rounded-2xl shadow-sm hover:shadow-md transition duration-300">
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="text-2xl">{evento.icono}</span>
+                      <h4 className="font-bold text-slate-800 leading-tight">{evento.titulo}</h4>
+                    </div>
+                    <div className="mb-2">
+                      <span className="text-[10px] uppercase font-bold tracking-wider text-sky-600 bg-sky-50 px-2 py-1 rounded">
+                        {evento.umbral}
+                      </span>
+                    </div>
+                    <p className="text-xs text-slate-600">{evento.accion}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* 7. TABLA DE VARIABLES (Anexo técnico) */}
-      <section className="py-20 bg-slate-900 text-white">
-        <div className="mx-auto max-w-5xl px-6">
-          <h2 className="text-3xl font-bold mb-8 text-center">Resumen de Entidades del Sistema</h2>
-          <div className="overflow-x-auto rounded-2xl border border-slate-700 shadow-lg bg-slate-800">
+      {/* 5. ARQUITECTURA DE LA SOLUCIÓN (Usando la imagen solicitada) */}
+      <section className="py-24 bg-white border-b border-slate-200">
+        <div className="mx-auto max-w-6xl px-6 text-center">
+          <h2 className="text-4xl font-extrabold text-slate-900 mb-6">Arquitectura del Sistema</h2>
+          <p className="text-lg text-slate-600 max-w-3xl mx-auto mb-12">
+            Topología de red centralizada. La <strong>Raspberry Pi 3 B+</strong> actúa como Nodo Máster, adquiriendo datos mediante I2C y 2-Wire, procesando la lógica localmente, y publicando vía MQTT hacia la nube.
+          </p>
+          
+          <div className="relative inline-block rounded-[2rem] p-4 bg-slate-50 border border-slate-200 shadow-2xl">
+            {/* Imagen de la arquitectura desde la carpeta public */}
+            <img 
+              src="/Arq SOPLON.jpeg" 
+              alt="Diagrama de Arquitectura Soplón" 
+              className="w-full max-w-4xl h-auto rounded-2xl object-contain"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 6. TABLA DE ENTIDADES (Anexo Técnico) */}
+      <section className="py-24 bg-slate-900 text-white relative">
+        <div className="absolute top-0 right-0 h-96 w-96 rounded-full bg-sky-500/5 blur-[100px]"></div>
+        
+        <div className="mx-auto max-w-5xl px-6 relative z-10">
+          <h2 className="text-3xl font-bold mb-4 text-center bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
+            Resumen de Entidades del Sistema
+          </h2>
+          <p className="text-slate-400 text-center mb-12">Variables físicas y lógicas que interactúan dentro del ecosistema IoT.</p>
+          
+          <div className="overflow-x-auto rounded-2xl border border-slate-700 shadow-xl bg-slate-800">
             <table className="w-full text-left text-sm">
               <thead className="bg-black/50 text-slate-300">
                 <tr>
-                  <th className="px-6 py-4 font-semibold">Variable</th>
-                  <th className="px-6 py-4 font-semibold">Tipo</th>
-                  <th className="px-6 py-4 font-semibold">Rango / Lógica</th>
-                  <th className="px-6 py-4 font-semibold">Sensor / Origen</th>
+                  <th className="px-6 py-5 font-bold uppercase tracking-wider text-xs">Variable</th>
+                  <th className="px-6 py-5 font-bold uppercase tracking-wider text-xs">Tipo</th>
+                  <th className="px-6 py-5 font-bold uppercase tracking-wider text-xs">Rango / Detalles</th>
+                  <th className="px-6 py-5 font-bold uppercase tracking-wider text-xs">Sensor / Origen</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-700">
                 {variables.map((row, index) => (
                   <tr key={index} className="hover:bg-slate-700/50 transition-colors">
-                    <td className="px-6 py-4 font-medium text-white">{row[0]}</td>
+                    <td className="px-6 py-4 font-semibold text-white">{row[0]}</td>
                     <td className="px-6 py-4">
-                      <span className="bg-slate-700 px-2 py-1 rounded text-xs text-slate-300">{row[1]}</span>
+                      <span className="bg-slate-700 border border-slate-600 px-2 py-1 rounded text-xs text-slate-300">{row[1]}</span>
                     </td>
                     <td className="px-6 py-4 text-slate-400">{row[2]}</td>
                     <td className="px-6 py-4 text-sky-400 font-mono text-xs">{row[3]}</td>
@@ -258,14 +258,15 @@ export default function Home() {
       </section>
 
       {/* FOOTER ACADÉMICO */}
-      <footer className="py-12 bg-black text-slate-400 text-center border-t border-slate-800">
+      <footer className="py-12 bg-black text-slate-500 text-center">
         <div className="mx-auto max-w-6xl px-6">
-          <p className="uppercase tracking-widest text-xs font-semibold mb-4 text-slate-500">
+          <p className="uppercase tracking-[0.2em] text-xs font-bold mb-4 text-slate-600">
             Pontificia Universidad Javeriana - Facultad de Ingeniería
           </p>
           <p className="text-sm italic">
-            Proyecto: Fundamentos en IoT y aplicaciones • Tutor: Wilder Eduardo Castellanos Hernández, PhD
+            Proyecto: Fundamentos en IoT y Aplicaciones • Tutor: Wilder Eduardo Castellanos Hernández, PhD
           </p>
+          <p className="mt-4 text-xs font-mono text-slate-700">Bogotá DC, Colombia</p>
         </div>
       </footer>
     </div>
