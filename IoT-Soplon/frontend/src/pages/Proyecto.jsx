@@ -66,7 +66,7 @@ export default function Home() {
                 playsInline
                 controls
               >
-                <source src="/Prototipo_SOPLON.mp4" type="video/mp4" />
+                <source src="/Prototipo SOPLON.mp4" type="video/mp4" />
                 Tu navegador no soporta la etiqueta de video.
               </video>
               <div className="absolute top-4 left-4 bg-black/60 backdrop-blur px-3 py-1 rounded-full text-white text-xs font-semibold flex items-center gap-2">
