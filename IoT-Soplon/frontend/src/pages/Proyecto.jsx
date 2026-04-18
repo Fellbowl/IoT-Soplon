@@ -38,7 +38,7 @@ export default function Proyecto() {
 
         <div className="relative mx-auto max-w-6xl px-6 text-center z-10 w-full">
           <span className="backdrop-blur-sm rounded-full bg-sky-500/30 px-5 py-2 text-sm font-bold text-sky-100 uppercase tracking-widest border border-sky-400/50 shadow-lg">
-            Documentación Técnica
+            Solución IoT para Deportistas de Alto Rendimiento
           </span>
           <h1 className="mt-8 text-6xl font-extrabold tracking-tight sm:text-8xl text-white drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
             Proyecto SOPLÓN
@@ -169,164 +169,253 @@ export default function Proyecto() {
       </section>
 
       {/* 6. ¿CÓMO SE ESTÁ HACIENDO? (Arquitectura Técnica con Diagrama en Código) */}
-      <section className="py-24 bg-slate-50 border-t border-slate-200">
+      <section className="py-24 bg-slate-50 border-t border-slate-200 relative">
         <div className="mx-auto max-w-7xl px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-extrabold text-slate-900">Arquitectura y Flujo de Datos</h2>
-            <p className="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
-              SOPLÓN utiliza una infraestructura en la nube moderna y de alta disponibilidad, conectando hardware físico con interfaces web en tiempo real.
+            <h2 className="text-4xl font-extrabold text-slate-900 mb-4">Ingeniería e Infraestructura IoT</h2>
+            <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+              Visualización detallada de la arquitectura centralizada del sistema, mostrando el flujo de datos desde los sensores hasta la interfaz de usuario en la nube.
             </p>
           </div>
-          
-          <div className="grid lg:grid-cols-12 gap-12 items-center">
-            
-            {/* Lógica y Ecuaciones (Columna Izquierda) */}
-            <div className="lg:col-span-5">
-              <h3 className="text-2xl font-bold text-slate-800 mb-8">Procesamiento y Lógica</h3>
-              <ul className="space-y-8">
-                <li className="flex gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-sky-100 flex items-center justify-center text-sky-600 font-bold text-xl shadow-sm">1</div>
-                  <div>
-                    <h4 className="font-bold text-slate-900 text-lg">Ecuación de Bernoulli</h4>
-                    <p className="text-base text-slate-600 mt-2 leading-relaxed">Transformamos la presión diferencial (sensor MPS20N0040D) en velocidad de viento integrando la densidad del aire local.</p>
-                  </div>
-                </li>
-                <li className="flex gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-sky-100 flex items-center justify-center text-sky-600 font-bold text-xl shadow-sm">2</div>
-                  <div>
-                    <h4 className="font-bold text-slate-900 text-lg">Biomecánica (Pitch & Roll)</h4>
-                    <p className="text-base text-slate-600 mt-2 leading-relaxed">Usamos el acelerómetro triaxial del MPU6050 y trigonometría para conocer la inclinación exacta del casco.</p>
-                  </div>
-                </li>
-                <li className="flex gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-sky-100 flex items-center justify-center text-sky-600 font-bold text-xl shadow-sm">3</div>
-                  <div>
-                    <h4 className="font-bold text-slate-900 text-lg">Filtrado Digital EMA</h4>
-                    <p className="text-base text-slate-600 mt-2 leading-relaxed">Para evitar lecturas erráticas por vibraciones o baches, implementamos un Filtro de Media Exponencial (EMA) a 10 Hz.</p>
-                  </div>
-                </li>
-              </ul>
-            </div>
 
-            {/* Diagrama de Arquitectura dibujado en JSX (Columna Derecha) */}
-            <div className="lg:col-span-7 bg-white p-8 sm:p-12 rounded-[2.5rem] border border-slate-200 shadow-xl relative">
-              <h3 className="text-lg font-bold text-slate-400 uppercase tracking-widest text-center mb-8">Deployment Map</h3>
+          <div className="p-8 sm:p-12 rounded-[2.5rem] bg-white border border-slate-200 shadow-xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 h-96 w-96 rounded-full bg-violet-500/5 blur-[100px]"></div>
+            <div className="absolute bottom-0 left-0 h-96 w-96 rounded-full bg-sky-500/5 blur-[100px]"></div>
+
+            {/* Título interno del diagrama */}
+            <h3 className="text-2xl font-extrabold text-slate-900 text-center mb-12">Topología de red Centralizada</h3>
+
+            {/* Diagrama dibujado en JSX */}
+            <div className="flex flex-col items-center w-full relative z-10">
               
-              <div className="flex flex-col items-center w-full relative">
+              {/* Capa Superior: Entradas (Sensores) */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl justify-items-center relative">
                 
-                {/* 1. IoT Device */}
-                <div className="w-full max-w-sm bg-slate-50 border-t-4 border-sky-500 rounded-2xl shadow-md p-5 text-center relative z-10 border border-slate-200">
-                  <div className="text-2xl mb-1">📟</div>
-                  <h4 className="font-bold text-slate-900 text-lg">Dispositivo IoT (Casco)</h4>
-                  <p className="text-sm text-slate-500 mt-1 font-mono">Raspberry Pi 3 B+ | Sensores</p>
-                </div>
-
-                {/* Flecha: Publish */}
-                <div className="h-12 w-0 border-l-2 border-dashed border-slate-300 flex items-center justify-center relative z-0">
-                  <div className="absolute left-4 bg-sky-50 text-sky-700 text-xs font-bold px-3 py-1 rounded-full border border-sky-200 whitespace-nowrap">
-                    MQTT Publish
-                  </div>
-                </div>
-
-                {/* 2. Broker */}
-                <div className="w-full max-w-sm bg-slate-50 border-t-4 border-violet-500 rounded-2xl shadow-md p-5 text-center relative z-10 border border-slate-200">
-                  <div className="text-2xl mb-1">☁️</div>
-                  <h4 className="font-bold text-slate-900 text-lg">Broker MQTT</h4>
-                  <p className="text-sm text-slate-500 mt-1 font-mono">HiveMQ Cloud</p>
-                </div>
-
-                {/* Flecha: Subscribe */}
-                <div className="h-12 w-0 border-l-2 border-dashed border-slate-300 flex items-center justify-center relative z-0">
-                  <div className="absolute left-4 bg-violet-50 text-violet-700 text-xs font-bold px-3 py-1 rounded-full border border-violet-200 whitespace-nowrap">
-                    MQTT Subscribe
-                  </div>
-                </div>
-
-                {/* 3. Backend & DB (En la misma fila) */}
-                <div className="w-full max-w-md flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
-                  <div className="w-full bg-slate-50 border-t-4 border-amber-500 rounded-2xl shadow-md p-5 text-center border border-slate-200">
-                    <div className="text-2xl mb-1">⚙️</div>
-                    <h4 className="font-bold text-slate-900 text-lg">Bridge Service</h4>
-                    <p className="text-sm text-slate-500 mt-1 font-mono">Python + Flask (Railway)</p>
+                {/* Columna Izquierda: MPS + HX */}
+                <div className="flex flex-col items-center gap-4 w-full">
+                  <div className="text-sm text-slate-500 text-center mb-1">Medición Manométrica y Dinámica</div>
+                  <div className="w-full max-w-sm bg-sky-900/40 border border-sky-500 rounded-2xl shadow-md p-5 text-center">
+                    <div className="text-white text-base">MPS20N0040D (Sensor Diferencial Presión)</div>
                   </div>
                   
-                  {/* Flecha horizontal interna */}
-                  <div className="hidden sm:flex items-center text-slate-300">
-                    <div className="w-6 border-t-2 border-dashed border-slate-300"></div>
-                    <span className="text-xl -ml-1">▶</span>
+                  {/* Línea punteada */}
+                  <div className="h-6 w-0 border-l-2 border-dashed border-slate-300"></div>
+
+                  <div className="text-sm text-slate-500 text-center mb-1">Digitalización Puente de Wheatstone</div>
+                  <div className="w-full max-w-sm bg-sky-900/40 border border-sky-500 rounded-2xl shadow-md p-5 text-center">
+                    <div className="text-white text-base">HX710B (Amplificador y ADC)</div>
                   </div>
-                  <div className="flex sm:hidden h-6 border-l-2 border-dashed border-slate-300 items-center justify-center">
+                </div>
+
+                {/* Columna Derecha: LM75 + MPU */}
+                <div className="flex flex-col items-center gap-4 w-full relative">
+                  <div className="text-sm text-slate-500 text-center mb-1">Medición Temperatura Ambiente</div>
+                  <div className="w-full max-w-sm bg-sky-900/40 border border-sky-500 rounded-2xl shadow-md p-5 text-center">
+                    <div className="text-white text-base">LM75A (Termómetro Digital)</div>
+                  </div>
+
+                  {/* Línea punteada compartida */}
+                  <div className="h-6 w-full flex justify-center items-center relative">
+                    <div className="w-0 border-l-2 border-dashed border-slate-300 h-full"></div>
+                    <div className="absolute -bottom-2 bg-slate-50 text-slate-500 text-xs px-2 py-0.5 rounded-full border border-slate-200">Bus Compartido (I2C)</div>
+                  </div>
+
+                  <div className="text-sm text-slate-500 text-center mb-1">Detección Inercial 6 Ejes</div>
+                  <div className="w-full max-w-sm bg-sky-900/40 border border-sky-500 rounded-2xl shadow-md p-5 text-center">
+                    <div className="text-white text-base">MPU6050 (Acelerómetro + Giroscopio)</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Flechas conectores a RPi */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl justify-items-center">
+                {/* Conector Izquierdo */}
+                <div className="w-full flex justify-center items-center h-12 relative">
+                  <div className="w-0 border-l-2 border-dashed border-slate-300 h-full"></div>
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-sky-50 text-sky-700 text-xs font-bold px-3 py-1 rounded-full border border-sky-200 whitespace-nowrap">
+                    GPIO 5/6 (2‐Wire)
+                  </div>
+                  {/* Punta de flecha */}
+                  <div className="absolute bottom-0 -left-1 border-r-2 border-b-2 border-slate-300 w-2 h-2 transform rotate-[135deg]"></div>
+                </div>
+                {/* Conector Derecho */}
+                <div className="w-full flex justify-center items-center h-12 relative">
+                  <div className="w-0 border-l-2 border-dashed border-slate-300 h-full"></div>
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-violet-50 text-violet-700 text-xs font-bold px-3 py-1 rounded-full border border-violet-200 whitespace-nowrap">
+                    GPIO 2/3 (I2C)
+                  </div>
+                  {/* Punta de flecha */}
+                  <div className="absolute bottom-0 -left-1 border-r-2 border-b-2 border-slate-300 w-2 h-2 transform rotate-[135deg]"></div>
+                </div>
+              </div>
+
+              {/* Nodo Central: RPi */}
+              <div className="w-full max-w-6xl p-8 bg-slate-50 border-t-4 border-l-4 border-l-violet-500 border-violet-500 rounded-[2.5rem] shadow-lg relative border border-slate-200">
+                <div className="text-2xl mb-1">📟</div>
+                <h4 className="font-bold text-slate-900 text-lg mb-6">Raspberry Pi 3 B+ (Nodo Máster)</h4>
+                
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-6 items-start relative">
+                  {/* Gestión de procesos central */}
+                  <div className="md:col-span-2 flex flex-col items-center gap-4 relative">
+                    <div className="text-sm text-slate-500 text-center mb-1">Gestión de Procesos</div>
+                    <div className="w-full max-w-sm bg-sky-900/40 border border-sky-500 rounded-2xl shadow-md p-5 text-center relative z-10">
+                      <div className="text-white text-base">publisher.py</div>
+                    </div>
+                    {/* Flecha a Paho-MQTT */}
+                    <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 text-sky-300 text-xl z-0 hidden md:block">▶</div>
+                    <div className="h-6 border-l-2 border-dashed border-slate-300 md:hidden"></div>
+                    <div className="absolute -bottom-4 text-sky-300 text-xl transform rotate-90 md:hidden z-0">▶</div>
+                  </div>
+
+                  {/* Bloques de lógica internos */}
+                  <div className="md:col-span-3 grid grid-cols-2 gap-4">
+                    <div className="p-4 bg-white border border-amber-200 rounded-xl shadow-inner text-center">
+                      <div className="font-semibold text-amber-900 text-xs font-mono">driver_mps.py</div>
+                    </div>
+                    <div className="p-4 bg-white border border-fuchsia-200 rounded-xl shadow-inner text-center">
+                      <div className="font-semibold text-fuchsia-900 text-xs font-mono">Calculo Bernoulli (Viento)</div>
+                    </div>
+                    <div className="p-4 bg-white border border-blue-200 rounded-xl shadow-inner text-center">
+                      <div className="font-semibold text-blue-900 text-xs font-mono"> filtrado.py</div>
+                    </div>
+                    <div className="p-4 bg-white border border-rose-200 rounded-xl shadow-inner text-center">
+                      <div className="font-semibold text-rose-900 text-xs font-mono"> Estrategia Soplada (Alertas)</div>
+                    </div>
+                    <div className="p-4 bg-white border border-blue-200 rounded-xl shadow-inner text-center">
+                      <div className="font-semibold text-blue-900 text-xs font-mono"> driver_mpu.py</div>
+                    </div>
+                    <div className="p-4 bg-white border border-rose-200 rounded-xl shadow-inner text-center">
+                      <div className="font-semibold text-rose-900 text-xs font-mono">estrategia.py</div>
+                    </div>
+                    <div className="p-4 bg-white border border-teal-200 rounded-xl shadow-inner text-center col-span-2">
+                      <div className="font-semibold text-teal-900 text-xs font-mono hover:text-sky-500 transition-colors">Almacenamiento Local CSV</div>
+                    </div>
+                  </div>
+
+                  {/* L-shaped dashed arrows connection to Paho-MQTT */}
+                  <div className="absolute top-1/2 -right-6 transform -translate-y-1/2 hidden md:block z-0">
+                    <div className="w-10 border-t-2 border-dashed border-slate-300 relative">
+                        <div className="absolute top-1/2 -right-1 text-slate-300 text-lg transform -translate-y-1/2">▶</div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              {/* Flechas conectores salidas */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl justify-items-center h-12 relative mt-12 mb-12">
+                {/* Conector Local CSV */}
+                <div className="w-full flex justify-center items-center h-full relative">
+                  <div className="w-0 border-l-2 border-dashed border-slate-300 h-full relative">
+                    <div className="absolute top-0 -left-1 border-t-2 border-l-2 border-slate-300 w-2 h-2 transform rotate-45"></div>
+                  </div>
+                </div>
+                {/* Conector Alertas */}
+                <div className="w-full flex justify-center items-center h-full relative">
+                   <div className="w-0 border-l-2 border-dashed border-slate-300 h-full relative">
+                    <div className="absolute top-0 -left-1 border-t-2 border-l-2 border-slate-300 w-2 h-2 transform rotate-45"></div>
+                  </div>
+                </div>
+                {/* Conector Paho-MQTT */}
+                <div className="w-full flex justify-center items-center h-full relative">
+                   <div className="w-0 border-l-2 border-dashed border-slate-300 h-full relative">
+                    <div className="absolute top-0 -left-1 border-t-2 border-l-2 border-slate-300 w-2 h-2 transform rotate-45"></div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Capa Inferior: Salidas Locales, Estrategia, MQTT */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl justify-items-center items-start">
+                {/* Local CSV */}
+                <div className="flex flex-col items-center gap-4 w-full text-center">
+                  <div className="text-sm text-slate-500 text-center mb-1">Respaldo y Depuración de Datos Local</div>
+                  <div className="w-full bg-slate-50/50 border-t-4 border-teal-500 rounded-2xl shadow-md p-5 text-center border border-slate-200 transition hover:border-teal-300">
+                    <div className="text-2xl mb-1">📂</div>
+                    <h4 className="font-semibold text-slate-900 text-lg">Almacenamiento Local CSV</h4>
+                  </div>
+                </div>
+
+                {/* Estrategia Soplada */}
+                <div className="flex flex-col items-center gap-4 w-full text-center">
+                  <div className="text-sm text-slate-500 text-center mb-1">Alertas y Recomendaciones en Campo</div>
+                  <div className="w-full bg-slate-50/50 border-t-4 border-rose-500 rounded-2xl shadow-md p-5 text-center border border-slate-200 transition hover:border-rose-300">
+                    <div className="text-2xl mb-1">💡</div>
+                    <h4 className="font-semibold text-slate-900 text-lg">Estrategia Soplada (Alertas)</h4>
+                  </div>
+                </div>
+
+                {/* MQTT Client */}
+                <div className="flex flex-col items-center gap-4 w-full text-center">
+                  <div className="text-sm text-slate-500 text-center mb-1">Publicación JSON de Métricas Procesadas</div>
+                  <div className="w-full bg-sky-900/40 border border-sky-500 rounded-2xl shadow-md p-5 text-center">
+                    <div className="text-white text-lg">Cliente MQTT (Paho-MQTT)</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Conector MQTT a Cloud */}
+              <div className="w-full flex flex-col sm:flex-row items-center justify-center h-16 relative mt-16 mb-16">
+                 {/* Flecha horizontal interna */}
+                  <div className="hidden sm:flex items-center text-slate-300">
+                    <div className="w-6 h-0 border-t-2 border-slate-300 relative z-0">
+                        <div className="absolute top-1/2 -right-1 text-slate-300 text-lg transform -translate-y-1/2">▶</div>
+                    </div>
+                  </div>
+                  <div className="flex sm:hidden h-6 border-l-2 border-slate-300 items-center justify-center">
                     <span className="text-xl text-slate-300 transform rotate-90 -mb-4">▶</span>
                   </div>
+              </div>
 
-                  <div className="w-full sm:w-48 bg-slate-50 border-t-4 border-rose-500 rounded-2xl shadow-md p-5 text-center border border-slate-200">
-                    <div className="text-2xl mb-1">🗄️</div>
-                    <h4 className="font-bold text-slate-900 text-base">Time-Series DB</h4>
-                    <p className="text-sm text-slate-500 mt-1 font-mono">InfluxDB</p>
-                  </div>
-                </div>
+              {/* HiveMQ Cloud & Dashboard UI (En la misma fila) */}
+              <div className="w-full max-w-md flex flex-col sm:flex-row items-center justify-center gap-12 relative z-10 border border-slate-200 rounded-[2.5rem] bg-slate-900/40 p-12">
+                  <div className="absolute top-0 right-0 h-96 w-96 rounded-full bg-blue-500/10 blur-[100px]"></div>
+                  <div className="absolute bottom-0 left-0 h-96 w-96 rounded-full bg-emerald-500/10 blur-[100px]"></div>
 
-                {/* Flecha: GET API */}
-                <div className="h-12 w-0 border-l-2 border-dashed border-slate-300 flex items-center justify-center relative z-0">
-                  <div className="absolute right-4 bg-amber-50 text-amber-700 text-xs font-bold px-3 py-1 rounded-full border border-amber-200 whitespace-nowrap">
-                    GET /api/readings
-                  </div>
-                </div>
-
-                {/* 4. Frontend & Auth (En la misma fila) */}
-                <div className="w-full max-w-md flex flex-col sm:flex-row-reverse items-center justify-center gap-4 relative z-10">
-                  <div className="w-full bg-slate-50 border-t-4 border-emerald-500 rounded-2xl shadow-md p-5 text-center border border-slate-200">
-                    <div className="text-2xl mb-1">💻</div>
-                    <h4 className="font-bold text-slate-900 text-lg">React App</h4>
-                    <p className="text-sm text-slate-500 mt-1 font-mono">Vercel (Dashboard)</p>
-                  </div>
-                  
-                  {/* Flecha horizontal interna (Auth provee a React) */}
-                  <div className="hidden sm:flex items-center text-slate-300">
-                    <span className="text-xl -mr-1">◀</span>
-                    <div className="w-6 border-t-2 border-dashed border-slate-300"></div>
-                  </div>
-                  <div className="flex sm:hidden h-6 border-l-2 border-dashed border-slate-300 items-center justify-center">
-                    <span className="text-xl text-slate-300 transform -rotate-90 -mb-4">▶</span>
+                  <div className="w-full sm:w-1/2 bg-slate-800 border-t-4 border-blue-500 rounded-2xl shadow-md p-5 text-center border border-slate-700 transition hover:border-blue-400">
+                    <div className="text-3xl mb-1">☁️</div>
+                    <h4 className="font-bold text-white text-lg">HiveMQ Cloud (Broker MQTT)</h4>
                   </div>
 
-                  <div className="w-full sm:w-48 bg-slate-50 border-t-4 border-blue-500 rounded-2xl shadow-md p-5 text-center border border-slate-200">
-                    <div className="text-2xl mb-1">🔐</div>
-                    <h4 className="font-bold text-slate-900 text-base">Auth</h4>
-                    <p className="text-sm text-slate-500 mt-1 font-mono">Clerk</p>
-                  </div>
-                </div>
+                  <div className="text-3xl font-bold text-sky-400 transform sm:rotate-0 rotate-90">→</div>
 
+                  <div className="w-full sm:w-1/2 bg-slate-800 border-t-4 border-emerald-500 rounded-2xl shadow-md p-5 text-center border border-slate-700 transition hover:border-emerald-400">
+                    <div className="text-3xl mb-1">📱💻</div>
+                    <div className="text-sm text-slate-500 text-center mb-1">Visualización Remota en Tiempo Real</div>
+                    <h4 className="font-bold text-white text-lg">Dashboard (Interfaz de Usuario React)</h4>
+                  </div>
               </div>
             </div>
-
           </div>
         </div>
       </section>
 
       {/* 7. TABLA DE VARIABLES (Anexo técnico) */}
-      <section className="py-24 bg-slate-900 text-white border-t border-slate-800">
-        <div className="mx-auto max-w-6xl px-6">
-          <h2 className="text-4xl font-bold mb-12 text-center">Entidades del Sistema (Métricas)</h2>
-          <div className="overflow-x-auto rounded-3xl border border-slate-700 shadow-2xl bg-slate-800">
-            <table className="w-full text-left text-base">
-              <thead className="bg-black/40 text-slate-300">
+      <section className="py-24 bg-slate-900 text-white border-t border-slate-800 relative">
+         <div className="absolute top-0 right-0 h-96 w-96 rounded-full bg-blue-500/5 blur-[100px]"></div>
+         <div className="absolute bottom-0 left-0 h-96 w-96 rounded-full bg-emerald-500/5 blur-[100px]"></div>
+        <div className="mx-auto max-w-5xl px-6 relative z-10">
+          <h2 className="text-4xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">Resumen de Entidades del Sistema</h2>
+          <p className="text-lg text-slate-400 text-center mb-12 max-w-3xl mx-auto leading-relaxed">Definición de las variables físicas y lógicas que interactúan dentro del ecosistema IoT de SOPLÓN.</p>
+          
+          <div className="overflow-hidden rounded-2xl border border-slate-700 shadow-lg bg-slate-800 relative">
+            <table className="w-full text-left text-sm relative z-10">
+              <thead className="bg-black text-slate-300">
                 <tr>
-                  <th className="px-8 py-5 font-bold uppercase tracking-wider text-sm">Variable</th>
-                  <th className="px-8 py-5 font-bold uppercase tracking-wider text-sm">Tipo</th>
-                  <th className="px-8 py-5 font-bold uppercase tracking-wider text-sm">Rango / Lógica</th>
-                  <th className="px-8 py-5 font-bold uppercase tracking-wider text-sm">Sensor / Origen</th>
+                  <th className="px-6 py-4 font-semibold uppercase tracking-wider text-sm">Variable</th>
+                  <th className="px-6 py-4 font-semibold uppercase tracking-wider text-sm">Tipo</th>
+                  <th className="px-6 py-4 font-semibold uppercase tracking-wider text-sm">Rango / Lógica</th>
+                  <th className="px-6 py-4 font-semibold uppercase tracking-wider text-sm">Sensor / Origen</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-700/50">
+              <tbody className="divide-y divide-slate-700 bg-slate-800">
                 {variables.map((row, index) => (
-                  <tr key={index} className="hover:bg-slate-700/30 transition-colors">
-                    <td className="px-8 py-5 font-semibold text-white">{row[0]}</td>
-                    <td className="px-8 py-5">
-                      <span className="bg-slate-700/50 border border-slate-600 px-3 py-1 rounded-md text-xs font-medium text-slate-300">{row[1]}</span>
+                  <tr key={index} className="hover:bg-slate-700 transition-colors">
+                    <td className="px-6 py-4 font-medium text-white">{row[0]}</td>
+                    <td className="px-6 py-4 text-slate-600">
+                      <span className="bg-slate-700 px-2 py-1 rounded text-xs font-medium text-slate-300">{row[1]}</span>
                     </td>
-                    <td className="px-8 py-5 text-slate-400">{row[2]}</td>
-                    <td className="px-8 py-5 text-sky-400 font-mono text-sm">{row[3]}</td>
+                    <td className="px-6 py-4 text-slate-400 leading-relaxed">{row[2]}</td>
+                    <td className="px-6 py-4 text-sky-600 font-mono text-xs">{row[3]}</td>
                   </tr>
                 ))}
               </tbody>
@@ -336,14 +425,15 @@ export default function Proyecto() {
       </section>
 
       {/* FOOTER ACADÉMICO */}
-      <footer className="py-12 bg-black text-slate-500 text-center">
-        <div className="mx-auto max-w-6xl px-6">
-          <p className="uppercase tracking-[0.2em] text-xs font-bold mb-4 text-slate-600">
+      <footer className="py-12 bg-black text-slate-600 text-center border-t border-slate-800 relative">
+        <div className="mx-auto max-w-6xl px-6 relative z-10">
+          <p className="uppercase tracking-[0.2em] text-xs font-bold mb-4 text-slate-500">
             Pontificia Universidad Javeriana - Facultad de Ingeniería
           </p>
           <p className="text-sm italic">
             Proyecto: Fundamentos en IoT y aplicaciones • Tutor: Wilder Eduardo Castellanos Hernández, PhD
           </p>
+           <p className="mt-4 text-xs font-mono">06 – 03 – 2026 • Bogotá DC, Colombia</p>
         </div>
       </footer>
     </div>
