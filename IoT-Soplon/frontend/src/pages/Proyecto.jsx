@@ -14,22 +14,26 @@ export default function Home() {
   return (
     <div className="bg-slate-50 min-h-screen font-sans">
       
-      {/* 1. HERO SECTION: Impacto Visual y Promesa de Valor */}
-      <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-black text-white py-24 overflow-hidden">
-        {/* Si tienes una imagen de fondo, descomenta la siguiente línea y ponla en la carpeta public */}
-        {/* <img src="/fondo_ciclismo.jpg" alt="Fondo" className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay" /> */}
+      {/* 1. HERO SECTION: Impacto Visual con tu Imagen de Fondo */}
+      <section className="relative bg-slate-900 text-white py-24 overflow-hidden">
+        {/* Imagen de fondo desde la carpeta public */}
+        <img 
+          src="/Fondo PROYECTO.jpg" 
+          alt="Fondo Proyecto Soplón" 
+          className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay" 
+        />
         
         <div className="relative mx-auto max-w-6xl px-6 text-center z-10">
           <span className="rounded-full bg-sky-500/20 px-4 py-1 text-sm font-semibold text-sky-300 uppercase tracking-wider border border-sky-500/30">
             IoT para Alto Rendimiento
           </span>
-          <h1 className="mt-6 text-6xl font-extrabold tracking-tight sm:text-8xl bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
+          <h1 className="mt-6 text-6xl font-extrabold tracking-tight sm:text-8xl bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400 drop-shadow-lg">
             SOPLÓN
           </h1>
-          <p className="mt-4 text-2xl italic text-sky-400 font-light">
+          <p className="mt-4 text-2xl italic text-sky-400 font-light drop-shadow-md">
             "El que te sopla la estrategia, no el secreto"
           </p>
-          <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-slate-300">
+          <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-slate-200 drop-shadow">
             Eliminamos el túnel de viento y lo llevamos a la carretera. Una solución IoT integrada en tu casco que procesa variables aerodinámicas al instante para indicarte qué hacer en el momento exacto.
           </p>
           <div className="mt-10 flex justify-center gap-4">
@@ -40,7 +44,31 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. EL PROBLEMA Y LA INNOVACIÓN */}
+      {/* 2. QUIÉNES SOMOS COMO EMPRESA */}
+      <section className="py-20 bg-slate-100 border-b border-slate-200">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="flex flex-col md:flex-row items-center gap-12">
+            <div className="w-full md:w-1/3 flex justify-center">
+              <img 
+                src="/Logo SOPLON.png" 
+                alt="Logo Empresa Soplón" 
+                className="w-64 h-auto drop-shadow-2xl hover:scale-105 transition-transform duration-300" 
+              />
+            </div>
+            <div className="w-full md:w-2/3">
+              <h2 className="text-4xl font-bold text-slate-900 mb-6">¿Quiénes Somos?</h2>
+              <p className="text-lg text-slate-600 leading-relaxed mb-4">
+                En <strong>Soplón</strong>, somos un equipo interdisciplinario de ingenieros en formación de la Pontificia Universidad Javeriana, apasionados por la intersección entre el deporte de alto rendimiento y las tecnologías de vanguardia.
+              </p>
+              <p className="text-lg text-slate-600 leading-relaxed">
+                Nuestra misión es democratizar el acceso a la telemetría profesional. Desarrollamos soluciones de Internet de las Cosas (IoT) accesibles, portátiles y precisas que transforman datos complejos en decisiones estratégicas en tiempo real, empoderando a atletas y entrenadores para alcanzar su máximo potencial.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. EL PROBLEMA Y LA INNOVACIÓN */}
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-6xl px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -57,7 +85,6 @@ export default function Home() {
             
             {/* AQUÍ VA TU VIDEO LOCAL */}
             <div className="rounded-3xl shadow-2xl overflow-hidden bg-slate-900 border-4 border-slate-100 relative group">
-              {/* Cambia "Prototipo_SOPLON.mp4" por el nombre exacto de tu archivo en la carpeta public */}
               <video 
                 className="w-full h-auto object-cover aspect-video" 
                 autoPlay 
@@ -78,7 +105,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. USUARIO OBJETIVO */}
+      {/* 4. USUARIO OBJETIVO */}
       <section className="py-16 bg-slate-100">
         <div className="mx-auto max-w-6xl px-6 text-center">
           <h2 className="text-3xl font-bold text-slate-900 mb-10">¿Para quién está diseñado?</h2>
@@ -102,7 +129,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. ARQUITECTURA DE INGENIERÍA */}
+      {/* 5. ARQUITECTURA DE INGENIERÍA */}
       <section className="py-20 bg-slate-900 text-white">
         <div className="mx-auto max-w-6xl px-6">
           <div className="text-center mb-16">
@@ -131,7 +158,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. TABLA DE VARIABLES (Diseño Limpio) */}
+      {/* 6. TABLA DE VARIABLES (Diseño Limpio) */}
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-5xl px-6">
           <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">Variables Sensadas y Procesadas</h2>
