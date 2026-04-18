@@ -30,7 +30,7 @@ export default function Home() {
             "El que te sopla la estrategia, no el secreto"
           </p>
           <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-slate-300">
-            Eliminamos el túnel de viento y lo llevamos a la carretera. Un estratega digital integrado en tu casco que procesa variables aerodinámicas al instante para indicarte qué hacer en el momento exacto.
+            Eliminamos el túnel de viento y lo llevamos a la carretera. Una solución IoT integrada en tu casco que procesa variables aerodinámicas al instante para indicarte qué hacer en el momento exacto.
           </p>
           <div className="mt-10 flex justify-center gap-4">
             <Link to="/dashboard" className="rounded-full bg-sky-500 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-sky-500/30 hover:bg-sky-400 hover:scale-105 transition-all">
