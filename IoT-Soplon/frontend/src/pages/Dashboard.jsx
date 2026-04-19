@@ -150,6 +150,14 @@ export default function Dashboard() {
     return Object.values(pivot).sort((a, b) => new Date(a.time) - new Date(b.time));
   }, [readings]);
 
+  const lastDataTime = chartData.length > 0
+    ? new Date(chartData[chartData.length - 1].time)
+    : null;
+
+  const isLive = lastDataTime
+    ? (Date.now() - lastDataTime.getTime()) < 1000000
+    : false;
+
   return (
     <div className="bg-slate-50 min-h-screen font-sans flex flex-col">
       
@@ -173,21 +181,17 @@ export default function Dashboard() {
 
           <div className="flex flex-col sm:flex-row items-center gap-4 bg-slate-800/50 backdrop-blur-md p-4 rounded-2xl border border-slate-700">
             <div className="flex items-center gap-3">
-              <span
-                className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider ${
-                  lastFetchHadError ? 'bg-red-500/20 text-red-400 border border-red-500/30' : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-                }`}
-              >
-                {lastFetchHadError ? (
-                  <span className="h-2 w-2 rounded-full bg-red-500" aria-hidden="true" />
-                ) : (
-                  <span className="relative flex h-2 w-2" aria-hidden="true">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-                  </span>
-                )}
-                {lastFetchHadError ? 'Pausado' : 'En Vivo'}
-              </span>
+              {isLive ? (
+                <span className="flex items-center gap-2 px-3 py-1 rounded-full bg-green-900 text-green-300 text-xs font-bold uppercase tracking-wider border border-green-500/30">
+                  <span className="w-2 h-2 rounded-full bg-green-400 animate-ping inline-block" />
+                  EN VIVO
+                </span>
+              ) : (
+                <span className="flex items-center gap-2 px-3 py-1 rounded-full bg-red-900 text-red-300 text-xs font-bold uppercase tracking-wider border border-red-500/30">
+                  <span className="w-2 h-2 rounded-full bg-red-400 inline-block" />
+                  DESCONECTADO
+                </span>
+              )}
             </div>
             
             <div className="h-8 w-px bg-slate-700 hidden sm:block"></div>
@@ -212,19 +216,12 @@ export default function Dashboard() {
       <div className="mx-auto max-w-7xl w-full px-6 -mt-16 relative z-20 flex-grow pb-20">
         
         {/* Alerta de pérdida de conexión */}
-        {showStaleWarning && (
+        {!isLive && chartData.length > 0 && (
           <div className="mb-8 flex items-center justify-between rounded-2xl border border-amber-500/30 bg-amber-500/10 backdrop-blur-md p-4 shadow-lg">
             <div className="flex items-center gap-3">
               <span className="text-amber-400 text-2xl">⚠️</span>
-              <span className="text-sm font-semibold text-amber-200">Señal perdida — Mostrando últimos datos conocidos</span>
+              <span className="text-sm font-semibold text-amber-200">Dispositivo desconectado — mostrando últimos datos registrados</span>
             </div>
-            <button
-              type="button"
-              onClick={() => setShowStaleWarning(false)}
-              className="text-sm font-bold text-amber-400 hover:text-amber-300 transition-colors"
-            >
-              Ocultar
-            </button>
           </div>
         )}
 
