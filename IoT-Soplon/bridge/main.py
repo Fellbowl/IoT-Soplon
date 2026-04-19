@@ -91,12 +91,14 @@ def create_point(data):
 influx_client = build_influx_client()
 
 
-def query_last_readings():
+def query_last_readings(limit=300):
     query = (
         f'from(bucket: "{INFLUX_BUCKET}") '
-        f'|> range(start: -5m) '
+        f'|> range(start: -30d) '
         f'|> filter(fn: (r) => r._measurement == "iot_sensor") '
-        f'|> sort(columns: ["_time"], desc: false)'
+        f'|> sort(columns: ["_time"], desc: true) '
+        f'|> limit(n: {limit}) '
+        f'|> sort(columns: ["_time"], desc: false) '
     )
     query_api = influx_client.query_api()
     readings = []
