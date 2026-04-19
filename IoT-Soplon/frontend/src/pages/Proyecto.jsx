@@ -287,130 +287,149 @@ export default function Proyecto() {
 
       {/* 7. ARQUITECTURA DE LA SOLUCIÓN (DIAGRAMA INTERACTIVO) */}
       <section className="py-24 bg-slate-950 border-t border-slate-800 relative overflow-hidden">
-        {/* Luces de fondo estilo Matrix/Cyberpunk */}
-        <div className="absolute top-20 left-10 h-96 w-96 rounded-full bg-sky-600/10 blur-[120px] pointer-events-none"></div>
-        <div className="absolute bottom-20 right-10 h-96 w-96 rounded-full bg-violet-600/10 blur-[120px] pointer-events-none"></div>
+        {/* Luces de fondo estilo Cyberpunk */}
+        <div className="absolute top-0 right-0 h-[600px] w-[600px] rounded-full bg-sky-600/10 blur-[150px] pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 h-[600px] w-[600px] rounded-full bg-violet-600/10 blur-[150px] pointer-events-none"></div>
 
-        <div className="mx-auto max-w-7xl px-6 relative z-10 text-center">
-          <h2 className="text-4xl font-extrabold text-white mb-6">Arquitectura de Software & Hardware</h2>
-          <p className="text-xl text-slate-400 max-w-3xl mx-auto mb-16 leading-relaxed">
-            Flujo de datos bidireccional desde la capa de adquisición física hasta la visualización en la nube mediante un ecosistema Full-Stack.
-          </p>
+        <div className="mx-auto max-w-7xl px-6 relative z-10">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-extrabold text-white mb-6">Arquitectura Centralizada del Sistema</h2>
+            <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+              Descubre cómo viajan los datos en tiempo real desde el casco del ciclista hasta la pantalla de su entrenador.
+            </p>
+          </div>
+
+          {/* Explicación de las Capas */}
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl backdrop-blur-md">
+              <h3 className="text-orange-400 font-bold mb-3 flex items-center gap-2"><span>📟</span> 1. Capa Hardware</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">El dispositivo IoT (Raspberry Pi + Sensores) captura la telemetría y actúa como publicador, enviando los datos mediante el protocolo ligero MQTT.</p>
+            </div>
+            <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl backdrop-blur-md">
+              <h3 className="text-sky-400 font-bold mb-3 flex items-center gap-2"><span>☁️</span> 2. Capa Cloud</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">HiveMQ recibe la señal. El Bridge Service (Railway) se suscribe, procesa con Python/Flask y escribe en la base de datos de series temporales InfluxDB.</p>
+            </div>
+            <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl backdrop-blur-md">
+              <h3 className="text-violet-400 font-bold mb-3 flex items-center gap-2"><span>▲</span> 3. Capa Frontend</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">Desplegado en Vercel, solicita la API al backend y utiliza Clerk para proteger las rutas (Sign In/Up) mediante Session JWT.</p>
+            </div>
+          </div>
           
           {/* INICIO DEL DIAGRAMA CSS */}
-          <div className="bg-slate-900/50 backdrop-blur-xl border border-slate-700/50 rounded-[3rem] p-8 md:p-12 shadow-2xl overflow-x-auto">
-            <div className="min-w-[800px] flex flex-col items-center gap-2">
+          <div className="bg-slate-900/60 backdrop-blur-2xl border border-slate-700/50 rounded-[3rem] p-8 shadow-2xl overflow-x-auto">
+            <div className="min-w-[900px] flex flex-col items-center gap-2 py-4">
               
-              {/* --- NIVEL 1: HARDWARE --- */}
-              <div className="w-64 bg-slate-800 border-2 border-orange-500/50 rounded-2xl p-5 shadow-[0_0_20px_rgba(249,115,22,0.15)] hover:scale-105 transition-transform">
+              {/* --- ROW 1: DISPOSITIVO IoT --- */}
+              <div className="w-72 bg-slate-800 border-2 border-orange-500/50 rounded-2xl p-5 shadow-[0_0_20px_rgba(249,115,22,0.15)] z-10 text-center">
                 <span className="text-3xl mb-2 block">📟</span>
-                <h3 className="font-bold text-white text-lg">IoT Device</h3>
-                <p className="text-xs text-slate-400 mt-1">Raspberry Pi + Sensores</p>
+                <h3 className="font-bold text-white text-lg">Dispositivo IoT</h3>
+                <p className="text-xs text-slate-400 mt-1">Raspberry pi + sensores</p>
               </div>
 
-              {/* FLECHA 1 */}
+              {/* FLECHA: MQTT Publish */}
               <div className="flex flex-col items-center text-orange-400 font-mono text-xs font-bold">
-                <span className="bg-slate-900 px-3 py-1 rounded-full border border-orange-500/30 z-10 mt-2">MQTT Publish</span>
-                <div className="w-0.5 h-8 bg-orange-500/50"></div>
+                <div className="w-0.5 h-6 bg-orange-500/50"></div>
+                <span className="bg-slate-950 px-3 py-1 rounded-full border border-orange-500/30 z-10 shadow-lg">MQTT Publish</span>
+                <div className="w-0.5 h-6 bg-orange-500/50"></div>
                 <div className="-mt-2 text-lg">▼</div>
               </div>
 
-              {/* --- NIVEL 2: BROKER --- */}
-              <div className="w-64 bg-slate-800 border-2 border-yellow-400/50 rounded-2xl p-5 shadow-[0_0_20px_rgba(250,204,21,0.15)] hover:scale-105 transition-transform">
+              {/* --- ROW 2: BROKER --- */}
+              <div className="w-72 bg-slate-800 border-2 border-yellow-400/50 rounded-2xl p-5 shadow-[0_0_20px_rgba(250,204,21,0.15)] z-10 text-center">
                 <span className="text-3xl mb-2 block">☁️</span>
                 <h3 className="font-bold text-white text-lg">HiveMQ Cloud</h3>
-                <p className="text-xs text-slate-400 mt-1">MQTT Broker Público</p>
+                <p className="text-xs text-slate-400 mt-1">MQTT Broker (intermediario)</p>
               </div>
 
-              {/* FLECHA 2 */}
+              {/* FLECHA: MQTT Subscribe */}
               <div className="flex flex-col items-center text-yellow-400 font-mono text-xs font-bold">
-                <span className="bg-slate-900 px-3 py-1 rounded-full border border-yellow-400/30 z-10 mt-2">MQTT Subscribe</span>
-                <div className="w-0.5 h-8 bg-yellow-400/50"></div>
+                <div className="w-0.5 h-6 bg-yellow-400/50"></div>
+                <span className="bg-slate-950 px-3 py-1 rounded-full border border-yellow-400/30 z-10 shadow-lg">MQTT Subscribe</span>
+                <div className="w-0.5 h-6 bg-yellow-400/50"></div>
                 <div className="-mt-2 text-lg">▼</div>
               </div>
 
-              {/* --- NIVEL 3: BACKEND + DATOS + GITHUB --- */}
-              <div className="flex items-center justify-center gap-4 w-full">
-                
-                {/* GITHUB */}
-                <div className="w-48 bg-slate-800 border border-slate-600 rounded-2xl p-4 hover:scale-105 transition-transform">
+              {/* --- ROW 3: BACKEND & DATABASE --- */}
+              <div className="flex items-center justify-center w-full my-2">
+                {/* Auto Deploy Left Side */}
+                <div className="w-48 bg-slate-800/80 border border-slate-600 rounded-2xl p-4 text-center">
                   <span className="text-2xl mb-1 block">🐙</span>
-                  <h3 className="font-bold text-white text-sm">GitHub (IoT-Soplon)</h3>
-                  <p className="text-[10px] text-slate-400">Repositorio Oficial</p>
+                  <h3 className="font-bold text-white text-xs">GitHub (IoT-Soplon)</h3>
                 </div>
-
-                {/* Flecha Auto-Deploy 1 */}
                 <div className="flex items-center text-slate-400 font-mono text-[10px] font-bold">
-                  <span className="bg-slate-900 px-2 py-1 rounded border border-slate-700 z-10">Auto-Deploy</span>
-                  <div className="h-0.5 w-8 bg-slate-600"></div>
+                  <div className="h-0.5 w-6 bg-slate-600"></div>
+                  <span className="bg-slate-950 px-2 py-1 rounded border border-slate-700 z-10">Auto-deploy</span>
+                  <div className="h-0.5 w-6 bg-slate-600"></div>
                   <div className="-ml-2 text-lg">▶</div>
                 </div>
 
-                {/* RAILWAY (BRIDGE) */}
-                <div className="w-64 bg-slate-800 border-2 border-sky-500/50 rounded-2xl p-5 shadow-[0_0_20px_rgba(14,165,233,0.15)] hover:scale-105 transition-transform relative">
-                  <span className="text-3xl mb-2 block">🚂</span>
-                  <h3 className="font-bold text-white text-lg">Railway: Bridge Service</h3>
-                  <p className="text-xs text-slate-400 mt-1">Python + paho-mqtt + Flask</p>
+                {/* Railway */}
+                <div className="w-72 bg-slate-800 border-2 border-sky-500/50 rounded-2xl p-5 shadow-[0_0_30px_rgba(14,165,233,0.2)] z-10 text-center relative overflow-hidden">
+                  <div className="absolute inset-0 bg-sky-500/5"></div>
+                  <span className="text-3xl mb-2 block relative z-10">🚂</span>
+                  <h3 className="font-bold text-white text-lg relative z-10">Railway: Bridge Service</h3>
+                  <p className="text-xs text-slate-400 mt-2 relative z-10 font-medium">Python + paho-mqtt<br/>Flask /api/readings</p>
                 </div>
 
-                {/* Flecha InfluxDB */}
-                <div className="flex items-center text-sky-400 font-mono text-xs font-bold">
-                  <div className="h-0.5 w-6 bg-sky-500/50"></div>
+                <div className="flex items-center text-blue-400 font-mono text-[10px] font-bold">
+                  <div className="h-0.5 w-8 bg-blue-500/50"></div>
                   <div className="-ml-2 text-lg">▶</div>
                 </div>
 
-                {/* INFLUXDB */}
-                <div className="w-48 bg-slate-800 border-2 border-blue-500/50 rounded-2xl p-4 shadow-[0_0_20px_rgba(59,130,246,0.15)] hover:scale-105 transition-transform">
+                {/* InfluxDB */}
+                <div className="w-48 bg-slate-800 border-2 border-blue-500/50 rounded-2xl p-4 shadow-[0_0_20px_rgba(59,130,246,0.15)] text-center">
                   <span className="text-2xl mb-1 block">🗄️</span>
                   <h3 className="font-bold text-white text-sm">InfluxDB Cloud</h3>
-                  <p className="text-[10px] text-slate-400">Time Series DB (us-east-1)</p>
+                  <p className="text-[10px] text-slate-400 mt-1">Time serial DB<br/>(us-east-1 bucket)</p>
                 </div>
               </div>
 
-              {/* FLECHA 3 (Hacia Frontend) */}
+              {/* FLECHA: API REST */}
               <div className="flex flex-col items-center text-emerald-400 font-mono text-xs font-bold">
-                <span className="bg-slate-900 px-3 py-1 rounded-full border border-emerald-500/30 z-10 mt-2">GET /api/readings</span>
-                <div className="w-0.5 h-10 bg-emerald-500/50"></div>
+                <div className="w-0.5 h-6 bg-emerald-500/50"></div>
+                <span className="bg-slate-950 px-4 py-1.5 rounded-full border border-emerald-500/50 z-10 shadow-[0_0_15px_rgba(16,185,129,0.3)]">GET /api/readings</span>
+                <div className="w-0.5 h-6 bg-emerald-500/50"></div>
                 <div className="-mt-2 text-lg">▼</div>
               </div>
 
-              {/* --- NIVEL 4: FRONTEND + AUTH --- */}
-              <div className="flex items-center justify-center gap-4 w-full">
-                
-                {/* CLERK */}
-                <div className="w-48 bg-slate-800 border-2 border-violet-500/50 rounded-2xl p-4 shadow-[0_0_20px_rgba(139,92,246,0.15)] hover:scale-105 transition-transform">
-                  <span className="text-2xl mb-1 block">🔐</span>
-                  <h3 className="font-bold text-white text-sm">Clerk</h3>
-                  <p className="text-[10px] text-slate-400">Auth-as-a-Service</p>
+              {/* --- ROW 4: FRONTEND & AUTH --- */}
+              <div className="flex items-center justify-center w-full mt-2">
+                {/* Auto Deploy Left Side */}
+                <div className="w-48 bg-slate-800/80 border border-slate-600 rounded-2xl p-4 text-center">
+                  <span className="text-2xl mb-1 block">🐙</span>
+                  <h3 className="font-bold text-white text-xs">GitHub (IoT-Soplon)</h3>
                 </div>
-
-                {/* Flecha JWT */}
-                <div className="flex items-center text-violet-400 font-mono text-[10px] font-bold">
-                  <span className="bg-slate-900 px-2 py-1 rounded border border-violet-500/30 z-10">Session JWT</span>
-                  <div className="h-0.5 w-6 bg-violet-500/50"></div>
+                <div className="flex items-center text-slate-400 font-mono text-[10px] font-bold">
+                  <div className="h-0.5 w-6 bg-slate-600"></div>
+                  <span className="bg-slate-950 px-2 py-1 rounded border border-slate-700 z-10">Auto-deploy</span>
+                  <div className="h-0.5 w-6 bg-slate-600"></div>
                   <div className="-ml-2 text-lg">▶</div>
                 </div>
 
-                {/* VERCEL (FRONTEND) */}
-                <div className="w-64 bg-slate-800 border-2 border-white/50 rounded-2xl p-5 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:scale-105 transition-transform relative">
+                {/* Vercel */}
+                <div className="w-72 bg-slate-800 border-2 border-white/50 rounded-2xl p-6 shadow-[0_0_30px_rgba(255,255,255,0.15)] z-10 text-center">
                   <span className="text-3xl mb-2 block">▲</span>
-                  <h3 className="font-bold text-white text-lg">Vercel: Frontend</h3>
-                  <p className="text-xs text-slate-400 mt-1">React (Home, Sign In/Up, Dash)</p>
+                  <h3 className="font-bold text-white text-lg">Frontend / Vercel</h3>
+                  <div className="mt-3 text-xs text-slate-300 space-y-1.5">
+                    <p className="bg-slate-900/50 py-1 rounded">Home <span className="text-slate-500">(landing page)</span></p>
+                    <p className="bg-slate-900/50 py-1 rounded">Sign IN & Sign UP <span className="text-slate-500">(Clerk components)</span></p>
+                    <p className="bg-slate-900/50 py-1 rounded font-semibold text-emerald-400">Dashboard <span className="text-slate-500 font-normal">(protected route)</span></p>
+                  </div>
                 </div>
 
-                {/* Flecha Auto-Deploy 2 (Desde Github) */}
-                {/* Visualmente conectada con Github, aquí usamos una etiqueta para mantener el diseño limpio */}
-                <div className="flex items-center text-slate-400 font-mono text-[10px] font-bold">
+                <div className="flex items-center text-violet-400 font-mono text-[10px] font-bold">
                   <div className="-mr-2 text-lg">◀</div>
-                  <div className="h-0.5 w-6 bg-slate-600"></div>
-                  <span className="bg-slate-900 px-2 py-1 rounded border border-slate-700 z-10">Auto-Deploy</span>
-                </div>
-                
-                <div className="w-48 bg-slate-800 border border-slate-600 rounded-2xl p-4 opacity-50">
-                  <span className="text-2xl mb-1 block">🐙</span>
-                  <h3 className="font-bold text-white text-sm">GitHub</h3>
+                  <div className="h-0.5 w-6 bg-violet-500/50"></div>
+                  <span className="bg-slate-950 px-2 py-1 rounded border border-violet-500/30 z-10 text-center">Session<br/>JWT</span>
+                  <div className="h-0.5 w-6 bg-violet-500/50"></div>
                 </div>
 
+                {/* Clerk */}
+                <div className="w-48 bg-slate-800 border-2 border-violet-500/50 rounded-2xl p-4 shadow-[0_0_20px_rgba(139,92,246,0.15)] text-center">
+                  <span className="text-2xl mb-1 block">🔐</span>
+                  <h3 className="font-bold text-white text-sm">Clerk</h3>
+                  <p className="text-[10px] text-slate-400 mt-1">Auth-as-a-service<br/>login-register<br/>session-jwt</p>
+                </div>
               </div>
 
             </div>
