@@ -371,10 +371,10 @@ export default function Proyecto() {
                   <p className="text-xs text-slate-400 mt-2 relative z-10 font-medium">Python + paho-mqtt<br/>Flask /api/readings</p>
                 </div>
 
-                <div className="flex items-center text-blue-400 font-mono text-[10px] font-bold">
-                  <div className="h-0.5 w-4 bg-blue-500/50"></div>
-                  <div className="text-lg">↔</div>
-                  <div className="h-0.5 w-4 bg-blue-500/50"></div>
+                <div className="flex items-center text-blue-400 font-mono text-[10px] font-bold gap-1">
+                  <div className="text-sm">◀</div>
+                  <div className="h-0.5 w-12 bg-blue-500/50"></div>
+                  <div className="text-sm">▶</div>
                 </div>
 
                 {/* InfluxDB */}
