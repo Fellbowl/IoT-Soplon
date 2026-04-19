@@ -35,16 +35,24 @@ export default function Proyecto() {
             alt="Ciclistas compitiendo - Soplón" 
             className="w-full h-full object-cover object-top" 
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/60 to-slate-900/90"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/70 to-slate-900/95"></div>
         </div>
 
         <div className="relative mx-auto max-w-5xl text-center z-10 w-full mt-10">
-          <span className="inline-block rounded-full bg-sky-500/20 border border-sky-400/50 px-5 py-2 text-xs uppercase tracking-widest text-sky-300 font-bold mb-6 backdrop-blur-md">
+          <span className="inline-block rounded-full bg-sky-500/20 border border-sky-400/50 px-5 py-2 text-xs uppercase tracking-widest text-sky-300 font-bold mb-8 backdrop-blur-md">
             Fundamentos en IoT y Aplicaciones
           </span>
           
-          {/* TÍTULO ELEGANTE */}
-          <h1 className="text-6xl sm:text-8xl xl:text-[9rem] font-serif font-light tracking-[0.15em] text-white mb-6 drop-shadow-2xl">
+          {/* TÍTULO ULTRA-MODERNO Y DEPORTIVO */}
+          <h1 
+            className="text-[5rem] sm:text-8xl xl:text-[10rem] font-sans font-black tracking-[0.25em] uppercase mb-4"
+            style={{
+              background: 'linear-gradient(to bottom right, #ffffff, #e0f2fe, #7dd3fc)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              filter: 'drop-shadow(0px 10px 15px rgba(0,0,0,0.6))'
+            }}
+          >
             SOPLÓN
           </h1>
           
@@ -53,20 +61,20 @@ export default function Proyecto() {
           </p>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-slate-200 text-sm font-semibold">
-            <div className="bg-black/40 p-4 rounded-2xl border border-white/10 backdrop-blur-md hover:bg-black/60 transition">Samuel S. Castrillón</div>
-            <div className="bg-black/40 p-4 rounded-2xl border border-white/10 backdrop-blur-md hover:bg-black/60 transition">Juan Pablo Arenas</div>
-            <div className="bg-black/40 p-4 rounded-2xl border border-white/10 backdrop-blur-md hover:bg-black/60 transition">David E. Alvarez</div>
-            <div className="bg-black/40 p-4 rounded-2xl border border-white/10 backdrop-blur-md hover:bg-black/60 transition">Samuel Montoya</div>
+            <div className="bg-black/40 p-4 rounded-2xl border border-white/10 backdrop-blur-md hover:bg-black/60 transition shadow-lg">Samuel S. Castrillón</div>
+            <div className="bg-black/40 p-4 rounded-2xl border border-white/10 backdrop-blur-md hover:bg-black/60 transition shadow-lg">Juan Pablo Arenas</div>
+            <div className="bg-black/40 p-4 rounded-2xl border border-white/10 backdrop-blur-md hover:bg-black/60 transition shadow-lg">David E. Alvarez</div>
+            <div className="bg-black/40 p-4 rounded-2xl border border-white/10 backdrop-blur-md hover:bg-black/60 transition shadow-lg">Samuel Montoya</div>
           </div>
           
-          <div className="mt-8 text-slate-300 text-xs tracking-wider uppercase flex flex-col sm:flex-row justify-center gap-4 sm:gap-12">
+          <div className="mt-8 text-slate-300 text-xs tracking-[0.1em] uppercase flex flex-col sm:flex-row justify-center gap-4 sm:gap-12">
             <p className="drop-shadow-md">Pontificia Universidad Javeriana</p>
             <p className="text-sky-400 font-bold drop-shadow-md">Tutor: Wilder E. Castellanos, PhD</p>
           </div>
         </div>
       </section>
 
-      {/* 2. NUEVA SECCIÓN: QUIÉNES SOMOS */}
+      {/* 2. QUIÉNES SOMOS */}
       <section className="py-24 bg-white border-b border-slate-200">
         <div className="mx-auto max-w-7xl px-6">
           <div className="flex flex-col md:flex-row items-center gap-16">
@@ -79,7 +87,7 @@ export default function Proyecto() {
                   src="/Logo SOPLON.png" 
                   alt="Logo de Soplón" 
                   className="relative w-72 max-w-full drop-shadow-2xl transition-transform duration-500 group-hover:scale-105"
-                  onError={(e) => { e.target.src = '/Logo SOPLON.jpg'; }} // Fallback por si la extensión es .jpg
+                  onError={(e) => { e.target.src = '/Logo SOPLON.jpg'; }} 
                 />
               </div>
             </div>
@@ -87,7 +95,7 @@ export default function Proyecto() {
             {/* Texto de Quiénes Somos */}
             <div className="w-full md:w-7/12 text-center md:text-left">
               <span className="text-sky-500 font-bold tracking-[0.2em] text-sm uppercase mb-3 block">Nuestra Identidad</span>
-              <h2 className="text-4xl sm:text-5xl font-serif font-light text-slate-900 mb-8">¿Quiénes Somos?</h2>
+              <h2 className="text-4xl sm:text-5xl font-extrabold text-slate-900 mb-8 tracking-tight">¿Quiénes Somos?</h2>
               
               <div className="space-y-6 text-lg text-slate-600 leading-relaxed">
                 <p>
@@ -96,7 +104,7 @@ export default function Proyecto() {
                 <p>
                   Nuestro propósito es transformar datos complejos en decisiones estratégicas claras. A través de soluciones de Internet de las Cosas (IoT) accesibles, portátiles y precisas, buscamos empoderar a atletas y entrenadores para que alcancen su máximo potencial.
                 </p>
-                <p className="pl-6 border-l-4 border-sky-500 text-slate-700 italic font-medium">
+                <p className="pl-6 border-l-4 border-sky-500 text-slate-700 italic font-medium bg-slate-50 py-3 pr-4 rounded-r-xl">
                   "Llevamos el análisis aerodinámico de un costoso túnel de viento directamente a la carretera."
                 </p>
               </div>
@@ -134,7 +142,7 @@ export default function Proyecto() {
               </div>
             </div>
             
-            {/* VIDEO: Ciclista High-Tech */}
+            {/* VIDEO */}
             <div className="relative group">
               <div className="rounded-[2.5rem] overflow-hidden bg-slate-900 border-8 border-white shadow-2xl relative z-10">
                 <video 
@@ -240,8 +248,6 @@ export default function Proyecto() {
           </div>
 
           <div className="grid lg:grid-cols-12 gap-12 items-center">
-            
-            {/* IMAGEN VERTICAL - USO SOPLON */}
             <div className="lg:col-span-4 flex justify-center relative group">
               <div className="rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white relative z-10 w-full max-w-sm transform transition-transform duration-500 group-hover:scale-[1.02]">
                 <img 
@@ -259,7 +265,6 @@ export default function Proyecto() {
               <div className="absolute -inset-2 rounded-[3rem] bg-gradient-to-br from-sky-500/30 to-violet-500/30 blur-2xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
 
-            {/* TARJETAS DE ALERTAS */}
             <div className="lg:col-span-8 grid sm:grid-cols-2 gap-6">
               {eventos.map((evento, index) => (
                 <div key={index} className="group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
@@ -276,33 +281,147 @@ export default function Proyecto() {
                 </div>
               ))}
             </div>
-
           </div>
         </div>
       </section>
 
-      {/* 7. ARQUITECTURA DE LA SOLUCIÓN */}
-      <section className="py-24 bg-white border-t border-slate-200">
-        <div className="mx-auto max-w-6xl px-6 text-center">
-          <h2 className="text-4xl font-extrabold text-slate-900 mb-6">Arquitectura Centralizada</h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-16 leading-relaxed">
-            Adquisición local de datos por I2C/2-Wire, procesamiento en Raspberry Pi y transmisión a la nube mediante MQTT para visualización en el Dashboard React.
+      {/* 7. ARQUITECTURA DE LA SOLUCIÓN (DIAGRAMA INTERACTIVO) */}
+      <section className="py-24 bg-slate-950 border-t border-slate-800 relative overflow-hidden">
+        {/* Luces de fondo estilo Matrix/Cyberpunk */}
+        <div className="absolute top-20 left-10 h-96 w-96 rounded-full bg-sky-600/10 blur-[120px] pointer-events-none"></div>
+        <div className="absolute bottom-20 right-10 h-96 w-96 rounded-full bg-violet-600/10 blur-[120px] pointer-events-none"></div>
+
+        <div className="mx-auto max-w-7xl px-6 relative z-10 text-center">
+          <h2 className="text-4xl font-extrabold text-white mb-6">Arquitectura de Software & Hardware</h2>
+          <p className="text-xl text-slate-400 max-w-3xl mx-auto mb-16 leading-relaxed">
+            Flujo de datos bidireccional desde la capa de adquisición física hasta la visualización en la nube mediante un ecosistema Full-Stack.
           </p>
           
-          <div className="relative inline-block rounded-[2.5rem] p-4 bg-slate-50 border border-slate-200 shadow-xl transition-transform duration-500 hover:scale-[1.02]">
-            <img 
-              src="/Arq SOPLON.jpeg" 
-              alt="Diagrama de Arquitectura Soplón" 
-              className="w-full max-w-4xl h-auto rounded-3xl object-contain"
-            />
+          {/* INICIO DEL DIAGRAMA CSS */}
+          <div className="bg-slate-900/50 backdrop-blur-xl border border-slate-700/50 rounded-[3rem] p-8 md:p-12 shadow-2xl overflow-x-auto">
+            <div className="min-w-[800px] flex flex-col items-center gap-2">
+              
+              {/* --- NIVEL 1: HARDWARE --- */}
+              <div className="w-64 bg-slate-800 border-2 border-orange-500/50 rounded-2xl p-5 shadow-[0_0_20px_rgba(249,115,22,0.15)] hover:scale-105 transition-transform">
+                <span className="text-3xl mb-2 block">📟</span>
+                <h3 className="font-bold text-white text-lg">IoT Device</h3>
+                <p className="text-xs text-slate-400 mt-1">Raspberry Pi + Sensores</p>
+              </div>
+
+              {/* FLECHA 1 */}
+              <div className="flex flex-col items-center text-orange-400 font-mono text-xs font-bold">
+                <span className="bg-slate-900 px-3 py-1 rounded-full border border-orange-500/30 z-10 mt-2">MQTT Publish</span>
+                <div className="w-0.5 h-8 bg-orange-500/50"></div>
+                <div className="-mt-2 text-lg">▼</div>
+              </div>
+
+              {/* --- NIVEL 2: BROKER --- */}
+              <div className="w-64 bg-slate-800 border-2 border-yellow-400/50 rounded-2xl p-5 shadow-[0_0_20px_rgba(250,204,21,0.15)] hover:scale-105 transition-transform">
+                <span className="text-3xl mb-2 block">☁️</span>
+                <h3 className="font-bold text-white text-lg">HiveMQ Cloud</h3>
+                <p className="text-xs text-slate-400 mt-1">MQTT Broker Público</p>
+              </div>
+
+              {/* FLECHA 2 */}
+              <div className="flex flex-col items-center text-yellow-400 font-mono text-xs font-bold">
+                <span className="bg-slate-900 px-3 py-1 rounded-full border border-yellow-400/30 z-10 mt-2">MQTT Subscribe</span>
+                <div className="w-0.5 h-8 bg-yellow-400/50"></div>
+                <div className="-mt-2 text-lg">▼</div>
+              </div>
+
+              {/* --- NIVEL 3: BACKEND + DATOS + GITHUB --- */}
+              <div className="flex items-center justify-center gap-4 w-full">
+                
+                {/* GITHUB */}
+                <div className="w-48 bg-slate-800 border border-slate-600 rounded-2xl p-4 hover:scale-105 transition-transform">
+                  <span className="text-2xl mb-1 block">🐙</span>
+                  <h3 className="font-bold text-white text-sm">GitHub (IoT-Soplon)</h3>
+                  <p className="text-[10px] text-slate-400">Repositorio Oficial</p>
+                </div>
+
+                {/* Flecha Auto-Deploy 1 */}
+                <div className="flex items-center text-slate-400 font-mono text-[10px] font-bold">
+                  <span className="bg-slate-900 px-2 py-1 rounded border border-slate-700 z-10">Auto-Deploy</span>
+                  <div className="h-0.5 w-8 bg-slate-600"></div>
+                  <div className="-ml-2 text-lg">▶</div>
+                </div>
+
+                {/* RAILWAY (BRIDGE) */}
+                <div className="w-64 bg-slate-800 border-2 border-sky-500/50 rounded-2xl p-5 shadow-[0_0_20px_rgba(14,165,233,0.15)] hover:scale-105 transition-transform relative">
+                  <span className="text-3xl mb-2 block">🚂</span>
+                  <h3 className="font-bold text-white text-lg">Railway: Bridge Service</h3>
+                  <p className="text-xs text-slate-400 mt-1">Python + paho-mqtt + Flask</p>
+                </div>
+
+                {/* Flecha InfluxDB */}
+                <div className="flex items-center text-sky-400 font-mono text-xs font-bold">
+                  <div className="h-0.5 w-6 bg-sky-500/50"></div>
+                  <div className="-ml-2 text-lg">▶</div>
+                </div>
+
+                {/* INFLUXDB */}
+                <div className="w-48 bg-slate-800 border-2 border-blue-500/50 rounded-2xl p-4 shadow-[0_0_20px_rgba(59,130,246,0.15)] hover:scale-105 transition-transform">
+                  <span className="text-2xl mb-1 block">🗄️</span>
+                  <h3 className="font-bold text-white text-sm">InfluxDB Cloud</h3>
+                  <p className="text-[10px] text-slate-400">Time Series DB (us-east-1)</p>
+                </div>
+              </div>
+
+              {/* FLECHA 3 (Hacia Frontend) */}
+              <div className="flex flex-col items-center text-emerald-400 font-mono text-xs font-bold">
+                <span className="bg-slate-900 px-3 py-1 rounded-full border border-emerald-500/30 z-10 mt-2">GET /api/readings</span>
+                <div className="w-0.5 h-10 bg-emerald-500/50"></div>
+                <div className="-mt-2 text-lg">▼</div>
+              </div>
+
+              {/* --- NIVEL 4: FRONTEND + AUTH --- */}
+              <div className="flex items-center justify-center gap-4 w-full">
+                
+                {/* CLERK */}
+                <div className="w-48 bg-slate-800 border-2 border-violet-500/50 rounded-2xl p-4 shadow-[0_0_20px_rgba(139,92,246,0.15)] hover:scale-105 transition-transform">
+                  <span className="text-2xl mb-1 block">🔐</span>
+                  <h3 className="font-bold text-white text-sm">Clerk</h3>
+                  <p className="text-[10px] text-slate-400">Auth-as-a-Service</p>
+                </div>
+
+                {/* Flecha JWT */}
+                <div className="flex items-center text-violet-400 font-mono text-[10px] font-bold">
+                  <span className="bg-slate-900 px-2 py-1 rounded border border-violet-500/30 z-10">Session JWT</span>
+                  <div className="h-0.5 w-6 bg-violet-500/50"></div>
+                  <div className="-ml-2 text-lg">▶</div>
+                </div>
+
+                {/* VERCEL (FRONTEND) */}
+                <div className="w-64 bg-slate-800 border-2 border-white/50 rounded-2xl p-5 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:scale-105 transition-transform relative">
+                  <span className="text-3xl mb-2 block">▲</span>
+                  <h3 className="font-bold text-white text-lg">Vercel: Frontend</h3>
+                  <p className="text-xs text-slate-400 mt-1">React (Home, Sign In/Up, Dash)</p>
+                </div>
+
+                {/* Flecha Auto-Deploy 2 (Desde Github) */}
+                {/* Visualmente conectada con Github, aquí usamos una etiqueta para mantener el diseño limpio */}
+                <div className="flex items-center text-slate-400 font-mono text-[10px] font-bold">
+                  <div className="-mr-2 text-lg">◀</div>
+                  <div className="h-0.5 w-6 bg-slate-600"></div>
+                  <span className="bg-slate-900 px-2 py-1 rounded border border-slate-700 z-10">Auto-Deploy</span>
+                </div>
+                
+                <div className="w-48 bg-slate-800 border border-slate-600 rounded-2xl p-4 opacity-50">
+                  <span className="text-2xl mb-1 block">🐙</span>
+                  <h3 className="font-bold text-white text-sm">GitHub</h3>
+                </div>
+
+              </div>
+
+            </div>
           </div>
+          {/* FIN DEL DIAGRAMA CSS */}
+
         </div>
       </section>
 
       {/* 8. TABLA DE ENTIDADES TÉCNICAS */}
       <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
-        <div className="absolute top-0 left-0 h-[400px] w-[400px] rounded-full bg-sky-500/10 blur-[100px]"></div>
-        
         <div className="mx-auto max-w-6xl px-6 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-extrabold text-white mb-4">Entidades del Sistema</h2>
@@ -336,7 +455,7 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* 9. VIDEO DEMOSTRATIVO FINAL (PROTOTIPO) - Efecto Parallax de Cierre */}
+      {/* 9. VIDEO DEMOSTRATIVO FINAL */}
       <section 
         className="py-24 relative bg-fixed bg-center bg-cover border-t border-slate-800"
         style={{ backgroundImage: "url('/Fondo PROYECTO.jpg')" }}
