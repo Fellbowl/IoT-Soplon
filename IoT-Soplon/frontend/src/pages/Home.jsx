@@ -150,10 +150,10 @@ export default function Home() {
 
           <div className="mt-12 text-center">
             <Link
-              to="/dashboard"
+              to="/proyecto"
               className="inline-flex items-center justify-center rounded-full bg-sky-500 px-10 py-5 text-base font-bold text-white shadow-[0_0_20px_rgba(14,165,233,0.5)] transition-all hover:bg-sky-400 hover:scale-105"
             >
-              Ir a mi Dashboard
+              Explorar el Proyecto
             </Link>
           </div>
         </div>
