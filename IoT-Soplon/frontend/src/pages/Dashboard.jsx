@@ -388,7 +388,7 @@ export default function Dashboard() {
       <footer className="py-12 bg-black text-slate-500 text-center">
         <div className="mx-auto max-w-6xl px-6">
           <p className="uppercase tracking-[0.2em] text-xs font-bold mb-4 text-slate-600">
-            Pontificia Universidad Javeriana - Facultad de Ingeniería
+            Proyecto Académico de Ingeniería
           </p>
           <p className="text-sm italic">
             Proyecto: Fundamentos en IoT y Aplicaciones • Tutor: Wilder Eduardo Castellanos Hernández, PhD

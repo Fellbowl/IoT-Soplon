@@ -68,7 +68,7 @@ export default function Proyecto() {
           </div>
           
           <div className="mt-8 text-slate-300 text-xs tracking-[0.1em] uppercase flex flex-col sm:flex-row justify-center gap-4 sm:gap-12">
-            <p className="drop-shadow-md">Pontificia Universidad Javeriana</p>
+            <p className="drop-shadow-md">Proyecto Académico de Ingeniería</p>
             <p className="text-sky-400 font-bold drop-shadow-md">Tutor: Wilder E. Castellanos, PhD</p>
           </div>
         </div>
@@ -99,7 +99,7 @@ export default function Proyecto() {
               
               <div className="space-y-6 text-lg text-slate-600 leading-relaxed">
                 <p>
-                  <strong>SOPLÓN</strong> es una empresa tecnológica emergente nacida en la Pontificia Universidad Javeriana, cuyo fin principal es democratizar el acceso a la telemetría profesional en el deporte. Nos apasiona la intersección entre el alto rendimiento físico y las tecnologías de vanguardia.
+                  <strong>SOPLÓN</strong> es una empresa tecnológica emergente nacida en un entorno académico de ingeniería, cuyo fin principal es democratizar el acceso a la telemetría profesional en el deporte. Nos apasiona la intersección entre el alto rendimiento físico y las tecnologías de vanguardia.
                 </p>
                 <p>
                   Nuestro propósito es transformar datos complejos en decisiones estratégicas claras. A través de soluciones de Internet de las Cosas (IoT) accesibles, portátiles y precisas, buscamos empoderar a atletas y entrenadores para que alcancen su máximo potencial.
@@ -525,7 +525,7 @@ export default function Proyecto() {
       <footer className="py-12 bg-black text-slate-500 text-center">
         <div className="mx-auto max-w-6xl px-6">
           <p className="uppercase tracking-[0.2em] text-xs font-bold mb-4 text-slate-600">
-            Pontificia Universidad Javeriana - Facultad de Ingeniería
+            Proyecto Académico de Ingeniería
           </p>
           <p className="text-sm italic">
             Proyecto: Fundamentos en IoT y Aplicaciones • Tutor: Wilder Eduardo Castellanos Hernández, PhD
