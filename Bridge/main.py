@@ -33,8 +33,10 @@ CORS(app, origins=[ALLOWED_ORIGIN])
 def health():
     return jsonify({"status": "ok"})
 
+# Una forma de asegurar que siempre veas algo de data al cargar:
 @app.route("/api/readings")
 def readings():
+    # Intenta traer los últimos 5 minutos...
     since = (datetime.now(timezone.utc) - timedelta(minutes=5)).strftime("%Y-%m-%dT%H:%M:%SZ")
     response = (
         supabase.table("sensor_readings")
@@ -43,6 +45,19 @@ def readings():
         .order("timestamp", desc=False)
         .execute()
     )
+    
+    # ...pero si no hay nada, trae al menos los últimos 20 registros históricos
+    if not response.data:
+        response = (
+            supabase.table("sensor_readings")
+            .select("*")
+            .order("timestamp", desc=True)
+            .limit(20)
+            .execute()
+        )
+        # Invertimos para que el gráfico los muestre en orden cronológico
+        return jsonify(list(reversed(response.data)))
+        
     return jsonify(response.data)
 
 def on_connect(client, userdata, flags, rc):
