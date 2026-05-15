@@ -8,7 +8,11 @@ import {
 const BRIDGE_URL = import.meta.env.VITE_BRIDGE_URL
 
 function formatTime(ts) {
-  return new Date(ts).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+  try {
+    return new Date(ts).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+  } catch {
+    return '--:--:--'
+  }
 }
 
 export default function Dashboard() {
@@ -23,16 +27,21 @@ export default function Dashboard() {
       try {
         const res = await fetch(`${BRIDGE_URL}/api/readings`)
         const json = await res.json()
+        if (!Array.isArray(json)) return
         
         const formatted = json.map(row => ({
           ...row,
           time: formatTime(row.timestamp),
-          // Aseguramos que los valores existan para las gráficas
-          pitch: row.pitch_deg || 0,
-          roll: row.roll_deg || 0,
-          viento: row.wind_speed_kmh || 0,
-          temperatura: row.temperature_c || 0,
-          presion: row.pressure_pa || 0
+          // Compatibilidad hacia atras para historiales con claves antiguas
+          pitch: row.pitch_deg ?? row.pitch ?? 0,
+          roll: row.roll_deg ?? row.roll ?? 0,
+          viento: row.wind_speed_kmh ?? row.wind_speed ?? 0,
+          temperatura: row.temperature_c ?? row.temperature ?? 0,
+          presion: row.pressure_pa ?? row.pressure ?? 0,
+          posture_status: row.posture_status ?? row.posture ?? null,
+          wind_category: row.wind_category ?? row.wind_status ?? null,
+          temp_status: row.temp_status ?? row.temperature_status ?? null,
+          alerts: Array.isArray(row.alerts) ? row.alerts : []
         }))
         
         setData(formatted)
@@ -51,6 +60,16 @@ export default function Dashboard() {
     const interval = setInterval(fetchData, 2000) // Refresco cada 2 segundos
     return () => clearInterval(interval)
   }, [])
+
+  const safePostureStatus = currentData?.posture_status
+    ? String(currentData.posture_status).toUpperCase()
+    : 'CALIBRANDO...'
+  const safeWindCategory = currentData?.wind_category
+    ? String(currentData.wind_category).toUpperCase()
+    : 'CALIBRANDO...'
+  const safeTempStatus = currentData?.temp_status
+    ? String(currentData.temp_status).toUpperCase()
+    : 'CALIBRANDO...'
 
   return (
     <div style={{ padding: '2rem', backgroundColor: '#f3f4f6', minHeight: '100vh', fontFamily: 'system-ui, sans-serif' }}>
@@ -80,7 +99,7 @@ export default function Dashboard() {
       )}
 
       {/* PANEL DE ALERTAS CRÍTICAS */}
-      {currentData && currentData.fall_detected && (
+      {currentData?.fall_detected && (
         <div style={{
           backgroundColor: '#fef2f2', border: '2px solid #ef4444', color: '#991b1b',
           padding: '1.5rem', borderRadius: '12px', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '1rem'
@@ -93,7 +112,7 @@ export default function Dashboard() {
         </div>
       )}
 
-      {currentData && currentData.alerts && currentData.alerts.length > 0 && !currentData.fall_detected && (
+      {Array.isArray(currentData?.alerts) && currentData.alerts.length > 0 && !currentData?.fall_detected && (
         <div style={{
           backgroundColor: '#fffbeb', border: '1px solid #f59e0b', color: '#92400e',
           padding: '1rem', borderRadius: '8px', marginBottom: '1.5rem'
@@ -112,22 +131,22 @@ export default function Dashboard() {
         
         <StatusCard 
           title="Postura Actual" 
-          value={currentData ? `${currentData.pitch}°` : '--'}
-          subtitle={currentData ? currentData.posture_status.toUpperCase() : 'Buscando...'}
+          value={currentData ? `${currentData?.pitch ?? 0}°` : '--'}
+          subtitle={safePostureStatus}
           color={currentData?.posture_bad ? '#ef4444' : '#10b981'}
         />
         
         <StatusCard 
           title="Viento Frontal" 
-          value={currentData ? `${currentData.viento} km/h` : '--'}
-          subtitle={currentData ? currentData.wind_category.toUpperCase() : 'Buscando...'}
+          value={currentData ? `${currentData?.viento ?? 0} km/h` : '--'}
+          subtitle={safeWindCategory}
           color={currentData?.wind_category === 'peligroso' ? '#ef4444' : (currentData?.wind_favorable ? '#10b981' : '#3b82f6')}
         />
         
         <StatusCard 
           title="Temperatura" 
-          value={currentData ? `${currentData.temperatura}°C` : '--'}
-          subtitle={currentData ? currentData.temp_status.toUpperCase() : 'Buscando...'}
+          value={currentData ? `${currentData?.temperatura ?? 0}°C` : '--'}
+          subtitle={safeTempStatus}
           color={currentData?.temp_status === 'critica' ? '#ef4444' : (currentData?.temp_status === 'caliente' ? '#f59e0b' : '#3b82f6')}
         />
 
