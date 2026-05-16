@@ -26,65 +26,9 @@ const eventos = [
 export default function Proyecto() {
   return (
     <div style={{ paddingBottom: '0' }}>
-      
-      {/* 1. HERO SECTION: PORTADA TÉCNICA */}
-      <section style={{ 
-        position: 'relative', 
-        padding: '10rem 2rem 8rem 2rem', 
-        minHeight: '60vh', 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center',
-        backgroundImage: 'url("/Fondo PROYECTO.jpg")',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
-      }}>
-        {/* Overlay oscuro con degradado sutil */}
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(17, 24, 39, 0.7), rgba(17, 24, 39, 0.95))' }}></div>
-        
-        <div className="container" style={{ position: 'relative', zIndex: 10, textAlign: 'center' }}>
-          <span style={{ 
-            display: 'inline-block', 
-            backgroundColor: 'var(--accent)', 
-            color: '#fff', 
-            padding: '0.4rem 1.2rem', 
-            borderRadius: '9999px', 
-            fontSize: '0.85rem', 
-            fontWeight: '800', 
-            letterSpacing: '0.1em', 
-            textTransform: 'uppercase', 
-            marginBottom: '1.5rem',
-            boxShadow: '0 4px 15px rgba(16, 185, 129, 0.3)'
-          }}>
-            Especificaciones Técnicas
-          </span>
-          
-          <h1 style={{ 
-            fontSize: 'clamp(3rem, 8vw, 5.5rem)', 
-            fontWeight: '900', 
-            margin: '0 0 1.5rem 0', 
-            letterSpacing: '-0.02em', 
-            color: '#ffffff',
-            lineHeight: '1.1'
-          }}>
-            Inside SOPLÓN
-          </h1>
-          
-          <p style={{ 
-            fontSize: 'clamp(1.1rem, 3vw, 1.3rem)', 
-            color: '#94a3b8', 
-            maxWidth: '600px', 
-            margin: '0 auto',
-            lineHeight: '1.6'
-          }}>
-            Descubre la arquitectura IoT, ingeniería embebida e inteligencia de datos detrás de nuestra tecnología de telemetría aerodinámica.
-          </p>
-        </div>
-      </section>
 
-      {/* 2. QUIÉNES SOMOS */}
-      <section className="container" style={{ padding: '6rem 2rem', borderBottom: '1px solid var(--border)' }}>
+      {/* 1. QUIÉNES SOMOS */}
+      <section className="container" style={{ padding: '8rem 2rem 6rem 2rem', borderBottom: '1px solid var(--border)' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
           <div style={{ textAlign: 'center' }}>
             <img src="/Logo SOPLON.png" alt="Logo de Soplón" style={{ maxWidth: '280px', width: '100%', filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.1))' }} />
@@ -109,7 +53,7 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* 3. CONTEXTO Y USUARIO OBJETIVO */}
+      {/* 2. CONTEXTO Y USUARIO OBJETIVO */}
       <section className="container" style={{ padding: '6rem 2rem', borderBottom: '1px solid var(--border)' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '4rem', alignItems: 'center' }}>
           <div>
@@ -135,7 +79,7 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* 4. COMPETENCIA */}
+      {/* 3. COMPETENCIA */}
       <section className="container" style={{ padding: '6rem 2rem', textAlign: 'center', borderBottom: '1px solid var(--border)' }}>
         <span style={{ color: 'var(--accent)', fontWeight: '800', letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: '0.85rem' }}>Estado del Arte</span>
         <h2 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0.5rem 0 1.5rem 0' }}>El "Punto Ciego" Aerodinámico</h2>
@@ -150,7 +94,7 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* 5. INGENIERÍA */}
+      {/* 4. INGENIERÍA */}
       <section className="container" style={{ padding: '6rem 2rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '32px', margin: '4rem auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <h2 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0 0 1.5rem 0' }}>Ingeniería y Procesamiento Digital</h2>
@@ -166,7 +110,7 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* 6. EVENTOS */}
+      {/* 5. EVENTOS */}
       <section className="container" style={{ padding: '6rem 2rem', borderBottom: '1px solid var(--border)' }}>
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <h2 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0 0 1.5rem 0' }}>Inteligencia en el Terreno</h2>
@@ -194,7 +138,7 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* 7. DIAGRAMA DE ARQUITECTURA */}
+      {/* 6. DIAGRAMA DE ARQUITECTURA */}
       <section style={{ backgroundColor: '#0f172a', padding: '8rem 2rem', color: '#fff' }}>
         <div className="container" style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <h2 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0 0 1.5rem 0' }}>Arquitectura de Red</h2>
@@ -283,7 +227,7 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* 8. TABLA DE ENTIDADES */}
+      {/* 7. TABLA DE ENTIDADES */}
       <section className="container" style={{ padding: '8rem 2rem' }}>
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <h2 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0 0 1.5rem 0' }}>Entidades del Sistema</h2>
@@ -316,7 +260,7 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* 9. VIDEO FINAL Y FOOTER */}
+      {/* 8. VIDEO FINAL Y FOOTER */}
       <section style={{ backgroundColor: '#111827', padding: '6rem 2rem', textAlign: 'center', color: '#fff', borderTop: '1px solid #1e293b' }}>
         <h2 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0 0 1rem 0' }}>Prueba de Concepto</h2>
         <p style={{ color: '#94a3b8', fontSize: '1.1rem', marginBottom: '4rem' }}>Integración física de hardware y sensores en casco aerodinámico.</p>
