@@ -152,12 +152,13 @@ export default function Home() {
               style={{ width: '100%', display: 'block', aspectRatio: '16/9', objectFit: 'cover' }}
             />
           </div>
-          {/* Imagen de uso */}
-          <div style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.1)', border: '1px solid var(--border)' }}>
+          
+          {/* Imagen de uso (Corregida para formato vertical) */}
+          <div style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.1)', border: '1px solid var(--border)', backgroundColor: 'var(--bg-secondary)' }}>
             <img 
               src="/Uso SOPLON.jpg" 
               alt="Ciclista usando SOPLON" 
-              style={{ width: '100%', height: '220px', display: 'block', objectFit: 'cover' }}
+              style={{ width: '100%', height: 'auto', maxHeight: '600px', display: 'block', objectFit: 'contain' }}
             />
           </div>
         </div>
@@ -235,24 +236,17 @@ export default function Home() {
           <img src="/Logo SOPLON.png" alt="SOPLON" style={{ height: '50px', marginBottom: '2rem', filter: 'grayscale(100%)', opacity: 0.5 }} />
           
           <h3 style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontWeight: '800', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>
-            Desarrollado por el equipo
+            Desarrollado por el equipo SOPLÓN
           </h3>
-          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem', marginBottom: '3rem' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem', marginBottom: '2rem' }}>
             <Badge text="Samuel S. Castrillón" />
             <Badge text="Juan Pablo Arenas" />
             <Badge text="David E. Alvarez" />
             <Badge text="Samuel Montoya" />
           </div>
 
-          <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-            Proyecto Académico de Ingeniería Electrónica
-          </p>
-          <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginTop: '0.5rem', fontStyle: 'italic' }}>
-            Pontificia Universidad Javeriana • Fundamentos en IoT y Aplicaciones<br/>
-            Tutor: Wilder Eduardo Castellanos Hernández, PhD
-          </p>
-          <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '1.5rem', fontFamily: 'monospace' }}>
-            Bogotá DC, Colombia | 2026
+          <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '1.5rem', fontFamily: 'monospace', letterSpacing: '0.05em' }}>
+            Bogotá DC, Colombia
           </p>
         </div>
       </footer>
