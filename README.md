@@ -77,5 +77,4 @@ Notas y recomendaciones
 - Añadir validaciones en la inserción en Supabase para evitar filas corruptas.
 - Documentar la estructura de la tabla `sensor_readings` en Supabase (tipos y columnas esperadas).
 
-¿Quieres que además cree una sección con ejemplos de `.env` y la especificación de la tabla `sensor_readings`? 
 
