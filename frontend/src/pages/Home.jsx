@@ -1,3 +1,4 @@
+// src/pages/Home.jsx
 import { Link } from 'react-router-dom';
 
 const features = [
@@ -20,204 +21,242 @@ const features = [
 
 export default function Home() {
   return (
-    <div className="bg-slate-50 min-h-screen font-sans">
+    <div style={{ paddingBottom: '2rem' }}>
       
-      {/* HERO SECTION: Atractivo y enfocado en el deportista */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-black px-6 py-20 lg:py-24 shadow-2xl">
-        {/* Video de fondo sutil para dar dinamismo (Ciclista élite en carrera) */}
-        <div className="absolute inset-0 z-0 opacity-20">
-          <video 
-            className="w-full h-full object-cover"
-            src="/a-high-tech-cycling-helmet-with-a-small-sleek-iot-.mp4" 
-            autoPlay loop muted playsInline
-          />
-          <div className="absolute inset-0 bg-black/60"></div>
-        </div>
-
-        <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 lg:grid-cols-12">
+      {/* HERO SECTION - DOS COLUMNAS */}
+      <section className="container" style={{ 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
+        gap: '4rem', 
+        alignItems: 'center', 
+        paddingTop: '6rem', 
+        paddingBottom: '6rem' 
+      }}>
+        {/* Lado Izquierdo: Textos */}
+        <div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+            <img src="/Logo SOPLON.png" alt="Logo SOPLON" style={{ height: '40px', objectFit: 'contain' }} />
+            <span style={{ color: 'var(--accent)', fontWeight: '800', letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: '0.85rem' }}>
+              Tu Ventaja Competitiva
+            </span>
+          </div>
           
-          {/* Texto Motivacional (Izquierda) */}
-          <div className="text-center lg:col-span-7 lg:text-left">
-            <div className="flex items-center justify-center lg:justify-start gap-3 mb-6">
-              {/* Se asume que el logo tiene fondo transparente */}
-              <img src="/Logo SOPLON.png" alt="Logo SOPLON" className="h-10 w-auto" />
-              <span className="inline-block rounded-full bg-slate-800/80 border border-slate-700 px-4 py-1.5 text-xs uppercase tracking-widest text-sky-400 font-bold backdrop-blur-sm">
-                Tu Ventaja Competitiva
-              </span>
-            </div>
-            
-            <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-6xl xl:text-7xl mb-6">
-              Domina el viento. <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-white">
-                Maximiza tu energía.
-              </span>
-            </h1>
-            <p className="text-lg leading-relaxed text-slate-300 max-w-2xl mx-auto lg:mx-0 mb-10">
-              Deja de pedalear a ciegas y lleva la tecnología de un túnel de viento directamente a tu casco. Regístrate hoy y transforma tu esfuerzo en pura velocidad.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-              <Link
-                to="/sign-up"
-                className="w-full sm:w-auto inline-flex items-center justify-center rounded-full bg-sky-500 px-8 py-4 text-sm font-bold text-white shadow-[0_0_20px_rgba(14,165,233,0.4)] transition-all hover:bg-sky-400 hover:scale-105"
-              >
-                Crear cuenta y empezar
-              </Link>
-              <Link
-                to="/sign-in"
-                className="w-full sm:w-auto inline-flex items-center justify-center rounded-full border border-slate-600 bg-slate-800/50 px-8 py-4 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:bg-slate-700 hover:border-slate-400"
-              >
-                Iniciar sesión
-              </Link>
-            </div>
-          </div>
-
-          {/* Celular Flotante con Video Vertical (Derecha) */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <div className="relative mx-auto w-full max-w-[280px] sm:max-w-[320px] transform transition-transform hover:scale-105 duration-500">
-              <div className="relative z-10 overflow-hidden rounded-[2.5rem] border-[6px] border-slate-800 bg-black shadow-2xl ring-1 ring-white/10">
-                <video 
-                  className="w-full h-auto aspect-[9/16] object-cover"
-                  src="/Ciclista con SOPLON.mp4" 
-                  autoPlay loop muted playsInline
-                />
-                <div className="absolute bottom-6 left-0 right-0 flex justify-center">
-                  <span className="bg-black/70 backdrop-blur-md text-white text-xs px-4 py-2 rounded-full border border-white/20 flex items-center gap-2 font-bold shadow-lg">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    Sincronizado en Ruta
-                  </span>
-                </div>
-              </div>
-              <div className="absolute -inset-2 -z-10 rounded-[3rem] bg-gradient-to-br from-sky-500 to-slate-800 opacity-40 blur-2xl"></div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* SECCIÓN INTRODUCTORIA: Características */}
-      <section className="py-24 bg-white relative z-10">
-        <div className="mx-auto max-w-7xl px-6 text-center">
-          <h2 className="text-4xl font-extrabold text-slate-900 mb-6">El secreto mejor guardado de los campeones</h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-16">
-            Ya seas un ciclista amateur buscando romper sus propias marcas, o un entrenador analizando el rendimiento de tu equipo, <strong>SOPLÓN</strong> traduce los datos de la carretera en una estrategia clara y fácil de leer.
+          <h1 style={{ fontSize: '4rem', fontWeight: '800', margin: '0 0 1.5rem 0', lineHeight: '1.1', letterSpacing: '-0.03em', color: 'var(--text-primary)' }}>
+            Domina el viento.<br />
+            <span style={{ color: 'var(--text-secondary)' }}>Maximiza tu energía.</span>
+          </h1>
+          
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', margin: '0 0 2.5rem 0', lineHeight: '1.6' }}>
+            Bienvenido a SOPLÓN. Deja de pedalear a ciegas y lleva la tecnología de un túnel de viento directamente a tu casco. 
+            Transforma tu esfuerzo en pura velocidad.
           </p>
-
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 text-left">
-            {features.map((feature) => (
-              <div 
-                key={feature.title} 
-                className="group rounded-3xl border border-slate-100 bg-slate-50 p-8 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:bg-white"
-              >
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-900 text-3xl shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:bg-sky-500">
-                  {feature.icon}
-                </div>
-                <h3 className="mt-8 text-xl font-bold text-slate-900 group-hover:text-sky-600 transition-colors">{feature.title}</h3>
-                <p className="mt-4 text-slate-600 leading-relaxed">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SECCIÓN HARDWARE E IOT: Prototipo y uso de la imagen */}
-      <section className="py-24 bg-slate-50 border-t border-slate-200">
-        <div className="mx-auto max-w-7xl px-6 lg:flex lg:items-center lg:gap-16">
-          <div className="lg:w-1/2 mb-12 lg:mb-0">
-            <span className="text-sky-600 font-bold tracking-wider uppercase text-sm mb-4 block">Arquitectura IoT</span>
-            <h2 className="text-4xl font-extrabold text-slate-900 mb-6">Diseño aerodinámico e integrado</h2>
-            <p className="text-lg text-slate-600 mb-6 leading-relaxed">
-              El hardware no debe ser un obstáculo. SOPLÓN se integra de manera imperceptible en tu casco. Su red de sensores de ultra bajo consumo captura presión diferencial, temperatura y biomecánica sin añadir peso innecesario.
-            </p>
-            <ul className="space-y-4 mb-8">
-              <li className="flex items-center gap-3 text-slate-700 font-medium">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-sky-100 text-sky-600">✓</span> Muestreo a 10 Hz
-              </li>
-              <li className="flex items-center gap-3 text-slate-700 font-medium">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-sky-100 text-sky-600">✓</span> Transmisión MQTT en tiempo real
-              </li>
-              <li className="flex items-center gap-3 text-slate-700 font-medium">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-sky-100 text-sky-600">✓</span> Detección de baches y caídas
-              </li>
-            </ul>
-          </div>
           
-          <div className="lg:w-1/2 flex flex-col gap-6">
-            {/* Video del prototipo */}
-            <div className="rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-white">
-              <video 
-                className="w-full h-auto aspect-video object-cover"
-                src="/Prototipo SOPLON.mp4" 
-                autoPlay loop muted playsInline
-              />
-            </div>
-            {/* Imagen estática complementaria (Uso SOPLON) */}
-            <div className="rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-white hidden sm:block">
-              <img 
-                src="/Uso SOPLON.jpg" 
-                alt="Ciclista en ruta usando SOPLON" 
-                className="w-full h-48 object-cover object-center transform hover:scale-105 transition-transform duration-700" 
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CIERRE: VIDEO FINAL, CRÉDITOS Y FOOTER */}
-      <section 
-        className="py-24 relative bg-fixed bg-center bg-cover border-t border-slate-800"
-        style={{ backgroundImage: "url('/Fondo PROYECTO.jpg')" }}
-      >
-        <div className="absolute inset-0 bg-slate-950/90 backdrop-blur-sm"></div>
-        
-        <div className="mx-auto max-w-5xl px-6 text-center relative z-10">
-          <h2 className="text-4xl font-extrabold text-white mb-6 drop-shadow-md">Descubre SOPLÓN en acción</h2>
-          <p className="text-xl text-sky-200 mb-16 font-medium">Mira cómo nuestra tecnología proyecta dinámicamente la información para el deportista.</p>
-
-          {/* Contenedor del video horizontal */}
-          <div className="rounded-[2.5rem] overflow-hidden shadow-[0_0_50px_rgba(14,165,233,0.3)] border-4 border-slate-700 bg-black relative group max-w-4xl mx-auto">
-            <video 
-              className="w-full h-auto aspect-video object-cover"
-              src="/SOPLON en accion.mp4" 
-              autoPlay loop muted playsInline controls
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-500 pointer-events-none"></div>
-          </div>
-          
-          {/* NOMBRES DEL EQUIPO EN EL CIERRE */}
-          <div className="mt-16 pt-10 border-t border-white/10">
-            <h3 className="text-sm text-slate-400 font-bold tracking-[0.2em] uppercase mb-6">Desarrollado por el equipo SOPLÓN</h3>
-            <div className="flex flex-wrap justify-center gap-4 sm:gap-8 text-slate-200 font-medium">
-              <span className="bg-white/5 border border-white/10 px-5 py-2 rounded-full">Samuel S. Castrillón</span>
-              <span className="bg-white/5 border border-white/10 px-5 py-2 rounded-full">Juan Pablo Arenas</span>
-              <span className="bg-white/5 border border-white/10 px-5 py-2 rounded-full">David E. Alvarez</span>
-              <span className="bg-white/5 border border-white/10 px-5 py-2 rounded-full">Samuel Montoya</span>
-            </div>
-          </div>
-
-          <div className="mt-12 text-center">
-            <Link
-              to="/dashboard"
-              className="inline-flex items-center justify-center rounded-full bg-sky-500 px-10 py-5 text-base font-bold text-white shadow-[0_0_20px_rgba(14,165,233,0.5)] transition-all hover:bg-sky-400 hover:scale-105"
-            >
-              Ir al Dashboard
+          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+            <Link to="/sign-up" className="btn-primary" style={{ fontSize: '1.1rem', padding: '1rem 2rem', backgroundColor: 'var(--accent)', color: '#fff' }}>
+              Empezar ahora
+            </Link>
+            <Link to="/sign-in" className="btn-primary" style={{ fontSize: '1.1rem', padding: '1rem 2rem', backgroundColor: '#fff', color: 'var(--text-primary)', border: '1px solid var(--border)' }}>
+              Iniciar sesión
             </Link>
           </div>
         </div>
+
+        {/* Lado Derecho: Celular/Video Vertical */}
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{ 
+            width: '100%', 
+            maxWidth: '300px', 
+            borderRadius: '40px', 
+            overflow: 'hidden', 
+            border: '8px solid var(--text-primary)', 
+            boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
+            backgroundColor: '#000',
+            position: 'relative'
+          }}>
+            <video 
+              src="/Ciclista con SOPLON.mp4" 
+              autoPlay loop muted playsInline 
+              style={{ width: '100%', height: 'auto', display: 'block', aspectRatio: '9/16', objectFit: 'cover' }}
+            />
+            {/* Etiqueta flotante sobre el video */}
+            <div style={{ position: 'absolute', bottom: '20px', width: '100%', display: 'flex', justifyContent: 'center' }}>
+              <span style={{ backgroundColor: 'rgba(0,0,0,0.7)', color: '#fff', padding: '0.4rem 1rem', borderRadius: '20px', fontSize: '0.8rem', fontWeight: 'bold', backdropFilter: 'blur(4px)' }}>
+                🟢 Sincronizado en Ruta
+              </span>
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* FOOTER ACADÉMICO */}
-      <footer className="py-12 bg-black text-slate-500 text-center">
-        <div className="mx-auto max-w-6xl px-6">
-          <p className="uppercase tracking-[0.2em] text-xs font-bold mb-4 text-slate-600">
+      {/* SECCIÓN INTRODUCTORIA Y FEATURES */}
+      <section className="container" style={{ marginBottom: '6rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '4rem', maxWidth: '800px', margin: '0 auto 4rem auto' }}>
+          <h2 className="section-title">El secreto mejor guardado de los campeones</h2>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.6' }}>
+            Ya seas un ciclista amateur buscando romper sus propias marcas, o un entrenador analizando el rendimiento de tu equipo, <strong>SOPLÓN</strong> traduce los datos de la carretera en una estrategia clara y fácil de leer.
+          </p>
+        </div>
+        
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+          {features.map((feature, idx) => (
+            <FeatureCard 
+              key={idx}
+              icon={feature.icon}
+              title={feature.title} 
+              desc={feature.description}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* SECCIÓN HARDWARE E IOT - DOS COLUMNAS */}
+      <section className="container" style={{ 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
+        gap: '4rem', 
+        alignItems: 'center', 
+        marginBottom: '6rem',
+        paddingTop: '4rem',
+        borderTop: '1px solid var(--border)'
+      }}>
+        <div>
+          <span style={{ color: 'var(--accent)', fontWeight: '800', letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: '0.85rem' }}>
+            Arquitectura IoT
+          </span>
+          <h2 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0.5rem 0 1.5rem 0', lineHeight: '1.2' }}>
+            Diseño aerodinámico e integrado
+          </h2>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem', fontSize: '1.1rem', lineHeight: '1.6' }}>
+            El hardware no debe ser un obstáculo. SOPLÓN se integra de manera imperceptible en tu casco. Su red de sensores de ultra bajo consumo captura presión diferencial, temperatura y biomecánica sin añadir peso innecesario.
+          </p>
+          <ul style={{ color: 'var(--text-primary)', fontWeight: '600', listStyle: 'none', lineHeight: '2.5' }}>
+            <li>✓ Muestreo a 10 Hz.</li>
+            <li>✓ Transmisión MQTT cifrada en tiempo real.</li>
+            <li>✓ Detección de baches, inclinación y caídas.</li>
+          </ul>
+        </div>
+        
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          {/* Video del prototipo */}
+          <div style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.1)', border: '1px solid var(--border)' }}>
+            <video 
+              src="/Prototipo SOPLON.mp4" 
+              autoPlay loop muted playsInline 
+              style={{ width: '100%', display: 'block', aspectRatio: '16/9', objectFit: 'cover' }}
+            />
+          </div>
+          {/* Imagen de uso (opcional, para dar más contexto visual) */}
+          <div style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.1)', border: '1px solid var(--border)' }}>
+            <img 
+              src="/Uso SOPLON.jpg" 
+              alt="Ciclista usando SOPLON" 
+              style={{ width: '100%', height: '200px', display: 'block', objectFit: 'cover' }}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* MEDIA SHOWCASE EN ACCIÓN */}
+      <section className="container" style={{ marginBottom: '6rem', textAlign: 'center' }}>
+        <h2 className="section-title">Descubre SOPLÓN en acción</h2>
+        <p style={{ color: 'var(--text-secondary)', marginBottom: '3rem', fontSize: '1.1rem' }}>
+          Mira cómo nuestra tecnología proyecta dinámicamente la información para el deportista en la ruta.
+        </p>
+
+        {/* Video Principal Horizontal */}
+        <div style={{ 
+          backgroundColor: '#000', 
+          borderRadius: '24px', 
+          overflow: 'hidden', 
+          aspectRatio: '16/9', 
+          boxShadow: '0 25px 50px -12px rgba(0,0,0,0.3)',
+          maxWidth: '1000px',
+          margin: '0 auto'
+        }}>
+          <video 
+            src="/SOPLON en accion.mp4" 
+            autoPlay loop muted playsInline controls
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          />
+        </div>
+
+        <div style={{ marginTop: '3rem' }}>
+          <Link to="/dashboard" className="btn-primary" style={{ fontSize: '1.1rem', padding: '1rem 3rem' }}>
+            Explorar el Dashboard
+          </Link>
+        </div>
+      </section>
+
+      {/* FOOTER Y CRÉDITOS */}
+      <footer style={{ 
+        backgroundColor: 'var(--bg-secondary)', 
+        padding: '4rem 2rem', 
+        textAlign: 'center',
+        borderTop: '1px solid var(--border)' 
+      }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+          <h3 style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontWeight: '800', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>
+            Desarrollado por el equipo SOPLÓN
+          </h3>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem', marginBottom: '3rem' }}>
+            <Badge text="Samuel S. Castrillón" />
+            <Badge text="Juan Pablo Arenas" />
+            <Badge text="David E. Alvarez" />
+            <Badge text="Samuel Montoya" />
+          </div>
+
+          <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
             Proyecto Académico de Ingeniería
           </p>
-          <p className="text-sm italic">
-            Pontificia Universidad Javeriana • Fundamentos en IoT y Aplicaciones • Tutor: Wilder Eduardo Castellanos Hernández, PhD
+          <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginTop: '0.5rem', fontStyle: 'italic' }}>
+            Pontificia Universidad Javeriana • Fundamentos en IoT y Aplicaciones<br/>
+            Tutor: Wilder Eduardo Castellanos Hernández, PhD
           </p>
-          <p className="mt-4 text-xs font-mono text-slate-700">Bogotá DC, Colombia</p>
+          <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '1.5rem', fontFamily: 'monospace' }}>
+            Bogotá DC, Colombia
+          </p>
         </div>
       </footer>
+
     </div>
+  );
+}
+
+// COMPONENTES AUXILIARES
+
+function FeatureCard({ icon, title, desc }) {
+  return (
+    <div style={{ 
+      padding: '2.5rem 2rem', 
+      backgroundColor: 'var(--bg-secondary)', 
+      borderRadius: '20px', 
+      border: '1px solid var(--border)',
+      transition: 'transform 0.2s ease',
+      cursor: 'default'
+    }}
+    onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-5px)'}
+    onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+    >
+      <div style={{ fontSize: '3rem', marginBottom: '1.5rem' }}>{icon}</div>
+      <h3 style={{ fontSize: '1.3rem', fontWeight: '800', marginBottom: '1rem', color: 'var(--text-primary)' }}>{title}</h3>
+      <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: '1.6' }}>{desc}</p>
+    </div>
+  );
+}
+
+function Badge({ text }) {
+  return (
+    <span style={{ 
+      backgroundColor: 'var(--bg-primary)', 
+      color: 'var(--text-primary)', 
+      padding: '0.5rem 1.2rem', 
+      borderRadius: '9999px', 
+      fontSize: '0.9rem', 
+      fontWeight: '600',
+      border: '1px solid var(--border)',
+      boxShadow: '0 2px 4px rgba(0,0,0,0.02)'
+    }}>
+      {text}
+    </span>
   );
 }
