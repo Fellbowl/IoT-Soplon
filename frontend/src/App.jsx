@@ -1,7 +1,8 @@
-// App.jsx
+// src/App.jsx
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Navbar from './components/Navbar.jsx'
 import Home from './pages/Home.jsx'
+import Proyecto from './pages/Proyecto.jsx' // <-- 1. Importación agregada
 import Dashboard from './pages/Dashboard.jsx'
 import SignInPage from './pages/SignInPage.jsx'
 import SignUpPage from './pages/SignUpPage.jsx'
@@ -14,7 +15,8 @@ function AppRoutes() {
       <Routes>
         <Route path="/" element={<Home />} />
         
-        {/* ELIMINADAS: Las rutas manuales de sso-callback */}
+        {/* <-- 2. Ruta agregada para que funcione el Navbar */}
+        <Route path="/proyecto" element={<Proyecto />} /> 
         
         {/* IMPORTANTE: El /* permite que Clerk maneje sus sub-rutas internas */}
         <Route path="/sign-in/*" element={<SignInPage />} />
