@@ -1,4 +1,4 @@
-import React from 'react';
+// src/pages/Proyecto.jsx
 import { Link } from 'react-router-dom';
 
 // Datos extraídos del Documento Oficial
@@ -25,514 +25,409 @@ const eventos = [
 
 export default function Proyecto() {
   return (
-    <div className="bg-slate-50 min-h-screen font-sans">
+    <div style={{ paddingBottom: '0' }}>
       
       {/* 1. HERO SECTION: PORTADA DE LA EXPOSICIÓN */}
-      <section className="relative overflow-hidden px-6 py-20 lg:py-32 shadow-2xl flex items-center min-h-[85vh]">
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="/Fondo PROYECTO.jpg" 
-            alt="Ciclistas compitiendo - Soplón" 
-            className="w-full h-full object-cover object-top" 
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/70 to-slate-900/95"></div>
-        </div>
-
-        <div className="relative mx-auto max-w-5xl text-center z-10 w-full mt-10">
-          <span className="inline-block rounded-full bg-sky-500/20 border border-sky-400/50 px-5 py-2 text-xs uppercase tracking-widest text-sky-300 font-bold mb-8 backdrop-blur-md">
+      <section style={{ 
+        position: 'relative', 
+        padding: '8rem 2rem', 
+        minHeight: '80vh', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center',
+        backgroundImage: 'url("/Fondo PROYECTO.jpg")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}>
+        {/* Overlay oscuro para que el texto resalte */}
+        <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(17, 24, 39, 0.85)' }}></div>
+        
+        <div className="container" style={{ position: 'relative', zIndex: 10, textAlign: 'center' }}>
+          <span style={{ 
+            display: 'inline-block', 
+            backgroundColor: 'rgba(56, 189, 248, 0.1)', 
+            border: '1px solid rgba(56, 189, 248, 0.3)', 
+            color: '#7dd3fc', 
+            padding: '0.5rem 1.5rem', 
+            borderRadius: '9999px', 
+            fontSize: '0.85rem', 
+            fontWeight: '800', 
+            letterSpacing: '0.1em', 
+            textTransform: 'uppercase', 
+            marginBottom: '2rem' 
+          }}>
             Fundamentos en IoT y Aplicaciones
           </span>
           
-          {/* TÍTULO ULTRA-MODERNO Y DEPORTIVO */}
-          <h1 
-            className="text-[5rem] sm:text-8xl xl:text-[10rem] font-sans font-black tracking-[0.25em] uppercase mb-4"
-            style={{
-              background: 'linear-gradient(to bottom right, #ffffff, #e0f2fe, #7dd3fc)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              filter: 'drop-shadow(0px 10px 15px rgba(0,0,0,0.6))'
-            }}
-          >
+          <h1 style={{ 
+            fontSize: 'clamp(4rem, 10vw, 8rem)', 
+            fontWeight: '900', 
+            margin: '0 0 1rem 0', 
+            letterSpacing: '0.1em', 
+            color: '#ffffff',
+            textShadow: '0 10px 30px rgba(0,0,0,0.5)'
+          }}>
             SOPLÓN
           </h1>
           
-          <p className="text-2xl md:text-4xl italic leading-relaxed text-sky-300 max-w-3xl mx-auto mb-16 font-light drop-shadow-lg">
+          <p style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', color: '#bae6fd', fontStyle: 'italic', fontWeight: '300', marginBottom: '4rem' }}>
             "El que te sopla la estrategia, no el secreto"
           </p>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-slate-200 text-sm font-semibold">
-            <div className="bg-black/40 p-4 rounded-2xl border border-white/10 backdrop-blur-md hover:bg-black/60 transition shadow-lg">Samuel S. Castrillón</div>
-            <div className="bg-black/40 p-4 rounded-2xl border border-white/10 backdrop-blur-md hover:bg-black/60 transition shadow-lg">Juan Pablo Arenas</div>
-            <div className="bg-black/40 p-4 rounded-2xl border border-white/10 backdrop-blur-md hover:bg-black/60 transition shadow-lg">David E. Alvarez</div>
-            <div className="bg-black/40 p-4 rounded-2xl border border-white/10 backdrop-blur-md hover:bg-black/60 transition shadow-lg">Samuel Montoya</div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem', marginBottom: '3rem' }}>
+            <BadgeDark text="Samuel S. Castrillón" />
+            <BadgeDark text="Juan Pablo Arenas" />
+            <BadgeDark text="David E. Alvarez" />
+            <BadgeDark text="Samuel Montoya" />
           </div>
           
-          <div className="mt-8 text-slate-300 text-xs tracking-[0.1em] uppercase flex flex-col sm:flex-row justify-center gap-4 sm:gap-12">
-            <p className="drop-shadow-md">Proyecto Académico de Ingeniería</p>
-            <p className="text-sky-400 font-bold drop-shadow-md">Tutor: Wilder E. Castellanos, PhD</p>
+          <div style={{ color: '#94a3b8', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: '600' }}>
+            <p style={{ margin: '0 0 0.5rem 0' }}>Proyecto Académico de Ingeniería</p>
+            <p style={{ margin: 0, color: '#38bdf8' }}>Tutor: Wilder E. Castellanos, PhD</p>
           </div>
         </div>
       </section>
 
       {/* 2. QUIÉNES SOMOS */}
-      <section className="py-24 bg-white border-b border-slate-200">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="flex flex-col md:flex-row items-center gap-16">
-            
-            {/* Logo de la empresa */}
-            <div className="w-full md:w-5/12 flex justify-center">
-              <div className="relative group">
-                <div className="absolute -inset-4 bg-sky-500/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition duration-700"></div>
-                <img 
-                  src="/Logo SOPLON.png" 
-                  alt="Logo de Soplón" 
-                  className="relative w-72 max-w-full drop-shadow-2xl transition-transform duration-500 group-hover:scale-105"
-                  onError={(e) => { e.target.src = '/Logo SOPLON.jpg'; }} 
-                />
-              </div>
+      <section className="container" style={{ padding: '6rem 2rem', borderBottom: '1px solid var(--border)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
+          <div style={{ textAlign: 'center' }}>
+            <img src="/Logo SOPLON.png" alt="Logo de Soplón" style={{ maxWidth: '280px', width: '100%', filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.1))' }} />
+          </div>
+          <div>
+            <span style={{ color: 'var(--accent)', fontWeight: '800', letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: '0.85rem' }}>
+              Nuestra Identidad
+            </span>
+            <h2 style={{ fontSize: '3rem', fontWeight: '800', margin: '0.5rem 0 2rem 0', color: 'var(--text-primary)' }}>¿Quiénes Somos?</h2>
+            <div style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8' }}>
+              <p style={{ marginBottom: '1.5rem' }}>
+                <strong>SOPLÓN</strong> es una empresa tecnológica emergente nacida en un entorno académico de ingeniería, cuyo fin principal es democratizar el acceso a la telemetría profesional en el deporte. Nos apasiona la intersección entre el alto rendimiento físico y las tecnologías de vanguardia.
+              </p>
+              <p style={{ marginBottom: '1.5rem' }}>
+                Nuestro propósito es transformar datos complejos en decisiones estratégicas claras. A través de soluciones de Internet de las Cosas (IoT) accesibles, portátiles y precisas, buscamos empoderar a atletas y entrenadores para que alcancen su máximo potencial.
+              </p>
+              <blockquote style={{ borderLeft: '4px solid var(--accent)', paddingLeft: '1.5rem', fontStyle: 'italic', backgroundColor: 'var(--bg-secondary)', padding: '1rem 1.5rem', borderRadius: '0 12px 12px 0', margin: 0 }}>
+                "Llevamos el análisis aerodinámico de un costoso túnel de viento directamente a la carretera."
+              </blockquote>
             </div>
-
-            {/* Texto de Quiénes Somos */}
-            <div className="w-full md:w-7/12 text-center md:text-left">
-              <span className="text-sky-500 font-bold tracking-[0.2em] text-sm uppercase mb-3 block">Nuestra Identidad</span>
-              <h2 className="text-4xl sm:text-5xl font-extrabold text-slate-900 mb-8 tracking-tight">¿Quiénes Somos?</h2>
-              
-              <div className="space-y-6 text-lg text-slate-600 leading-relaxed">
-                <p>
-                  <strong>SOPLÓN</strong> es una empresa tecnológica emergente nacida en un entorno académico de ingeniería, cuyo fin principal es democratizar el acceso a la telemetría profesional en el deporte. Nos apasiona la intersección entre el alto rendimiento físico y las tecnologías de vanguardia.
-                </p>
-                <p>
-                  Nuestro propósito es transformar datos complejos en decisiones estratégicas claras. A través de soluciones de Internet de las Cosas (IoT) accesibles, portátiles y precisas, buscamos empoderar a atletas y entrenadores para que alcancen su máximo potencial.
-                </p>
-                <p className="pl-6 border-l-4 border-sky-500 text-slate-700 italic font-medium bg-slate-50 py-3 pr-4 rounded-r-xl">
-                  "Llevamos el análisis aerodinámico de un costoso túnel de viento directamente a la carretera."
-                </p>
-              </div>
-            </div>
-
           </div>
         </div>
       </section>
 
       {/* 3. CONTEXTO Y USUARIO OBJETIVO */}
-      <section className="py-24 bg-slate-50 border-b border-slate-200">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-4xl font-extrabold text-slate-900 mb-6">El Contexto Deportivo</h2>
-              <p className="text-lg text-slate-600 leading-relaxed mb-8">
-                SOPLÓN se despliega en entornos abiertos (ciclismo de ruta, duatlón, triatlón) donde el deportista enfrenta ráfagas de viento y cambios de inclinación. <strong>Aquí la eficiencia no es solo potencia física</strong>, sino adaptación a factores aerodinámicos.
-              </p>
-              
-              <div className="space-y-4">
-                <div className="flex items-start gap-4 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition">
-                  <div className="text-4xl">🚴</div>
-                  <div>
-                    <h3 className="font-bold text-slate-900">Deportistas de Alto Rendimiento</h3>
-                    <p className="text-slate-600 text-sm mt-1">Élites y amateurs avanzados que buscan maximizar su eficiencia adaptándose al viento en ruta.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition">
-                  <div className="text-4xl">⏱️</div>
-                  <div>
-                    <h3 className="font-bold text-slate-900">Entrenadores y Clubes</h3>
-                    <p className="text-slate-600 text-sm mt-1">Requieren telemetría precisa en tiempo real para evaluar y perfeccionar la técnica de sus ciclistas.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            {/* VIDEO */}
-            <div className="relative group">
-              <div className="rounded-[2.5rem] overflow-hidden bg-slate-900 border-8 border-white shadow-2xl relative z-10">
-                <video 
-                  className="w-full h-auto object-cover aspect-video" 
-                  autoPlay loop muted playsInline
-                  src="/a-high-tech-cycling-helmet-with-a-small-sleek-iot-.mp4" 
-                />
-                <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full text-white text-xs font-bold flex items-center gap-2 border border-white/10">
-                  <span className="text-sky-400">⚡</span> VISIÓN DEL PRODUCTO
-                </div>
-              </div>
-              <div className="absolute -inset-4 rounded-[3rem] bg-gradient-to-br from-sky-500/30 to-violet-500/30 blur-2xl -z-10 group-hover:blur-3xl transition-all duration-500"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. EL PROBLEMA Y LA COMPETENCIA */}
-      <section 
-        className="py-24 relative bg-fixed bg-center bg-cover overflow-hidden" 
-        style={{ backgroundImage: "url('/Fondo PROYECTO.jpg')" }}
-      >
-        <div className="absolute inset-0 bg-slate-900/85 backdrop-blur-sm"></div>
-        
-        <div className="mx-auto max-w-7xl px-6 relative z-10 text-center">
-          <h2 className="text-4xl font-extrabold text-white mb-6">El "Punto Ciego" Aerodinámico</h2>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed mb-16">
-            El viento representa entre el <strong>70% y el 90% de la resistencia total</strong>. Actualmente los ciclistas corren a ciegas: no saben cuándo adoptar una postura más aerodinámica o conservar energía.
-          </p>
-          
-          <div className="grid md:grid-cols-3 gap-8 text-left">
-            <div className="bg-slate-900/60 backdrop-blur-md border border-slate-700/50 p-8 rounded-3xl hover:bg-slate-800 transition">
-              <h3 className="text-2xl font-bold text-slate-200 mb-4">Garmin / Potenciómetros</h3>
-              <p className="text-slate-400 mb-6 leading-relaxed">Solo miden dinámica del pedaleo y esfuerzo mecánico (Vatios).</p>
-              <span className="inline-block bg-red-500/20 text-red-400 text-xs font-bold px-3 py-1.5 rounded uppercase tracking-wider">No miden el viento</span>
-            </div>
-            
-            <div className="bg-slate-900/60 backdrop-blur-md border border-slate-700/50 p-8 rounded-3xl hover:bg-slate-800 transition">
-              <h3 className="text-2xl font-bold text-slate-200 mb-4">Velocomp / Notio</h3>
-              <p className="text-slate-400 mb-6 leading-relaxed">Calculan CdA y resistencia al aire, pero son extremadamente costosos.</p>
-              <span className="inline-block bg-red-500/20 text-red-400 text-xs font-bold px-3 py-1.5 rounded uppercase tracking-wider">Análisis posterior</span>
-            </div>
-            
-            <div className="bg-sky-900/60 backdrop-blur-md border-2 border-sky-400 p-8 rounded-3xl shadow-[0_0_40px_rgba(14,165,233,0.3)] transform md:-translate-y-4">
-              <h3 className="text-2xl font-extrabold text-white mb-4">SOPLÓN</h3>
-              <p className="text-sky-100 mb-6 leading-relaxed">
-                Integra biomecánica y variables ambientales. <strong>Procesa todo al instante</strong> para indicar qué hacer en el momento exacto.
-              </p>
-              <span className="inline-block bg-emerald-500/30 text-emerald-300 text-xs font-bold px-3 py-1.5 rounded uppercase tracking-wider border border-emerald-400/50">Estratega en Tiempo Real</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. LÓGICA DE CÁLCULO E INGENIERÍA */}
-      <section className="py-24 bg-slate-50">
-        <div className="mx-auto max-w-7xl px-6 text-center">
-          <h2 className="text-4xl font-extrabold text-slate-900 mb-6">Ingeniería y Procesamiento Digital</h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-16">
-            La Raspberry Pi 3 B+ procesa continuamente los datos de la capa de percepción mediante tres bloques matemáticos fundamentales.
-          </p>
-
-          <div className="grid lg:grid-cols-3 gap-8 text-left">
-            <div className="group rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-900 text-xl font-bold text-white mb-6 group-hover:bg-sky-500 transition-colors">1</div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Velocidad del Viento</h3>
-              <p className="text-slate-600 mb-6">Simplificamos la ecuación de Bernoulli usando la presión del sensor MPS20N0040D y la densidad del aire local.</p>
-              <div className="bg-slate-900 text-sky-400 p-4 rounded-xl font-mono text-xs overflow-x-auto border border-slate-800">
-                v = √( 2 · ΔP / ρ ) * 3.6
-              </div>
-            </div>
-
-            <div className="group rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-900 text-xl font-bold text-white mb-6 group-hover:bg-sky-500 transition-colors">2</div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Biomecánica (MPU6050)</h3>
-              <p className="text-slate-600 mb-6">Determinamos la orientación del casco mediante trigonometría para evaluar si se mantiene la postura aero.</p>
-              <div className="bg-slate-900 text-sky-400 p-4 rounded-xl font-mono text-xs overflow-x-auto border border-slate-800 flex flex-col gap-2">
-                <span>Pitch = arctan2(ax, √(ay² + az²))</span>
-                <span>Roll = arctan2(ay, √(ax² + az²))</span>
-              </div>
-            </div>
-
-            <div className="group rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-900 text-xl font-bold text-white mb-6 group-hover:bg-sky-500 transition-colors">3</div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Filtro Exponencial (EMA)</h3>
-              <p className="text-slate-600 mb-6">Filtramos lecturas erráticas por vibraciones o pedaleo de pie implementando un EMA a 10 Hz.</p>
-              <div className="bg-slate-900 text-sky-400 p-4 rounded-xl font-mono text-xs overflow-x-auto border border-slate-800">
-                P_filt = (α * P_act) + ((1-α) * P_ant)
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. INTELIGENCIA Y EVENTOS */}
-      <section className="py-24 bg-slate-100 border-t border-slate-200">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-extrabold text-slate-900 mb-6">Inteligencia en el Terreno</h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-              El algoritmo evalúa continuamente umbrales para "soplar" la mejor táctica, convirtiendo datos crudos en estrategias mientras el deportista está en acción.
+      <section className="container" style={{ padding: '6rem 2rem', borderBottom: '1px solid var(--border)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '4rem', alignItems: 'center' }}>
+          <div>
+            <h2 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0 0 1.5rem 0', color: 'var(--text-primary)' }}>El Contexto Deportivo</h2>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.6', marginBottom: '2.5rem' }}>
+              SOPLÓN se despliega en entornos abiertos (ciclismo de ruta, duatlón, triatlón) donde el deportista enfrenta ráfagas de viento y cambios de inclinación. <strong>Aquí la eficiencia no es solo potencia física</strong>, sino adaptación a factores aerodinámicos.
             </p>
-          </div>
-
-          <div className="grid lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-4 flex justify-center relative group">
-              <div className="rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white relative z-10 w-full max-w-sm transform transition-transform duration-500 group-hover:scale-[1.02]">
-                <img 
-                  src="/Uso SOPLON.jpg" 
-                  alt="Usuario con el casco SOPLÓN instalado" 
-                  className="w-full h-auto object-cover aspect-[3/4] sm:aspect-[9/16]"
-                />
-                <div className="absolute bottom-6 left-0 right-0 flex justify-center">
-                  <span className="bg-black/75 backdrop-blur-md px-4 py-2 rounded-full text-white text-xs font-bold flex items-center gap-2 shadow-lg border border-white/20">
-                    <span className="w-2.5 h-2.5 rounded-full bg-sky-400 animate-pulse"></span>
-                    Lectura de Sensores Activa
-                  </span>
-                </div>
-              </div>
-              <div className="absolute -inset-2 rounded-[3rem] bg-gradient-to-br from-sky-500/30 to-violet-500/30 blur-2xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            </div>
-
-            <div className="lg:col-span-8 grid sm:grid-cols-2 gap-6">
-              {eventos.map((evento, index) => (
-                <div key={index} className="group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-3xl">{evento.icono}</span>
-                    <h3 className="font-bold text-slate-900 leading-tight">{evento.titulo}</h3>
-                  </div>
-                  <div className="mb-4">
-                    <span className="text-[11px] font-mono text-sky-700 bg-sky-50 px-2.5 py-1 rounded-md font-semibold border border-sky-100">
-                      {evento.umbral}
-                    </span>
-                  </div>
-                  <p className="text-sm text-slate-600 leading-relaxed">{evento.accion}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 7. ARQUITECTURA DE LA SOLUCIÓN (DIAGRAMA INTERACTIVO) */}
-      <section className="py-24 bg-slate-950 border-t border-slate-800 relative overflow-hidden">
-        {/* Luces de fondo estilo Cyberpunk */}
-        <div className="absolute top-0 right-0 h-[600px] w-[600px] rounded-full bg-sky-600/10 blur-[150px] pointer-events-none"></div>
-        <div className="absolute bottom-0 left-0 h-[600px] w-[600px] rounded-full bg-violet-600/10 blur-[150px] pointer-events-none"></div>
-
-        <div className="mx-auto max-w-7xl px-6 relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-extrabold text-white mb-6">Arquitectura Centralizada del Sistema</h2>
-            <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-              Descubre cómo viajan los datos en tiempo real desde el casco del ciclista hasta la pantalla de su entrenador.
-            </p>
-          </div>
-
-          {/* Explicación de las Capas */}
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl backdrop-blur-md">
-              <h3 className="text-orange-400 font-bold mb-3 flex items-center gap-2"><span>📟</span> 1. Capa Hardware</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">El dispositivo IoT (Raspberry Pi + Sensores) captura la telemetría y actúa como publicador, enviando los datos mediante el protocolo ligero MQTT.</p>
-            </div>
-            <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl backdrop-blur-md">
-              <h3 className="text-sky-400 font-bold mb-3 flex items-center gap-2"><span>☁️</span> 2. Capa Cloud</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">HiveMQ recibe la señal. El Bridge Service (Railway) se suscribe, procesa con Python/Flask y escribe en la base de datos de series temporales InfluxDB.</p>
-            </div>
-            <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl backdrop-blur-md">
-              <h3 className="text-violet-400 font-bold mb-3 flex items-center gap-2"><span>▲</span> 3. Capa Frontend</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">Desplegado en Vercel, solicita la API al backend y utiliza Clerk para proteger las rutas (Sign In/Up) mediante Session JWT.</p>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <InfoBox icon="🚴" title="Deportistas de Alto Rendimiento" desc="Élites y amateurs avanzados que buscan maximizar su eficiencia adaptándose al viento en ruta." />
+              <InfoBox icon="⏱️" title="Entrenadores y Clubes" desc="Requieren telemetría precisa en tiempo real para evaluar y perfeccionar la técnica de sus ciclistas." />
             </div>
           </div>
           
-          {/* INICIO DEL DIAGRAMA CSS */}
-          <div className="bg-slate-900/60 backdrop-blur-2xl border border-slate-700/50 rounded-[3rem] p-8 shadow-2xl overflow-x-auto">
-            <div className="min-w-[900px] flex flex-col items-center gap-2 py-4">
-              
-              {/* --- ROW 1: DISPOSITIVO IoT --- */}
-              <div className="w-72 bg-slate-800 border-2 border-orange-500/50 rounded-2xl p-5 shadow-[0_0_20px_rgba(249,115,22,0.15)] z-10 text-center">
-                <span className="text-3xl mb-2 block">📟</span>
-                <h3 className="font-bold text-white text-lg">Dispositivo IoT</h3>
-                <p className="text-xs text-slate-400 mt-1">Raspberry pi + sensores</p>
-              </div>
-
-              {/* FLECHA: MQTT Publish */}
-              <div className="flex flex-col items-center text-orange-400 font-mono text-xs font-bold">
-                <div className="w-0.5 h-6 bg-orange-500/50"></div>
-                <span className="bg-slate-950 px-3 py-1 rounded-full border border-orange-500/30 z-10 shadow-lg">MQTT Publish</span>
-                <div className="w-0.5 h-6 bg-orange-500/50"></div>
-                <div className="-mt-2 text-lg">▼</div>
-              </div>
-
-              {/* --- ROW 2: BROKER --- */}
-              <div className="w-72 bg-slate-800 border-2 border-yellow-400/50 rounded-2xl p-5 shadow-[0_0_20px_rgba(250,204,21,0.15)] z-10 text-center">
-                <span className="text-3xl mb-2 block">☁️</span>
-                <h3 className="font-bold text-white text-lg">HiveMQ Cloud</h3>
-                <p className="text-xs text-slate-400 mt-1">MQTT Broker (intermediario)</p>
-              </div>
-
-              {/* FLECHA: MQTT Subscribe */}
-              <div className="flex flex-col items-center text-yellow-400 font-mono text-xs font-bold">
-                <div className="w-0.5 h-6 bg-yellow-400/50"></div>
-                <span className="bg-slate-950 px-3 py-1 rounded-full border border-yellow-400/30 z-10 shadow-lg">MQTT Subscribe</span>
-                <div className="w-0.5 h-6 bg-yellow-400/50"></div>
-                <div className="-mt-2 text-lg">▼</div>
-              </div>
-
-              {/* --- ROW 3: BACKEND & DATABASE --- */}
-              <div className="flex items-center justify-center w-full my-2">
-                {/* Auto Deploy Left Side */}
-                <div className="w-48 bg-slate-800/80 border border-slate-600 rounded-2xl p-4 text-center">
-                  <span className="text-2xl mb-1 block">🐙</span>
-                  <h3 className="font-bold text-white text-xs">GitHub (IoT-Soplon)</h3>
-                </div>
-                <div className="flex items-center text-slate-400 font-mono text-[10px] font-bold">
-                  <div className="h-0.5 w-6 bg-slate-600"></div>
-                  <span className="bg-slate-950 px-2 py-1 rounded border border-slate-700 z-10">Auto-deploy</span>
-                  <div className="h-0.5 w-6 bg-slate-600"></div>
-                  <div className="-ml-2 text-lg">▶</div>
-                </div>
-
-                {/* Railway */}
-                <div className="w-72 bg-slate-800 border-2 border-sky-500/50 rounded-2xl p-5 shadow-[0_0_30px_rgba(14,165,233,0.2)] z-10 text-center relative overflow-hidden">
-                  <div className="absolute inset-0 bg-sky-500/5"></div>
-                  <span className="text-3xl mb-2 block relative z-10">🚂</span>
-                  <h3 className="font-bold text-white text-lg relative z-10">Railway: Bridge Service</h3>
-                  <p className="text-xs text-slate-400 mt-2 relative z-10 font-medium">Python + paho-mqtt<br/>Flask /api/readings</p>
-                </div>
-
-                <div className="flex items-center text-blue-400 font-mono text-[10px] font-bold gap-1">
-                  <div className="text-sm">◀</div>
-                  <div className="h-0.5 w-12 bg-blue-500/50"></div>
-                  <div className="text-sm">▶</div>
-                </div>
-
-                {/* InfluxDB */}
-                <div className="w-48 bg-slate-800 border-2 border-blue-500/50 rounded-2xl p-4 shadow-[0_0_20px_rgba(59,130,246,0.15)] text-center">
-                  <span className="text-2xl mb-1 block">🗄️</span>
-                  <h3 className="font-bold text-white text-sm">InfluxDB Cloud</h3>
-                  <p className="text-[10px] text-slate-400 mt-1">Time serial DB<br/>(us-east-1 bucket)</p>
-                </div>
-              </div>
-
-              {/* FLECHA: API REST */}
-              <div className="flex flex-col items-center text-emerald-400 font-mono text-xs font-bold">
-                <div className="w-0.5 h-6 bg-emerald-500/50"></div>
-                <span className="bg-slate-950 px-4 py-1.5 rounded-full border border-emerald-500/50 z-10 shadow-[0_0_15px_rgba(16,185,129,0.3)]">GET /api/readings</span>
-                <div className="w-0.5 h-6 bg-emerald-500/50"></div>
-                <div className="-mt-2 text-lg">▼</div>
-              </div>
-
-              {/* --- ROW 4: FRONTEND & AUTH --- */}
-              <div className="flex items-center justify-center w-full mt-2">
-                {/* Auto Deploy Left Side */}
-                <div className="w-48 bg-slate-800/80 border border-slate-600 rounded-2xl p-4 text-center">
-                  <span className="text-2xl mb-1 block">🐙</span>
-                  <h3 className="font-bold text-white text-xs">GitHub (IoT-Soplon)</h3>
-                </div>
-                <div className="flex items-center text-slate-400 font-mono text-[10px] font-bold">
-                  <div className="h-0.5 w-6 bg-slate-600"></div>
-                  <span className="bg-slate-950 px-2 py-1 rounded border border-slate-700 z-10">Auto-deploy</span>
-                  <div className="h-0.5 w-6 bg-slate-600"></div>
-                  <div className="-ml-2 text-lg">▶</div>
-                </div>
-
-                {/* Vercel */}
-                <div className="w-72 bg-slate-800 border-2 border-white/50 rounded-2xl p-6 shadow-[0_0_30px_rgba(255,255,255,0.15)] z-10 text-center">
-                  <span className="text-3xl mb-2 block">▲</span>
-                  <h3 className="font-bold text-white text-lg">Frontend / Vercel</h3>
-                  <div className="mt-3 text-xs text-slate-300 space-y-1.5">
-                    <p className="bg-slate-900/50 py-1 rounded">Home <span className="text-slate-500">(landing page)</span></p>
-                    <p className="bg-slate-900/50 py-1 rounded">Sign IN & Sign UP <span className="text-slate-500">(Clerk components)</span></p>
-                    <p className="bg-slate-900/50 py-1 rounded font-semibold text-emerald-400">Dashboard <span className="text-slate-500 font-normal">(protected route)</span></p>
-                  </div>
-                </div>
-
-                <div className="flex items-center text-violet-400 font-mono text-[10px] font-bold">
-                  <div className="-mr-2 text-lg">◀</div>
-                  <div className="h-0.5 w-6 bg-violet-500/50"></div>
-                  <span className="bg-slate-950 px-2 py-1 rounded border border-violet-500/30 z-10 text-center">Session<br/>JWT</span>
-                  <div className="h-0.5 w-6 bg-violet-500/50"></div>
-                </div>
-
-                {/* Clerk */}
-                <div className="w-48 bg-slate-800 border-2 border-violet-500/50 rounded-2xl p-4 shadow-[0_0_20px_rgba(139,92,246,0.15)] text-center">
-                  <span className="text-2xl mb-1 block">🔐</span>
-                  <h3 className="font-bold text-white text-sm">Clerk</h3>
-                  <p className="text-[10px] text-slate-400 mt-1">Auth-as-a-service<br/>login-register<br/>session-jwt</p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-          {/* FIN DEL DIAGRAMA CSS */}
-
-        </div>
-      </section>
-
-      {/* 8. TABLA DE ENTIDADES TÉCNICAS */}
-      <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
-        <div className="mx-auto max-w-6xl px-6 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-extrabold text-white mb-4">Entidades del Sistema</h2>
-            <p className="text-slate-400">Resumen técnico de variables de entrada y salida.</p>
-          </div>
-          
-          <div className="overflow-x-auto rounded-3xl border border-slate-700 shadow-2xl bg-slate-800">
-            <table className="w-full text-left text-sm">
-              <thead className="bg-black/40 text-slate-300">
-                <tr>
-                  <th className="px-8 py-5 font-bold uppercase tracking-wider text-xs">Variable</th>
-                  <th className="px-8 py-5 font-bold uppercase tracking-wider text-xs">Tipo</th>
-                  <th className="px-8 py-5 font-bold uppercase tracking-wider text-xs">Rango / Lógica</th>
-                  <th className="px-8 py-5 font-bold uppercase tracking-wider text-xs">Sensor</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-700/50">
-                {variables.map((row, index) => (
-                  <tr key={index} className="hover:bg-slate-700/40 transition-colors">
-                    <td className="px-8 py-5 font-semibold text-white">{row[0]}</td>
-                    <td className="px-8 py-5">
-                      <span className="bg-slate-700 border border-slate-600 px-3 py-1 rounded text-xs text-slate-300">{row[1]}</span>
-                    </td>
-                    <td className="px-8 py-5 text-slate-300">{row[2]}</td>
-                    <td className="px-8 py-5 text-sky-400 font-mono text-xs">{row[3]}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      {/* 9. VIDEO DEMOSTRATIVO FINAL */}
-      <section 
-        className="py-24 relative bg-fixed bg-center bg-cover border-t border-slate-800"
-        style={{ backgroundImage: "url('/Fondo PROYECTO.jpg')" }}
-      >
-        <div className="absolute inset-0 bg-slate-950/90 backdrop-blur-sm"></div>
-        
-        <div className="mx-auto max-w-5xl px-6 text-center relative z-10">
-          <h2 className="text-4xl font-extrabold text-white mb-6 drop-shadow-md">Prueba de Concepto (Prototipo)</h2>
-          <p className="text-xl text-sky-200 mb-16 font-medium">Integración física de la Raspberry Pi y sensores en casco aerodinámico.</p>
-          
-          <div className="rounded-[2.5rem] overflow-hidden shadow-[0_0_50px_rgba(14,165,233,0.3)] border-4 border-slate-700 bg-black relative group max-w-4xl mx-auto">
-            <video 
-              className="w-full h-auto aspect-video object-cover"
-              src="/Prototipo SOPLON.mp4" 
-              autoPlay loop muted controls playsInline
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-500 pointer-events-none flex items-end justify-center pb-8">
-              <span className="px-6 py-2 bg-black/50 backdrop-blur rounded-full text-white font-bold tracking-widest text-sm border border-white/20">
-                SOPLÓN V1.0
+          <div style={{ borderRadius: '40px', overflow: 'hidden', border: '8px solid var(--text-primary)', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)', backgroundColor: '#000', position: 'relative' }}>
+            <video src="/a-high-tech-cycling-helmet-with-a-small-sleek-iot-.mp4" autoPlay loop muted playsInline style={{ width: '100%', height: 'auto', display: 'block', aspectRatio: '16/9', objectFit: 'cover' }} />
+            <div style={{ position: 'absolute', top: '20px', right: '20px' }}>
+              <span style={{ backgroundColor: 'rgba(0,0,0,0.7)', color: '#fff', padding: '0.4rem 1rem', borderRadius: '20px', fontSize: '0.8rem', fontWeight: 'bold', backdropFilter: 'blur(4px)' }}>
+                ⚡ VISIÓN DEL PRODUCTO
               </span>
             </div>
           </div>
-          
-          {/* NOMBRES DEL EQUIPO EN EL CIERRE */}
-          <div className="mt-16 pt-10 border-t border-white/10">
-            <h3 className="text-sm text-slate-400 font-bold tracking-[0.2em] uppercase mb-6">Desarrollado por el equipo SOPLÓN</h3>
-            <div className="flex flex-wrap justify-center gap-4 sm:gap-8 text-slate-200 font-medium">
-              <span className="bg-white/5 border border-white/10 px-5 py-2 rounded-full">Samuel S. Castrillón</span>
-              <span className="bg-white/5 border border-white/10 px-5 py-2 rounded-full">Juan Pablo Arenas</span>
-              <span className="bg-white/5 border border-white/10 px-5 py-2 rounded-full">David E. Alvarez</span>
-              <span className="bg-white/5 border border-white/10 px-5 py-2 rounded-full">Samuel Montoya</span>
+        </div>
+      </section>
+
+      {/* 4. COMPETENCIA */}
+      <section className="container" style={{ padding: '6rem 2rem', textAlign: 'center', borderBottom: '1px solid var(--border)' }}>
+        <span style={{ color: 'var(--accent)', fontWeight: '800', letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: '0.85rem' }}>Estado del Arte</span>
+        <h2 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0.5rem 0 1.5rem 0' }}>El "Punto Ciego" Aerodinámico</h2>
+        <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '800px', margin: '0 auto 4rem auto', lineHeight: '1.6' }}>
+          El viento representa entre el <strong>70% y el 90% de la resistencia total</strong>. Actualmente los ciclistas corren a ciegas. ¿Cómo lo resolvemos en comparación con el mercado?
+        </p>
+        
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', textAlign: 'left' }}>
+          <CompetitorCard title="Garmin / Potenciómetros" desc="Solo miden dinámica del pedaleo y esfuerzo mecánico (Vatios)." tag="No miden el viento" isMain={false} />
+          <CompetitorCard title="Velocomp / Notio" desc="Calculan CdA y resistencia al aire, pero son extremadamente costosos." tag="Análisis posterior" isMain={false} />
+          <CompetitorCard title="SOPLÓN" desc="Integra biomecánica y variables ambientales. Procesa todo al instante para indicar qué hacer en el momento exacto." tag="Estratega en Tiempo Real" isMain={true} />
+        </div>
+      </section>
+
+      {/* 5. INGENIERÍA */}
+      <section className="container" style={{ padding: '6rem 2rem', backgroundColor: 'var(--bg-secondary)' }}>
+        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+          <h2 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0 0 1.5rem 0' }}>Ingeniería y Procesamiento Digital</h2>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '800px', margin: '0 auto', lineHeight: '1.6' }}>
+            La Raspberry Pi 3 B+ procesa continuamente los datos de la capa de percepción mediante tres bloques matemáticos fundamentales.
+          </p>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+          <MathCard step="1" title="Velocidad del Viento" desc="Simplificamos la ecuación de Bernoulli usando la presión del sensor MPS20N0040D y la densidad del aire local." formula="v = √( 2 · ΔP / ρ ) * 3.6" />
+          <MathCard step="2" title="Biomecánica (MPU6050)" desc="Determinamos la orientación del casco mediante trigonometría para evaluar si se mantiene la postura aero." formula="Pitch = arctan2(ax, √(ay² + az²))" formula2="Roll = arctan2(ay, √(ax² + az²))" />
+          <MathCard step="3" title="Filtro Exponencial (EMA)" desc="Filtramos lecturas erráticas por vibraciones o pedaleo de pie implementando un EMA a 10 Hz." formula="P_filt = (α * P_act) + ((1-α) * P_ant)" />
+        </div>
+      </section>
+
+      {/* 6. EVENTOS */}
+      <section className="container" style={{ padding: '6rem 2rem', borderBottom: '1px solid var(--border)' }}>
+        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+          <h2 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0 0 1.5rem 0' }}>Inteligencia en el Terreno</h2>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '800px', margin: '0 auto', lineHeight: '1.6' }}>
+            El algoritmo evalúa continuamente umbrales para "soplar" la mejor táctica, convirtiendo datos crudos en estrategias mientras el deportista está en acción.
+          </p>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '4rem', alignItems: 'center' }}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={{ borderRadius: '40px', overflow: 'hidden', border: '8px solid var(--text-primary)', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)', maxWidth: '300px', width: '100%', position: 'relative' }}>
+              <img src="/Uso SOPLON.jpg" alt="Uso SOPLON" style={{ width: '100%', height: 'auto', display: 'block', aspectRatio: '9/16', objectFit: 'cover' }} />
+              <div style={{ position: 'absolute', bottom: '20px', width: '100%', display: 'flex', justifyContent: 'center' }}>
+                <span style={{ backgroundColor: 'rgba(0,0,0,0.7)', color: '#fff', padding: '0.4rem 1rem', borderRadius: '20px', fontSize: '0.8rem', fontWeight: 'bold', backdropFilter: 'blur(4px)' }}>
+                  🟢 Sensores Activos
+                </span>
+              </div>
             </div>
           </div>
-
-          <div className="mt-12 text-center">
-            <Link
-              to="/dashboard"
-              className="inline-flex items-center justify-center rounded-full bg-sky-500 px-10 py-5 text-base font-bold text-white shadow-[0_0_20px_rgba(14,165,233,0.5)] transition-all hover:bg-sky-400 hover:scale-105"
-            >
-              Iniciar Telemetría en Vivo
-            </Link>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            {eventos.map((evt, i) => (
+              <EventCard key={i} icon={evt.icono} title={evt.titulo} umbral={evt.umbral} desc={evt.accion} />
+            ))}
           </div>
         </div>
       </section>
 
+      {/* 7. DIAGRAMA DE ARQUITECTURA (CSS PURO) */}
+      <section style={{ backgroundColor: '#0f172a', padding: '6rem 2rem', color: '#fff' }}>
+        <div className="container" style={{ textAlign: 'center', marginBottom: '4rem' }}>
+          <h2 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0 0 1.5rem 0' }}>Arquitectura Centralizada</h2>
+          <p style={{ color: '#94a3b8', fontSize: '1.1rem', maxWidth: '800px', margin: '0 auto', lineHeight: '1.6' }}>
+            Descubre cómo viajan los datos en tiempo real desde el casco del ciclista hasta la pantalla de su entrenador mediante nuestra infraestructura en la nube.
+          </p>
+        </div>
+
+        <div className="container" style={{ backgroundColor: '#1e293b', borderRadius: '24px', padding: '3rem', overflowX: 'auto', border: '1px solid #334155' }}>
+          <div style={{ minWidth: '800px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+            
+            {/* ROW 1: Dispositivo */}
+            <div style={{ backgroundColor: '#334155', border: '2px solid #f97316', padding: '1.5rem', borderRadius: '16px', width: '250px', textAlign: 'center' }}>
+              <span style={{ fontSize: '2rem' }}>📟</span>
+              <h3 style={{ margin: '0.5rem 0 0 0', fontSize: '1.1rem' }}>Dispositivo IoT</h3>
+              <p style={{ margin: 0, fontSize: '0.8rem', color: '#94a3b8' }}>Raspberry Pi + Sensores</p>
+            </div>
+
+            {/* Arrow */}
+            <DiagramArrow color="#f97316" text="MQTT Publish" />
+
+            {/* ROW 2: Broker */}
+            <div style={{ backgroundColor: '#334155', border: '2px solid #eab308', padding: '1.5rem', borderRadius: '16px', width: '250px', textAlign: 'center' }}>
+              <span style={{ fontSize: '2rem' }}>☁️</span>
+              <h3 style={{ margin: '0.5rem 0 0 0', fontSize: '1.1rem' }}>HiveMQ Cloud</h3>
+              <p style={{ margin: 0, fontSize: '0.8rem', color: '#94a3b8' }}>Broker MQTT</p>
+            </div>
+
+            {/* Arrow */}
+            <DiagramArrow color="#eab308" text="MQTT Subscribe" />
+
+            {/* ROW 3: Backend */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', width: '100%', justifyContent: 'center' }}>
+              <SideBox icon="🐙" title="GitHub" subtitle="Auto-Deploy" />
+              <div style={{ color: '#94a3b8', fontWeight: 'bold' }}>▶</div>
+              <div style={{ backgroundColor: '#334155', border: '2px solid #0ea5e9', padding: '1.5rem', borderRadius: '16px', width: '300px', textAlign: 'center' }}>
+                <span style={{ fontSize: '2rem' }}>🚂</span>
+                <h3 style={{ margin: '0.5rem 0 0 0', fontSize: '1.1rem' }}>Railway: Bridge</h3>
+                <p style={{ margin: '0.5rem 0 0 0', fontSize: '0.8rem', color: '#94a3b8', fontFamily: 'monospace' }}>Python Flask (API)</p>
+              </div>
+              <div style={{ color: '#3b82f6', fontWeight: 'bold', fontSize: '0.8rem' }}>◀ ▶</div>
+              <SideBox icon="🗄️" title="InfluxDB" subtitle="Series Temporales" borderColor="#3b82f6" />
+            </div>
+
+            {/* Arrow */}
+            <DiagramArrow color="#10b981" text="GET /api/readings" />
+
+            {/* ROW 4: Frontend */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', width: '100%', justifyContent: 'center' }}>
+              <SideBox icon="🐙" title="GitHub" subtitle="Auto-Deploy" />
+              <div style={{ color: '#94a3b8', fontWeight: 'bold' }}>▶</div>
+              <div style={{ backgroundColor: '#334155', border: '2px solid #fff', padding: '1.5rem', borderRadius: '16px', width: '300px', textAlign: 'center' }}>
+                <span style={{ fontSize: '2rem' }}>▲</span>
+                <h3 style={{ margin: '0.5rem 0 0 0', fontSize: '1.1rem' }}>Vercel: Frontend</h3>
+                <p style={{ margin: '0.5rem 0 0 0', fontSize: '0.8rem', color: '#94a3b8', fontFamily: 'monospace' }}>React + Vite</p>
+              </div>
+              <div style={{ color: '#8b5cf6', fontWeight: 'bold', fontSize: '0.8rem' }}>◀ Session ▶</div>
+              <SideBox icon="🔐" title="Clerk" subtitle="Auth & JWT" borderColor="#8b5cf6" />
+            </div>
+            
+          </div>
+        </div>
+      </section>
+
+      {/* 8. TABLA DE ENTIDADES */}
+      <section className="container" style={{ padding: '6rem 2rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+          <h2 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0 0 1.5rem 0' }}>Entidades del Sistema</h2>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>Resumen técnico de variables de entrada y salida.</p>
+        </div>
+        
+        <div style={{ overflowX: 'auto', borderRadius: '16px', border: '1px solid var(--border)', backgroundColor: 'var(--bg-primary)' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.95rem' }}>
+            <thead style={{ backgroundColor: 'var(--bg-secondary)', color: 'var(--text-secondary)' }}>
+              <tr>
+                <th style={{ padding: '1rem 1.5rem', borderBottom: '1px solid var(--border)' }}>Variable</th>
+                <th style={{ padding: '1rem 1.5rem', borderBottom: '1px solid var(--border)' }}>Tipo</th>
+                <th style={{ padding: '1rem 1.5rem', borderBottom: '1px solid var(--border)' }}>Rango / Lógica</th>
+                <th style={{ padding: '1rem 1.5rem', borderBottom: '1px solid var(--border)' }}>Sensor</th>
+              </tr>
+            </thead>
+            <tbody>
+              {variables.map((row, idx) => (
+                <tr key={idx} style={{ borderBottom: idx !== variables.length - 1 ? '1px solid var(--border)' : 'none' }}>
+                  <td style={{ padding: '1rem 1.5rem', fontWeight: '600' }}>{row[0]}</td>
+                  <td style={{ padding: '1rem 1.5rem' }}>
+                    <span style={{ backgroundColor: 'var(--bg-secondary)', padding: '0.3rem 0.6rem', borderRadius: '6px', fontSize: '0.85rem' }}>{row[1]}</span>
+                  </td>
+                  <td style={{ padding: '1rem 1.5rem', color: 'var(--text-secondary)' }}>{row[2]}</td>
+                  <td style={{ padding: '1rem 1.5rem', fontFamily: 'monospace', color: 'var(--accent)', fontWeight: 'bold' }}>{row[3]}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* 9. VIDEO FINAL Y FOOTER */}
+      <section style={{ backgroundColor: '#111827', padding: '6rem 2rem', textAlign: 'center', color: '#fff' }}>
+        <h2 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0 0 1rem 0' }}>Prueba de Concepto (Prototipo)</h2>
+        <p style={{ color: '#94a3b8', fontSize: '1.1rem', marginBottom: '3rem' }}>Integración física de la Raspberry Pi y sensores en casco aerodinámico.</p>
+        
+        <div style={{ maxWidth: '900px', margin: '0 auto 4rem auto', borderRadius: '24px', overflow: 'hidden', border: '1px solid #334155' }}>
+          <video src="/Prototipo SOPLON.mp4" autoPlay loop muted controls playsInline style={{ width: '100%', display: 'block' }} />
+        </div>
+
+        <Link to="/dashboard" className="btn-primary" style={{ fontSize: '1.1rem', padding: '1rem 3rem', backgroundColor: 'var(--accent)', color: '#fff', border: 'none' }}>
+          Iniciar Telemetría en Vivo
+        </Link>
+      </section>
+
       {/* FOOTER ACADÉMICO */}
-      <footer className="py-12 bg-black text-slate-500 text-center">
-        <div className="mx-auto max-w-6xl px-6">
-          <p className="uppercase tracking-[0.2em] text-xs font-bold mb-4 text-slate-600">
+      <footer style={{ backgroundColor: '#0f172a', padding: '4rem 2rem', textAlign: 'center', borderTop: '1px solid #1e293b' }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+          <p style={{ textTransform: 'uppercase', letterSpacing: '0.2em', fontSize: '0.75rem', fontWeight: 'bold', color: '#64748b', marginBottom: '1rem' }}>
             Proyecto Académico de Ingeniería
           </p>
-          <p className="text-sm italic">
-            Proyecto: Fundamentos en IoT y Aplicaciones • Tutor: Wilder Eduardo Castellanos Hernández, PhD
+          <p style={{ fontSize: '0.9rem', fontStyle: 'italic', color: '#94a3b8' }}>
+            Pontificia Universidad Javeriana • Fundamentos en IoT y Aplicaciones<br/>
+            Tutor: Wilder Eduardo Castellanos Hernández, PhD
           </p>
-          <p className="mt-4 text-xs font-mono text-slate-700">Bogotá DC, Colombia</p>
+          <p style={{ marginTop: '1.5rem', fontSize: '0.8rem', fontFamily: 'monospace', color: '#64748b' }}>Bogotá DC, Colombia</p>
         </div>
       </footer>
+
+    </div>
+  );
+}
+
+// COMPONENTES AUXILIARES PARA MANTENER EL CÓDIGO LIMPIO
+
+function BadgeDark({ text }) {
+  return (
+    <span style={{ backgroundColor: 'rgba(255,255,255,0.1)', color: '#fff', padding: '0.5rem 1.2rem', borderRadius: '9999px', fontSize: '0.9rem', fontWeight: '600', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.2)' }}>
+      {text}
+    </span>
+  );
+}
+
+function InfoBox({ icon, title, desc }) {
+  return (
+    <div style={{ display: 'flex', gap: '1rem', backgroundColor: 'var(--bg-secondary)', padding: '1.5rem', borderRadius: '16px', border: '1px solid var(--border)' }}>
+      <div style={{ fontSize: '2rem' }}>{icon}</div>
+      <div>
+        <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '1.1rem' }}>{title}</h3>
+        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.5' }}>{desc}</p>
+      </div>
+    </div>
+  );
+}
+
+function CompetitorCard({ title, desc, tag, isMain }) {
+  return (
+    <div style={{ 
+      padding: '2rem', 
+      borderRadius: '20px', 
+      border: isMain ? '2px solid var(--accent)' : '1px solid var(--border)', 
+      backgroundColor: isMain ? 'rgba(16, 185, 129, 0.05)' : 'var(--bg-secondary)' 
+    }}>
+      <h3 style={{ fontSize: '1.3rem', fontWeight: '800', marginBottom: '1rem', color: 'var(--text-primary)' }}>{title}</h3>
+      <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', lineHeight: '1.6' }}>{desc}</p>
+      <span style={{ 
+        backgroundColor: isMain ? 'var(--accent)' : '#ef4444', 
+        color: '#fff', 
+        padding: '0.3rem 0.8rem', 
+        borderRadius: '6px', 
+        fontSize: '0.8rem', 
+        fontWeight: 'bold', 
+        textTransform: 'uppercase' 
+      }}>
+        {tag}
+      </span>
+    </div>
+  );
+}
+
+function MathCard({ step, title, desc, formula, formula2 }) {
+  return (
+    <div style={{ padding: '2rem', backgroundColor: 'var(--bg-primary)', borderRadius: '20px', border: '1px solid var(--border)', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ width: '40px', height: '40px', backgroundColor: 'var(--text-primary)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '12px', fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>
+        {step}
+      </div>
+      <h3 style={{ fontSize: '1.2rem', fontWeight: '800', marginBottom: '1rem' }}>{title}</h3>
+      <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', flexGrow: 1 }}>{desc}</p>
+      <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '1rem', borderRadius: '8px', fontFamily: 'monospace', fontSize: '0.9rem', color: 'var(--accent)', fontWeight: 'bold' }}>
+        {formula}
+        {formula2 && <><br/>{formula2}</>}
+      </div>
+    </div>
+  );
+}
+
+function EventCard({ icon, title, umbral, desc }) {
+  return (
+    <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '16px', border: '1px solid var(--border)' }}>
+      <span style={{ fontSize: '2rem' }}>{icon}</span>
+      <div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.5rem' }}>
+          <h3 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 'bold' }}>{title}</h3>
+          <span style={{ backgroundColor: 'var(--bg-primary)', padding: '0.2rem 0.6rem', borderRadius: '6px', fontSize: '0.75rem', fontFamily: 'monospace', border: '1px solid var(--border)', color: 'var(--text-secondary)' }}>
+            {umbral}
+          </span>
+        </div>
+        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.95rem' }}>{desc}</p>
+      </div>
+    </div>
+  );
+}
+
+// Sub-componentes para el diagrama de arquitectura
+function DiagramArrow({ color, text }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: color, fontFamily: 'monospace', fontSize: '0.8rem', fontWeight: 'bold' }}>
+      <div style={{ width: '2px', height: '20px', backgroundColor: color, opacity: 0.5 }}></div>
+      <span style={{ padding: '0.3rem 1rem', border: `1px solid ${color}`, borderRadius: '20px', backgroundColor: '#1e293b' }}>{text}</span>
+      <div style={{ width: '2px', height: '20px', backgroundColor: color, opacity: 0.5 }}></div>
+      <div style={{ marginTop: '-8px', fontSize: '1.2rem' }}>▼</div>
+    </div>
+  );
+}
+
+function SideBox({ icon, title, subtitle, borderColor = '#475569' }) {
+  return (
+    <div style={{ backgroundColor: '#334155', border: `1px solid ${borderColor}`, padding: '1rem', borderRadius: '12px', width: '120px', textAlign: 'center' }}>
+      <span style={{ fontSize: '1.5rem', display: 'block', marginBottom: '0.2rem' }}>{icon}</span>
+      <h3 style={{ margin: 0, fontSize: '0.8rem', color: '#fff' }}>{title}</h3>
+      <p style={{ margin: 0, fontSize: '0.65rem', color: '#94a3b8' }}>{subtitle}</p>
     </div>
   );
 }
