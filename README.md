@@ -42,7 +42,7 @@ Estructura del repositorio y función de cada archivo
 	- `src/components/Navbar.jsx` — barra de navegación con enlaces y botones de sesión (`UserButton`) de Clerk.
 	- `src/components/ProtectedRoute.jsx` — componente que protege rutas que requieren autenticación.
 	- `src/pages/Dashboard.jsx` — vista principal con peticiones periódicas a `BRIDGE_URL` (`/api/readings`), renderiza gráficos con `recharts` (temperatura, presión, aceleración, giroscopio).
-	- `src/pages/Home.jsx`, `SignInPage.jsx`, `SignUpPage.jsx` — páginas públicas y de autenticación usando Clerk.
+	- `src/pages/Home.jsx`,`Proyecto.jsx`, `SignInPage.jsx`, `SignUpPage.jsx` — páginas públicas y de autenticación usando Clerk.
 
 Herramientas y servicios conectados
 ---------------------------------
