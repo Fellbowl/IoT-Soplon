@@ -40,7 +40,6 @@ export default function Proyecto() {
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed'
       }}>
-        {/* Overlay oscuro para que el texto resalte */}
         <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(17, 24, 39, 0.85)' }}></div>
         
         <div className="container" style={{ position: 'relative', zIndex: 10, textAlign: 'center' }}>
@@ -75,7 +74,7 @@ export default function Proyecto() {
             "El que te sopla la estrategia, no el secreto"
           </p>
           
-          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem', marginBottom: '3rem' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyItems: 'center', justifyContent: 'center', gap: '1rem', marginBottom: '3rem' }}>
             <BadgeDark text="Samuel S. Castrillón" />
             <BadgeDark text="Juan Pablo Arenas" />
             <BadgeDark text="David E. Alvarez" />
@@ -200,65 +199,91 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* 7. DIAGRAMA DE ARQUITECTURA (CSS PURO) */}
+      {/* 7. DIAGRAMA DE ARQUITECTURA (NUEVO - ADAPTADO AL REPOSITORIO) */}
       <section style={{ backgroundColor: '#0f172a', padding: '6rem 2rem', color: '#fff' }}>
         <div className="container" style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <h2 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0 0 1.5rem 0' }}>Arquitectura Centralizada</h2>
+          <h2 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0 0 1.5rem 0' }}>Arquitectura del Sistema</h2>
           <p style={{ color: '#94a3b8', fontSize: '1.1rem', maxWidth: '800px', margin: '0 auto', lineHeight: '1.6' }}>
-            Descubre cómo viajan los datos en tiempo real desde el casco del ciclista hasta la pantalla de su entrenador mediante nuestra infraestructura en la nube.
+            Flujo de telemetría: Desde la adquisición por la Raspberry Pi hasta la visualización en el frontend mediante Flask, Supabase y MQTT.
           </p>
+        </div>
+
+        {/* Explicación de las Capas */}
+        <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem', marginBottom: '4rem' }}>
+          <div style={{ backgroundColor: '#1e293b', border: '1px solid #334155', padding: '1.5rem', borderRadius: '16px' }}>
+            <h3 style={{ color: '#f97316', fontSize: '1.1rem', margin: '0 0 0.5rem 0' }}>📟 1. Hardware & Publisher</h3>
+            <p style={{ color: '#94a3b8', fontSize: '0.9rem', lineHeight: '1.5', margin: 0 }}>
+              La Raspberry Pi lee los sensores (I2C/GPIO), aplica filtros (media filtrada, z-score, EMA) y ejecuta <code>Publisher.py</code> para publicar los datos en formato JSON.
+            </p>
+          </div>
+          <div style={{ backgroundColor: '#1e293b', border: '1px solid #334155', padding: '1.5rem', borderRadius: '16px' }}>
+            <h3 style={{ color: '#0ea5e9', fontSize: '1.1rem', margin: '0 0 0.5rem 0' }}>⚙️ 2. Bridge & Supabase</h3>
+            <p style={{ color: '#94a3b8', fontSize: '0.9rem', lineHeight: '1.5', margin: 0 }}>
+              El servicio backend <code>Bridge/main.py</code> (Flask) se suscribe al broker MQTT, persiste los datos en <b>Supabase</b> (tabla <code>sensor_readings</code>) y expone la API REST.
+            </p>
+          </div>
+          <div style={{ backgroundColor: '#1e293b', border: '1px solid #334155', padding: '1.5rem', borderRadius: '16px' }}>
+            <h3 style={{ color: '#a855f7', fontSize: '1.1rem', margin: '0 0 0.5rem 0' }}>💻 3. Frontend Dashboard</h3>
+            <p style={{ color: '#94a3b8', fontSize: '0.9rem', lineHeight: '1.5', margin: 0 }}>
+              Aplicación web en React (Vite) que consume la API del Bridge. Utiliza Recharts para gráficos en tiempo real y Clerk para autenticación de usuarios.
+            </p>
+          </div>
         </div>
 
         <div className="container" style={{ backgroundColor: '#1e293b', borderRadius: '24px', padding: '3rem', overflowX: 'auto', border: '1px solid #334155' }}>
           <div style={{ minWidth: '800px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
             
             {/* ROW 1: Dispositivo */}
-            <div style={{ backgroundColor: '#334155', border: '2px solid #f97316', padding: '1.5rem', borderRadius: '16px', width: '250px', textAlign: 'center' }}>
-              <span style={{ fontSize: '2rem' }}>📟</span>
-              <h3 style={{ margin: '0.5rem 0 0 0', fontSize: '1.1rem' }}>Dispositivo IoT</h3>
-              <p style={{ margin: 0, fontSize: '0.8rem', color: '#94a3b8' }}>Raspberry Pi + Sensores</p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', width: '100%', justifyContent: 'center' }}>
+              <SideBox icon="⚙️" title="Sensores" subtitle="MPU6050, LM75A, HX710B" />
+              <div style={{ color: '#94a3b8', fontWeight: 'bold' }}>▶</div>
+              <div style={{ backgroundColor: '#334155', border: '2px solid #f97316', padding: '1.5rem', borderRadius: '16px', width: '280px', textAlign: 'center' }}>
+                <span style={{ fontSize: '2rem' }}>📟</span>
+                <h3 style={{ margin: '0.5rem 0 0 0', fontSize: '1.1rem' }}>Raspberry Pi</h3>
+                <p style={{ margin: '0.5rem 0 0 0', fontSize: '0.8rem', color: '#fcd34d', fontFamily: 'monospace' }}>Publisher.py (Daemon)</p>
+              </div>
             </div>
 
             {/* Arrow */}
-            <DiagramArrow color="#f97316" text="MQTT Publish" />
+            <DiagramArrow color="#f97316" text="MQTT Publish (TLS) JSON" />
 
             {/* ROW 2: Broker */}
             <div style={{ backgroundColor: '#334155', border: '2px solid #eab308', padding: '1.5rem', borderRadius: '16px', width: '250px', textAlign: 'center' }}>
               <span style={{ fontSize: '2rem' }}>☁️</span>
-              <h3 style={{ margin: '0.5rem 0 0 0', fontSize: '1.1rem' }}>HiveMQ Cloud</h3>
-              <p style={{ margin: 0, fontSize: '0.8rem', color: '#94a3b8' }}>Broker MQTT</p>
+              <h3 style={{ margin: '0.5rem 0 0 0', fontSize: '1.1rem' }}>MQTT Broker</h3>
+              <p style={{ margin: 0, fontSize: '0.8rem', color: '#94a3b8' }}>Conexión TLS Segura</p>
             </div>
 
             {/* Arrow */}
             <DiagramArrow color="#eab308" text="MQTT Subscribe" />
 
-            {/* ROW 3: Backend */}
+            {/* ROW 3: Backend Bridge */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', width: '100%', justifyContent: 'center' }}>
               <SideBox icon="🐙" title="GitHub" subtitle="Auto-Deploy" />
               <div style={{ color: '#94a3b8', fontWeight: 'bold' }}>▶</div>
-              <div style={{ backgroundColor: '#334155', border: '2px solid #0ea5e9', padding: '1.5rem', borderRadius: '16px', width: '300px', textAlign: 'center' }}>
+              <div style={{ backgroundColor: '#334155', border: '2px solid #0ea5e9', padding: '1.5rem', borderRadius: '16px', width: '280px', textAlign: 'center' }}>
                 <span style={{ fontSize: '2rem' }}>🚂</span>
-                <h3 style={{ margin: '0.5rem 0 0 0', fontSize: '1.1rem' }}>Railway: Bridge</h3>
-                <p style={{ margin: '0.5rem 0 0 0', fontSize: '0.8rem', color: '#94a3b8', fontFamily: 'monospace' }}>Python Flask (API)</p>
+                <h3 style={{ margin: '0.5rem 0 0 0', fontSize: '1.1rem' }}>Servicio Bridge</h3>
+                <p style={{ margin: '0.5rem 0 0 0', fontSize: '0.8rem', color: '#93c5fd', fontFamily: 'monospace' }}>Python Flask / main.py</p>
               </div>
-              <div style={{ color: '#3b82f6', fontWeight: 'bold', fontSize: '0.8rem' }}>◀ ▶</div>
-              <SideBox icon="🗄️" title="InfluxDB" subtitle="Series Temporales" borderColor="#3b82f6" />
+              <div style={{ color: '#22c55e', fontWeight: 'bold', fontSize: '0.8rem' }}>◀ Persiste ▶</div>
+              <SideBox icon="🗄️" title="Supabase" subtitle="sensor_readings" borderColor="#22c55e" />
             </div>
 
             {/* Arrow */}
-            <DiagramArrow color="#10b981" text="GET /api/readings" />
+            <DiagramArrow color="#10b981" text="API REST: GET /api/readings" />
 
             {/* ROW 4: Frontend */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', width: '100%', justifyContent: 'center' }}>
-              <SideBox icon="🐙" title="GitHub" subtitle="Auto-Deploy" />
-              <div style={{ color: '#94a3b8', fontWeight: 'bold' }}>▶</div>
-              <div style={{ backgroundColor: '#334155', border: '2px solid #fff', padding: '1.5rem', borderRadius: '16px', width: '300px', textAlign: 'center' }}>
-                <span style={{ fontSize: '2rem' }}>▲</span>
-                <h3 style={{ margin: '0.5rem 0 0 0', fontSize: '1.1rem' }}>Vercel: Frontend</h3>
-                <p style={{ margin: '0.5rem 0 0 0', fontSize: '0.8rem', color: '#94a3b8', fontFamily: 'monospace' }}>React + Vite</p>
+              <div style={{ width: '120px' }}></div> {/* Spacer para alinear */}
+              <div style={{ color: 'transparent', fontWeight: 'bold' }}>▶</div>
+              <div style={{ backgroundColor: '#334155', border: '2px solid #a855f7', padding: '1.5rem', borderRadius: '16px', width: '280px', textAlign: 'center' }}>
+                <span style={{ fontSize: '2rem' }}>💻</span>
+                <h3 style={{ margin: '0.5rem 0 0 0', fontSize: '1.1rem' }}>Aplicación Frontend</h3>
+                <p style={{ margin: '0.5rem 0 0 0', fontSize: '0.8rem', color: '#d8b4fe', fontFamily: 'monospace' }}>React + Vite + Recharts</p>
               </div>
-              <div style={{ color: '#8b5cf6', fontWeight: 'bold', fontSize: '0.8rem' }}>◀ Session ▶</div>
-              <SideBox icon="🔐" title="Clerk" subtitle="Auth & JWT" borderColor="#8b5cf6" />
+              <div style={{ color: '#8b5cf6', fontWeight: 'bold', fontSize: '0.8rem' }}>◀ Auth SSO ▶</div>
+              <SideBox icon="🔐" title="Clerk" subtitle="Gestión Usuarios" borderColor="#8b5cf6" />
             </div>
             
           </div>
@@ -269,7 +294,7 @@ export default function Proyecto() {
       <section className="container" style={{ padding: '6rem 2rem' }}>
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <h2 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0 0 1.5rem 0' }}>Entidades del Sistema</h2>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>Resumen técnico de variables de entrada y salida.</p>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>Resumen técnico de variables de entrada y salida registradas en base de datos.</p>
         </div>
         
         <div style={{ overflowX: 'auto', borderRadius: '16px', border: '1px solid var(--border)', backgroundColor: 'var(--bg-primary)' }}>
