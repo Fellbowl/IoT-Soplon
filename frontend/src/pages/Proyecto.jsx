@@ -27,11 +27,11 @@ export default function Proyecto() {
   return (
     <div style={{ paddingBottom: '0' }}>
       
-      {/* 1. HERO SECTION: PORTADA DE LA EXPOSICIÓN */}
+      {/* 1. HERO SECTION: PORTADA TÉCNICA */}
       <section style={{ 
         position: 'relative', 
-        padding: '8rem 2rem', 
-        minHeight: '80vh', 
+        padding: '10rem 2rem 8rem 2rem', 
+        minHeight: '60vh', 
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'center',
@@ -40,51 +40,46 @@ export default function Proyecto() {
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed'
       }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(17, 24, 39, 0.85)' }}></div>
+        {/* Overlay oscuro con degradado sutil */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(17, 24, 39, 0.7), rgba(17, 24, 39, 0.95))' }}></div>
         
         <div className="container" style={{ position: 'relative', zIndex: 10, textAlign: 'center' }}>
           <span style={{ 
             display: 'inline-block', 
-            backgroundColor: 'rgba(56, 189, 248, 0.1)', 
-            border: '1px solid rgba(56, 189, 248, 0.3)', 
-            color: '#7dd3fc', 
-            padding: '0.5rem 1.5rem', 
+            backgroundColor: 'var(--accent)', 
+            color: '#fff', 
+            padding: '0.4rem 1.2rem', 
             borderRadius: '9999px', 
             fontSize: '0.85rem', 
             fontWeight: '800', 
             letterSpacing: '0.1em', 
             textTransform: 'uppercase', 
-            marginBottom: '2rem' 
+            marginBottom: '1.5rem',
+            boxShadow: '0 4px 15px rgba(16, 185, 129, 0.3)'
           }}>
-            Fundamentos en IoT y Aplicaciones
+            Especificaciones Técnicas
           </span>
           
           <h1 style={{ 
-            fontSize: 'clamp(4rem, 10vw, 8rem)', 
+            fontSize: 'clamp(3rem, 8vw, 5.5rem)', 
             fontWeight: '900', 
-            margin: '0 0 1rem 0', 
-            letterSpacing: '0.1em', 
+            margin: '0 0 1.5rem 0', 
+            letterSpacing: '-0.02em', 
             color: '#ffffff',
-            textShadow: '0 10px 30px rgba(0,0,0,0.5)'
+            lineHeight: '1.1'
           }}>
-            SOPLÓN
+            Inside SOPLÓN
           </h1>
           
-          <p style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', color: '#bae6fd', fontStyle: 'italic', fontWeight: '300', marginBottom: '4rem' }}>
-            "El que te sopla la estrategia, no el secreto"
+          <p style={{ 
+            fontSize: 'clamp(1.1rem, 3vw, 1.3rem)', 
+            color: '#94a3b8', 
+            maxWidth: '600px', 
+            margin: '0 auto',
+            lineHeight: '1.6'
+          }}>
+            Descubre la arquitectura IoT, ingeniería embebida e inteligencia de datos detrás de nuestra tecnología de telemetría aerodinámica.
           </p>
-          
-          <div style={{ display: 'flex', flexWrap: 'wrap', justifyItems: 'center', justifyContent: 'center', gap: '1rem', marginBottom: '3rem' }}>
-            <BadgeDark text="Samuel S. Castrillón" />
-            <BadgeDark text="Juan Pablo Arenas" />
-            <BadgeDark text="David E. Alvarez" />
-            <BadgeDark text="Samuel Montoya" />
-          </div>
-          
-          <div style={{ color: '#94a3b8', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: '600' }}>
-            <p style={{ margin: '0 0 0.5rem 0' }}>Proyecto Académico de Ingeniería</p>
-            <p style={{ margin: 0, color: '#38bdf8' }}>Tutor: Wilder E. Castellanos, PhD</p>
-          </div>
         </div>
       </section>
 
@@ -101,7 +96,7 @@ export default function Proyecto() {
             <h2 style={{ fontSize: '3rem', fontWeight: '800', margin: '0.5rem 0 2rem 0', color: 'var(--text-primary)' }}>¿Quiénes Somos?</h2>
             <div style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8' }}>
               <p style={{ marginBottom: '1.5rem' }}>
-                <strong>SOPLÓN</strong> es una empresa tecnológica emergente nacida en un entorno académico de ingeniería, cuyo fin principal es democratizar el acceso a la telemetría profesional en el deporte. Nos apasiona la intersección entre el alto rendimiento físico y las tecnologías de vanguardia.
+                <strong>SOPLÓN</strong> es una empresa tecnológica emergente nacida de la pasión por la ingeniería y el deporte, cuyo fin principal es democratizar el acceso a la telemetría profesional. Nos apasiona la intersección entre el alto rendimiento físico y las tecnologías de vanguardia.
               </p>
               <p style={{ marginBottom: '1.5rem' }}>
                 Nuestro propósito es transformar datos complejos en decisiones estratégicas claras. A través de soluciones de Internet de las Cosas (IoT) accesibles, portátiles y precisas, buscamos empoderar a atletas y entrenadores para que alcancen su máximo potencial.
@@ -156,11 +151,11 @@ export default function Proyecto() {
       </section>
 
       {/* 5. INGENIERÍA */}
-      <section className="container" style={{ padding: '6rem 2rem', backgroundColor: 'var(--bg-secondary)' }}>
+      <section className="container" style={{ padding: '6rem 2rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '32px', margin: '4rem auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <h2 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0 0 1.5rem 0' }}>Ingeniería y Procesamiento Digital</h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '800px', margin: '0 auto', lineHeight: '1.6' }}>
-            La Raspberry Pi 3 B+ procesa continuamente los datos de la capa de percepción mediante tres bloques matemáticos fundamentales.
+            Nuestra arquitectura procesa continuamente los datos de la capa de percepción mediante tres bloques matemáticos fundamentales en el firmware.
           </p>
         </div>
 
@@ -199,69 +194,68 @@ export default function Proyecto() {
         </div>
       </section>
 
-      {/* 7. DIAGRAMA DE ARQUITECTURA (NUEVO - ADAPTADO AL REPOSITORIO) */}
-      <section style={{ backgroundColor: '#0f172a', padding: '6rem 2rem', color: '#fff' }}>
+      {/* 7. DIAGRAMA DE ARQUITECTURA */}
+      <section style={{ backgroundColor: '#0f172a', padding: '8rem 2rem', color: '#fff' }}>
         <div className="container" style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <h2 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0 0 1.5rem 0' }}>Arquitectura del Sistema</h2>
+          <h2 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0 0 1.5rem 0' }}>Arquitectura de Red</h2>
           <p style={{ color: '#94a3b8', fontSize: '1.1rem', maxWidth: '800px', margin: '0 auto', lineHeight: '1.6' }}>
-            Flujo de telemetría: Desde la adquisición por la Raspberry Pi hasta la visualización en el frontend mediante Flask, Supabase y MQTT.
+            Flujo de telemetría: Desde la adquisición por hardware hasta la visualización en el frontend mediante Flask, Supabase y MQTT.
           </p>
         </div>
 
         {/* Explicación de las Capas */}
         <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem', marginBottom: '4rem' }}>
-          <div style={{ backgroundColor: '#1e293b', border: '1px solid #334155', padding: '1.5rem', borderRadius: '16px' }}>
+          <div style={{ backgroundColor: '#1e293b', border: '1px solid #334155', padding: '1.5rem', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.2)' }}>
             <h3 style={{ color: '#f97316', fontSize: '1.1rem', margin: '0 0 0.5rem 0' }}>📟 1. Hardware & Publisher</h3>
             <p style={{ color: '#94a3b8', fontSize: '0.9rem', lineHeight: '1.5', margin: 0 }}>
-              La Raspberry Pi lee los sensores (I2C/GPIO), aplica filtros (media filtrada, z-score, EMA) y ejecuta <code>Publisher.py</code> para publicar los datos en formato JSON.
+              Adquisición de sensores (I2C/GPIO), aplicación de filtros digitales y ejecución del <code>Publisher.py</code> para enviar JSON.
             </p>
           </div>
-          <div style={{ backgroundColor: '#1e293b', border: '1px solid #334155', padding: '1.5rem', borderRadius: '16px' }}>
+          <div style={{ backgroundColor: '#1e293b', border: '1px solid #334155', padding: '1.5rem', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.2)' }}>
             <h3 style={{ color: '#0ea5e9', fontSize: '1.1rem', margin: '0 0 0.5rem 0' }}>⚙️ 2. Bridge & Supabase</h3>
             <p style={{ color: '#94a3b8', fontSize: '0.9rem', lineHeight: '1.5', margin: 0 }}>
-              El servicio backend <code>Bridge/main.py</code> (Flask) se suscribe al broker MQTT, persiste los datos en <b>Supabase</b> (tabla <code>sensor_readings</code>) y expone la API REST.
+              Servicio backend <code>Bridge/main.py</code> (Flask) suscrito al broker MQTT, persiste en <b>Supabase</b> y expone la API REST.
             </p>
           </div>
-          <div style={{ backgroundColor: '#1e293b', border: '1px solid #334155', padding: '1.5rem', borderRadius: '16px' }}>
+          <div style={{ backgroundColor: '#1e293b', border: '1px solid #334155', padding: '1.5rem', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.2)' }}>
             <h3 style={{ color: '#a855f7', fontSize: '1.1rem', margin: '0 0 0.5rem 0' }}>💻 3. Frontend Dashboard</h3>
             <p style={{ color: '#94a3b8', fontSize: '0.9rem', lineHeight: '1.5', margin: 0 }}>
-              Aplicación web en React (Vite) que consume la API del Bridge. Utiliza Recharts para gráficos en tiempo real y Clerk para autenticación de usuarios.
+              Aplicación web React que consume la API. Utiliza Recharts para visualización y Clerk para autenticación segura.
             </p>
           </div>
         </div>
 
-        <div className="container" style={{ backgroundColor: '#1e293b', borderRadius: '24px', padding: '3rem', overflowX: 'auto', border: '1px solid #334155' }}>
+        {/* Diagrama Visual */}
+        <div className="container" style={{ backgroundColor: '#1e293b', borderRadius: '24px', padding: '4rem 2rem', overflowX: 'auto', border: '1px solid #334155' }}>
           <div style={{ minWidth: '800px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
             
             {/* ROW 1: Dispositivo */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', width: '100%', justifyContent: 'center' }}>
               <SideBox icon="⚙️" title="Sensores" subtitle="MPU6050, LM75A, HX710B" />
               <div style={{ color: '#94a3b8', fontWeight: 'bold' }}>▶</div>
-              <div style={{ backgroundColor: '#334155', border: '2px solid #f97316', padding: '1.5rem', borderRadius: '16px', width: '280px', textAlign: 'center' }}>
+              <div style={{ backgroundColor: '#334155', border: '2px solid #f97316', padding: '1.5rem', borderRadius: '16px', width: '280px', textAlign: 'center', boxShadow: '0 0 20px rgba(249, 115, 22, 0.1)' }}>
                 <span style={{ fontSize: '2rem' }}>📟</span>
-                <h3 style={{ margin: '0.5rem 0 0 0', fontSize: '1.1rem' }}>Raspberry Pi</h3>
+                <h3 style={{ margin: '0.5rem 0 0 0', fontSize: '1.1rem' }}>Hardware Embebido</h3>
                 <p style={{ margin: '0.5rem 0 0 0', fontSize: '0.8rem', color: '#fcd34d', fontFamily: 'monospace' }}>Publisher.py (Daemon)</p>
               </div>
             </div>
 
-            {/* Arrow */}
             <DiagramArrow color="#f97316" text="MQTT Publish (TLS) JSON" />
 
             {/* ROW 2: Broker */}
-            <div style={{ backgroundColor: '#334155', border: '2px solid #eab308', padding: '1.5rem', borderRadius: '16px', width: '250px', textAlign: 'center' }}>
+            <div style={{ backgroundColor: '#334155', border: '2px solid #eab308', padding: '1.5rem', borderRadius: '16px', width: '250px', textAlign: 'center', boxShadow: '0 0 20px rgba(234, 179, 8, 0.1)' }}>
               <span style={{ fontSize: '2rem' }}>☁️</span>
               <h3 style={{ margin: '0.5rem 0 0 0', fontSize: '1.1rem' }}>MQTT Broker</h3>
               <p style={{ margin: 0, fontSize: '0.8rem', color: '#94a3b8' }}>Conexión TLS Segura</p>
             </div>
 
-            {/* Arrow */}
             <DiagramArrow color="#eab308" text="MQTT Subscribe" />
 
             {/* ROW 3: Backend Bridge */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', width: '100%', justifyContent: 'center' }}>
               <SideBox icon="🐙" title="GitHub" subtitle="Auto-Deploy" />
               <div style={{ color: '#94a3b8', fontWeight: 'bold' }}>▶</div>
-              <div style={{ backgroundColor: '#334155', border: '2px solid #0ea5e9', padding: '1.5rem', borderRadius: '16px', width: '280px', textAlign: 'center' }}>
+              <div style={{ backgroundColor: '#334155', border: '2px solid #0ea5e9', padding: '1.5rem', borderRadius: '16px', width: '280px', textAlign: 'center', boxShadow: '0 0 20px rgba(14, 165, 233, 0.1)' }}>
                 <span style={{ fontSize: '2rem' }}>🚂</span>
                 <h3 style={{ margin: '0.5rem 0 0 0', fontSize: '1.1rem' }}>Servicio Bridge</h3>
                 <p style={{ margin: '0.5rem 0 0 0', fontSize: '0.8rem', color: '#93c5fd', fontFamily: 'monospace' }}>Python Flask / main.py</p>
@@ -270,14 +264,13 @@ export default function Proyecto() {
               <SideBox icon="🗄️" title="Supabase" subtitle="sensor_readings" borderColor="#22c55e" />
             </div>
 
-            {/* Arrow */}
             <DiagramArrow color="#10b981" text="API REST: GET /api/readings" />
 
             {/* ROW 4: Frontend */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', width: '100%', justifyContent: 'center' }}>
-              <div style={{ width: '120px' }}></div> {/* Spacer para alinear */}
+              <div style={{ width: '120px' }}></div> 
               <div style={{ color: 'transparent', fontWeight: 'bold' }}>▶</div>
-              <div style={{ backgroundColor: '#334155', border: '2px solid #a855f7', padding: '1.5rem', borderRadius: '16px', width: '280px', textAlign: 'center' }}>
+              <div style={{ backgroundColor: '#334155', border: '2px solid #a855f7', padding: '1.5rem', borderRadius: '16px', width: '280px', textAlign: 'center', boxShadow: '0 0 20px rgba(168, 85, 247, 0.1)' }}>
                 <span style={{ fontSize: '2rem' }}>💻</span>
                 <h3 style={{ margin: '0.5rem 0 0 0', fontSize: '1.1rem' }}>Aplicación Frontend</h3>
                 <p style={{ margin: '0.5rem 0 0 0', fontSize: '0.8rem', color: '#d8b4fe', fontFamily: 'monospace' }}>React + Vite + Recharts</p>
@@ -291,31 +284,31 @@ export default function Proyecto() {
       </section>
 
       {/* 8. TABLA DE ENTIDADES */}
-      <section className="container" style={{ padding: '6rem 2rem' }}>
+      <section className="container" style={{ padding: '8rem 2rem' }}>
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <h2 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0 0 1.5rem 0' }}>Entidades del Sistema</h2>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>Resumen técnico de variables de entrada y salida registradas en base de datos.</p>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>Resumen técnico de variables de entrada y salida registradas en la base de datos.</p>
         </div>
         
-        <div style={{ overflowX: 'auto', borderRadius: '16px', border: '1px solid var(--border)', backgroundColor: 'var(--bg-primary)' }}>
+        <div style={{ overflowX: 'auto', borderRadius: '24px', border: '1px solid var(--border)', backgroundColor: 'var(--bg-primary)', boxShadow: '0 10px 30px rgba(0,0,0,0.05)' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.95rem' }}>
             <thead style={{ backgroundColor: 'var(--bg-secondary)', color: 'var(--text-secondary)' }}>
               <tr>
-                <th style={{ padding: '1rem 1.5rem', borderBottom: '1px solid var(--border)' }}>Variable</th>
-                <th style={{ padding: '1rem 1.5rem', borderBottom: '1px solid var(--border)' }}>Tipo</th>
-                <th style={{ padding: '1rem 1.5rem', borderBottom: '1px solid var(--border)' }}>Rango / Lógica</th>
-                <th style={{ padding: '1rem 1.5rem', borderBottom: '1px solid var(--border)' }}>Sensor</th>
+                <th style={{ padding: '1.5rem', borderBottom: '2px solid var(--border)', textTransform: 'uppercase', letterSpacing: '0.05em', fontSize: '0.85rem' }}>Variable</th>
+                <th style={{ padding: '1.5rem', borderBottom: '2px solid var(--border)', textTransform: 'uppercase', letterSpacing: '0.05em', fontSize: '0.85rem' }}>Tipo</th>
+                <th style={{ padding: '1.5rem', borderBottom: '2px solid var(--border)', textTransform: 'uppercase', letterSpacing: '0.05em', fontSize: '0.85rem' }}>Rango / Lógica</th>
+                <th style={{ padding: '1.5rem', borderBottom: '2px solid var(--border)', textTransform: 'uppercase', letterSpacing: '0.05em', fontSize: '0.85rem' }}>Origen</th>
               </tr>
             </thead>
             <tbody>
               {variables.map((row, idx) => (
-                <tr key={idx} style={{ borderBottom: idx !== variables.length - 1 ? '1px solid var(--border)' : 'none' }}>
-                  <td style={{ padding: '1rem 1.5rem', fontWeight: '600' }}>{row[0]}</td>
-                  <td style={{ padding: '1rem 1.5rem' }}>
-                    <span style={{ backgroundColor: 'var(--bg-secondary)', padding: '0.3rem 0.6rem', borderRadius: '6px', fontSize: '0.85rem' }}>{row[1]}</span>
+                <tr key={idx} style={{ borderBottom: idx !== variables.length - 1 ? '1px solid var(--border)' : 'none', transition: 'background-color 0.2s ease' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-secondary)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}>
+                  <td style={{ padding: '1.5rem', fontWeight: '600' }}>{row[0]}</td>
+                  <td style={{ padding: '1.5rem' }}>
+                    <span style={{ backgroundColor: 'var(--bg-secondary)', padding: '0.4rem 0.8rem', borderRadius: '8px', fontSize: '0.85rem', border: '1px solid var(--border)' }}>{row[1]}</span>
                   </td>
-                  <td style={{ padding: '1rem 1.5rem', color: 'var(--text-secondary)' }}>{row[2]}</td>
-                  <td style={{ padding: '1rem 1.5rem', fontFamily: 'monospace', color: 'var(--accent)', fontWeight: 'bold' }}>{row[3]}</td>
+                  <td style={{ padding: '1.5rem', color: 'var(--text-secondary)' }}>{row[2]}</td>
+                  <td style={{ padding: '1.5rem', fontFamily: 'monospace', color: 'var(--accent)', fontWeight: 'bold' }}>{row[3]}</td>
                 </tr>
               ))}
             </tbody>
@@ -324,30 +317,29 @@ export default function Proyecto() {
       </section>
 
       {/* 9. VIDEO FINAL Y FOOTER */}
-      <section style={{ backgroundColor: '#111827', padding: '6rem 2rem', textAlign: 'center', color: '#fff' }}>
-        <h2 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0 0 1rem 0' }}>Prueba de Concepto (Prototipo)</h2>
-        <p style={{ color: '#94a3b8', fontSize: '1.1rem', marginBottom: '3rem' }}>Integración física de la Raspberry Pi y sensores en casco aerodinámico.</p>
+      <section style={{ backgroundColor: '#111827', padding: '6rem 2rem', textAlign: 'center', color: '#fff', borderTop: '1px solid #1e293b' }}>
+        <h2 style={{ fontSize: '2.5rem', fontWeight: '800', margin: '0 0 1rem 0' }}>Prueba de Concepto</h2>
+        <p style={{ color: '#94a3b8', fontSize: '1.1rem', marginBottom: '4rem' }}>Integración física de hardware y sensores en casco aerodinámico.</p>
         
-        <div style={{ maxWidth: '900px', margin: '0 auto 4rem auto', borderRadius: '24px', overflow: 'hidden', border: '1px solid #334155' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto 4rem auto', borderRadius: '24px', overflow: 'hidden', border: '2px solid #334155', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}>
           <video src="/Prototipo SOPLON.mp4" autoPlay loop muted controls playsInline style={{ width: '100%', display: 'block' }} />
         </div>
 
-        <Link to="/dashboard" className="btn-primary" style={{ fontSize: '1.1rem', padding: '1rem 3rem', backgroundColor: 'var(--accent)', color: '#fff', border: 'none' }}>
+        <Link to="/dashboard" className="btn-primary" style={{ fontSize: '1.1rem', padding: '1.2rem 3rem', backgroundColor: 'var(--accent)', color: '#fff', border: 'none', borderRadius: '9999px', boxShadow: '0 10px 20px rgba(16, 185, 129, 0.2)' }}>
           Iniciar Telemetría en Vivo
         </Link>
       </section>
 
-      {/* FOOTER ACADÉMICO */}
+      {/* FOOTER LIMPIO Y COMERCIAL */}
       <footer style={{ backgroundColor: '#0f172a', padding: '4rem 2rem', textAlign: 'center', borderTop: '1px solid #1e293b' }}>
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <p style={{ textTransform: 'uppercase', letterSpacing: '0.2em', fontSize: '0.75rem', fontWeight: 'bold', color: '#64748b', marginBottom: '1rem' }}>
-            Proyecto Académico de Ingeniería
+          <img src="/Logo SOPLON.png" alt="SOPLON Logo" style={{ height: '40px', filter: 'grayscale(100%) opacity(50%)', marginBottom: '2rem' }} />
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem', marginBottom: '2rem' }}>
+            <span style={{ color: '#64748b', fontSize: '0.9rem', fontWeight: '600' }}>Desarrollado por el equipo SOPLÓN</span>
+          </div>
+          <p style={{ margin: 0, fontSize: '0.85rem', fontFamily: 'monospace', color: '#475569', letterSpacing: '0.1em' }}>
+            BOGOTÁ, COLOMBIA
           </p>
-          <p style={{ fontSize: '0.9rem', fontStyle: 'italic', color: '#94a3b8' }}>
-            Pontificia Universidad Javeriana • Fundamentos en IoT y Aplicaciones<br/>
-            Tutor: Wilder Eduardo Castellanos Hernández, PhD
-          </p>
-          <p style={{ marginTop: '1.5rem', fontSize: '0.8rem', fontFamily: 'monospace', color: '#64748b' }}>Bogotá DC, Colombia</p>
         </div>
       </footer>
 
@@ -357,21 +349,13 @@ export default function Proyecto() {
 
 // COMPONENTES AUXILIARES PARA MANTENER EL CÓDIGO LIMPIO
 
-function BadgeDark({ text }) {
-  return (
-    <span style={{ backgroundColor: 'rgba(255,255,255,0.1)', color: '#fff', padding: '0.5rem 1.2rem', borderRadius: '9999px', fontSize: '0.9rem', fontWeight: '600', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.2)' }}>
-      {text}
-    </span>
-  );
-}
-
 function InfoBox({ icon, title, desc }) {
   return (
-    <div style={{ display: 'flex', gap: '1rem', backgroundColor: 'var(--bg-secondary)', padding: '1.5rem', borderRadius: '16px', border: '1px solid var(--border)' }}>
+    <div style={{ display: 'flex', gap: '1rem', backgroundColor: 'var(--bg-secondary)', padding: '1.5rem', borderRadius: '20px', border: '1px solid var(--border)' }}>
       <div style={{ fontSize: '2rem' }}>{icon}</div>
       <div>
         <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '1.1rem' }}>{title}</h3>
-        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.5' }}>{desc}</p>
+        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6' }}>{desc}</p>
       </div>
     </div>
   );
@@ -381,20 +365,22 @@ function CompetitorCard({ title, desc, tag, isMain }) {
   return (
     <div style={{ 
       padding: '2rem', 
-      borderRadius: '20px', 
+      borderRadius: '24px', 
       border: isMain ? '2px solid var(--accent)' : '1px solid var(--border)', 
-      backgroundColor: isMain ? 'rgba(16, 185, 129, 0.05)' : 'var(--bg-secondary)' 
+      backgroundColor: isMain ? 'rgba(16, 185, 129, 0.03)' : 'var(--bg-secondary)',
+      boxShadow: isMain ? '0 10px 30px rgba(16, 185, 129, 0.1)' : 'none'
     }}>
       <h3 style={{ fontSize: '1.3rem', fontWeight: '800', marginBottom: '1rem', color: 'var(--text-primary)' }}>{title}</h3>
       <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', lineHeight: '1.6' }}>{desc}</p>
       <span style={{ 
         backgroundColor: isMain ? 'var(--accent)' : '#ef4444', 
         color: '#fff', 
-        padding: '0.3rem 0.8rem', 
-        borderRadius: '6px', 
+        padding: '0.4rem 1rem', 
+        borderRadius: '8px', 
         fontSize: '0.8rem', 
         fontWeight: 'bold', 
-        textTransform: 'uppercase' 
+        textTransform: 'uppercase',
+        letterSpacing: '0.05em'
       }}>
         {tag}
       </span>
@@ -404,13 +390,13 @@ function CompetitorCard({ title, desc, tag, isMain }) {
 
 function MathCard({ step, title, desc, formula, formula2 }) {
   return (
-    <div style={{ padding: '2rem', backgroundColor: 'var(--bg-primary)', borderRadius: '20px', border: '1px solid var(--border)', display: 'flex', flexDirection: 'column' }}>
-      <div style={{ width: '40px', height: '40px', backgroundColor: 'var(--text-primary)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '12px', fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>
+    <div style={{ padding: '2rem', backgroundColor: 'var(--bg-primary)', borderRadius: '24px', border: '1px solid var(--border)', display: 'flex', flexDirection: 'column', boxShadow: '0 4px 6px rgba(0,0,0,0.02)' }}>
+      <div style={{ width: '48px', height: '48px', backgroundColor: 'var(--text-primary)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '14px', fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>
         {step}
       </div>
       <h3 style={{ fontSize: '1.2rem', fontWeight: '800', marginBottom: '1rem' }}>{title}</h3>
-      <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', flexGrow: 1 }}>{desc}</p>
-      <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '1rem', borderRadius: '8px', fontFamily: 'monospace', fontSize: '0.9rem', color: 'var(--accent)', fontWeight: 'bold' }}>
+      <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', flexGrow: 1, lineHeight: '1.6' }}>{desc}</p>
+      <div style={{ backgroundColor: 'var(--bg-secondary)', padding: '1rem', borderRadius: '12px', fontFamily: 'monospace', fontSize: '0.9rem', color: 'var(--accent)', fontWeight: 'bold', border: '1px solid var(--border)' }}>
         {formula}
         {formula2 && <><br/>{formula2}</>}
       </div>
@@ -420,16 +406,16 @@ function MathCard({ step, title, desc, formula, formula2 }) {
 
 function EventCard({ icon, title, umbral, desc }) {
   return (
-    <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '16px', border: '1px solid var(--border)' }}>
+    <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '20px', border: '1px solid var(--border)' }}>
       <span style={{ fontSize: '2rem' }}>{icon}</span>
       <div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.5rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '1rem', marginBottom: '0.5rem' }}>
           <h3 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 'bold' }}>{title}</h3>
-          <span style={{ backgroundColor: 'var(--bg-primary)', padding: '0.2rem 0.6rem', borderRadius: '6px', fontSize: '0.75rem', fontFamily: 'monospace', border: '1px solid var(--border)', color: 'var(--text-secondary)' }}>
+          <span style={{ backgroundColor: 'var(--bg-primary)', padding: '0.3rem 0.8rem', borderRadius: '8px', fontSize: '0.75rem', fontFamily: 'monospace', border: '1px solid var(--border)', color: 'var(--text-secondary)', fontWeight: 'bold' }}>
             {umbral}
           </span>
         </div>
-        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.95rem' }}>{desc}</p>
+        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.5' }}>{desc}</p>
       </div>
     </div>
   );
@@ -438,10 +424,10 @@ function EventCard({ icon, title, umbral, desc }) {
 // Sub-componentes para el diagrama de arquitectura
 function DiagramArrow({ color, text }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: color, fontFamily: 'monospace', fontSize: '0.8rem', fontWeight: 'bold' }}>
-      <div style={{ width: '2px', height: '20px', backgroundColor: color, opacity: 0.5 }}></div>
-      <span style={{ padding: '0.3rem 1rem', border: `1px solid ${color}`, borderRadius: '20px', backgroundColor: '#1e293b' }}>{text}</span>
-      <div style={{ width: '2px', height: '20px', backgroundColor: color, opacity: 0.5 }}></div>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color: color, fontFamily: 'monospace', fontSize: '0.85rem', fontWeight: 'bold' }}>
+      <div style={{ width: '2px', height: '24px', backgroundColor: color, opacity: 0.5 }}></div>
+      <span style={{ padding: '0.4rem 1.2rem', border: `1px solid ${color}`, borderRadius: '20px', backgroundColor: '#1e293b', boxShadow: `0 0 10px ${color}20` }}>{text}</span>
+      <div style={{ width: '2px', height: '24px', backgroundColor: color, opacity: 0.5 }}></div>
       <div style={{ marginTop: '-8px', fontSize: '1.2rem' }}>▼</div>
     </div>
   );
@@ -449,10 +435,10 @@ function DiagramArrow({ color, text }) {
 
 function SideBox({ icon, title, subtitle, borderColor = '#475569' }) {
   return (
-    <div style={{ backgroundColor: '#334155', border: `1px solid ${borderColor}`, padding: '1rem', borderRadius: '12px', width: '120px', textAlign: 'center' }}>
-      <span style={{ fontSize: '1.5rem', display: 'block', marginBottom: '0.2rem' }}>{icon}</span>
-      <h3 style={{ margin: 0, fontSize: '0.8rem', color: '#fff' }}>{title}</h3>
-      <p style={{ margin: 0, fontSize: '0.65rem', color: '#94a3b8' }}>{subtitle}</p>
+    <div style={{ backgroundColor: '#334155', border: `1px solid ${borderColor}`, padding: '1rem', borderRadius: '16px', width: '130px', textAlign: 'center' }}>
+      <span style={{ fontSize: '1.5rem', display: 'block', marginBottom: '0.4rem' }}>{icon}</span>
+      <h3 style={{ margin: 0, fontSize: '0.85rem', color: '#fff', fontWeight: 'bold' }}>{title}</h3>
+      <p style={{ margin: '0.2rem 0 0 0', fontSize: '0.7rem', color: '#94a3b8' }}>{subtitle}</p>
     </div>
   );
 }
