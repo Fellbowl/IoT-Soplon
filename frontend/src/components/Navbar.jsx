@@ -57,6 +57,11 @@ export default function Navbar() {
             Inicio
           </NavLink>
           
+          {/* NUEVO ENLACE: Visible para todos */}
+          <NavLink to="/proyecto" currentPath={location.pathname}>
+            Proyecto
+          </NavLink>
+          
           {isSignedIn ? (
             <>
               <NavLink to="/dashboard" currentPath={location.pathname}>
