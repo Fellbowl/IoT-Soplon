@@ -208,10 +208,6 @@ export default function Home() {
           <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
             Proyecto Académico de Ingeniería
           </p>
-          <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginTop: '0.5rem', fontStyle: 'italic' }}>
-            Pontificia Universidad Javeriana • Fundamentos en IoT y Aplicaciones<br/>
-            Tutor: Wilder Eduardo Castellanos Hernández, PhD
-          </p>
           <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '1.5rem', fontFamily: 'monospace' }}>
             Bogotá DC, Colombia
           </p>
