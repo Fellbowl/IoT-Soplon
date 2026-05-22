@@ -299,8 +299,7 @@ def build_mqtt_client() -> mqtt.Client:
     client = mqtt.Client(client_id=DEVICE_ID)
     if MQTT_USER:
         client.username_pw_set(MQTT_USER, MQTT_PASS)
-    if CA_CERT:
-        client.tls_set(ca_certs=CA_CERT, tls_version=ssl.PROTOCOL_TLS)
+    client.tls_set(tls_version=ssl.PROTOCOL_TLS_CLIENT)
     client.on_connect = lambda c, u, f, rc: log.info(f"MQTT conectado (rc={rc})")
     client.on_disconnect = lambda c, u, rc: log.warning(f"MQTT desconectado (rc={rc})")
     return client
