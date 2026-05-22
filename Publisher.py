@@ -300,7 +300,12 @@ def build_mqtt_client() -> mqtt.Client:
     if MQTT_USER:
         client.username_pw_set(MQTT_USER, MQTT_PASS)
     client.tls_set(tls_version=ssl.PROTOCOL_TLS_CLIENT)
-    client.on_connect = lambda c, u, f, rc: log.info(f"MQTT conectado (rc={rc})")
+    def on_connect(c, u, f, rc):
+        if rc == 0:
+            log.info("MQTT conectado correctamente")
+        else:
+            log.error(f"MQTT rechazado por el broker (rc={rc})")
+    client.on_connect = on_connect
     client.on_disconnect = lambda c, u, rc: log.warning(f"MQTT desconectado (rc={rc})")
     return client
 
