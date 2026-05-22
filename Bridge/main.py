@@ -5,39 +5,51 @@ import paho.mqtt.client as mqtt
 import threading
 from dotenv import load_dotenv
 from supabase import create_client
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 from datetime import datetime, timezone, timedelta
-
 
 load_dotenv()
 
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_SECRET_KEY")
+supabase     = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
-
-MQTT_BROKER = os.getenv("MQTT_BROKER")
-MQTT_PORT   = int(os.getenv("MQTT_PORT", 8883))
-MQTT_TOPIC  = os.getenv("MQTT_TOPIC")
+MQTT_BROKER   = os.getenv("MQTT_BROKER")
+MQTT_PORT     = int(os.getenv("MQTT_PORT", 8883))
+MQTT_TOPIC    = os.getenv("MQTT_TOPIC")
 MQTT_USER     = os.getenv("MQTT_USER")
 MQTT_PASSWORD = os.getenv("MQTT_PASSWORD")
 
-ALLOWED_ORIGIN = os.getenv("ALLOWED_ORIGIN")
-PORT = int(os.getenv("PORT", 5000))
+ALLOWED_ORIGIN = os.getenv("ALLOWED_ORIGIN", "*")
+PORT           = int(os.getenv("PORT", 5000))
 
 app = Flask(__name__)
 CORS(app, origins=[ALLOWED_ORIGIN])
+
+# ─────────────────────────────────────────────
+# Endpoints REST
+# ─────────────────────────────────────────────
 
 @app.route("/api/health")
 def health():
     return jsonify({"status": "ok"})
 
-# Una forma de asegurar que siempre veas algo de data al cargar:
+
 @app.route("/api/readings")
 def readings():
-    # Intenta traer los últimos 5 minutos...
-    since = (datetime.now(timezone.utc) - timedelta(minutes=5)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    """
+    Devuelve lecturas en orden cronológico.
+    Query params:
+      - minutes (int, default 5): ventana de tiempo hacia atrás
+      - limit   (int, default 20): fallback si no hay datos recientes
+    """
+    minutes = int(request.args.get("minutes", 5))
+    limit   = int(request.args.get("limit", 20))
+
+    since = (datetime.now(timezone.utc) - timedelta(minutes=minutes)) \
+                .strftime("%Y-%m-%dT%H:%M:%SZ")
+
     response = (
         supabase.table("sensor_readings")
         .select("*")
@@ -45,51 +57,158 @@ def readings():
         .order("timestamp", desc=False)
         .execute()
     )
-    
-    # ...pero si no hay nada, trae al menos los últimos 20 registros históricos
+
     if not response.data:
         response = (
             supabase.table("sensor_readings")
             .select("*")
             .order("timestamp", desc=True)
-            .limit(20)
+            .limit(limit)
             .execute()
         )
-        # Invertimos para que el gráfico los muestre en orden cronológico
         return jsonify(list(reversed(response.data)))
-        
+
     return jsonify(response.data)
+
+
+@app.route("/api/alerts")
+def alerts():
+    """
+    Devuelve las filas que tuvieron al menos una alerta activa.
+    Query params:
+      - minutes (int, default 30): ventana de búsqueda
+      - limit   (int, default 50)
+    """
+    minutes = int(request.args.get("minutes", 30))
+    limit   = int(request.args.get("limit", 50))
+
+    since = (datetime.now(timezone.utc) - timedelta(minutes=minutes)) \
+                .strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    response = (
+        supabase.table("sensor_readings")
+        .select("timestamp, device_id, alerts, posture_alert, wind_status, fall_detected")
+        .gte("timestamp", since)
+        .neq("alerts", "[]")          # solo filas con alertas
+        .order("timestamp", desc=True)
+        .limit(limit)
+        .execute()
+    )
+
+    return jsonify(response.data)
+
+
+@app.route("/api/session/summary")
+def session_summary():
+    """
+    Resumen estadístico de la sesión más reciente (últimas N horas).
+    Útil para la vista Historial del dashboard.
+    """
+    hours = float(request.args.get("hours", 2))
+    since = (datetime.now(timezone.utc) - timedelta(hours=hours)) \
+                .strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    response = (
+        supabase.table("sensor_readings")
+        .select(
+            "timestamp, posture_ok, wind_status, wind_speed_kmh, "
+            "temperature_c, fall_detected, alerts"
+        )
+        .gte("timestamp", since)
+        .order("timestamp", desc=False)
+        .execute()
+    )
+
+    data = response.data
+    if not data:
+        return jsonify({"error": "no data"}), 404
+
+    total = len(data)
+    posture_ok_count = sum(1 for r in data if r.get("posture_ok"))
+    fall_count       = sum(1 for r in data if r.get("fall_detected"))
+    temps            = [r["temperature_c"] for r in data if r.get("temperature_c") is not None]
+    winds            = [r["wind_speed_kmh"] for r in data if r.get("wind_speed_kmh") is not None]
+
+    alert_counts = {}
+    for r in data:
+        for a in (r.get("alerts") or []):
+            alert_counts[a] = alert_counts.get(a, 0) + 1
+
+    return jsonify({
+        "total_readings":    total,
+        "posture_ok_pct":    round(posture_ok_count / total * 100, 1) if total else 0,
+        "fall_count":        fall_count,
+        "avg_temperature_c": round(sum(temps) / len(temps), 2) if temps else None,
+        "max_wind_kmh":      round(max(winds), 1) if winds else None,
+        "alert_counts":      alert_counts,
+        "from":              data[0]["timestamp"],
+        "to":                data[-1]["timestamp"],
+    })
+
+
+# ─────────────────────────────────────────────
+# MQTT — mapeo de payload v2
+# ─────────────────────────────────────────────
 
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
-        print(f"Conectado al broker MQTT")
+        print(f"[MQTT] Conectado al broker, suscrito a: {MQTT_TOPIC}")
         client.subscribe(MQTT_TOPIC)
     else:
-        print(f"Error de conexión, código: {rc}")
+        print(f"[MQTT] Error de conexión, código: {rc}")
+
 
 def on_message(client, userdata, msg):
     try:
         payload = json.loads(msg.payload.decode())
-        print(f"Mensaje recibido: {payload}")
+        print(f"[MQTT] Mensaje recibido: {payload}")
 
         row = {
-            "device_id":   payload.get("device_id", "unknown"),
-            "timestamp":   payload.get("timestamp"),
-            "temperature": payload.get("temperature"),
-            "pressure":    payload.get("pressure"),
-            "accel_x":     payload.get("accel_x"),
-            "accel_y":     payload.get("accel_y"),
-            "accel_z":     payload.get("accel_z"),
-            "gyro_x":      payload.get("gyro_x"),
-            "gyro_y":      payload.get("gyro_y"),
-            "gyro_z":      payload.get("gyro_z"),
+            # ── Identificación ────────────────────────────────────────────
+            "device_id":       payload.get("device_id", "unknown"),
+            "timestamp":       payload.get("timestamp"),
+
+            # ── Ambiente ──────────────────────────────────────────────────
+            "temperature_c":   payload.get("temperature_c"),   # nuevo nombre v2
+            "temperature":     payload.get("temperature_c"),   # alias v1 (retrocompat.)
+
+            # ── Presión / viento ──────────────────────────────────────────
+            "wind_dynamic_pa": payload.get("wind_dynamic_pa"),
+            "wind_speed_kmh":  payload.get("wind_speed_kmh"),
+            "wind_status":     payload.get("wind_status"),     # CALM|FAVORABLE|HEADWIND|CROSSWIND_WARNING
+            "pressure":        payload.get("wind_dynamic_pa"), # alias v1 (retrocompat.)
+
+            # ── Postura ───────────────────────────────────────────────────
+            "pitch_deg":       payload.get("pitch_deg"),
+            "roll_deg":        payload.get("roll_deg"),
+            "posture_ok":      payload.get("posture_ok"),
+            "posture_alert":   payload.get("posture_alert"),   # HEAD_TOO_HIGH|LOW|LEAN_LEFT|RIGHT
+
+            # ── IMU raw ───────────────────────────────────────────────────
+            "accel_x":         payload.get("accel_x"),
+            "accel_y":         payload.get("accel_y"),
+            "accel_z":         payload.get("accel_z"),
+            "gyro_x":          payload.get("gyro_x"),
+            "gyro_y":          payload.get("gyro_y"),
+            "gyro_z":          payload.get("gyro_z"),
+
+            # ── Alertas / seguridad ───────────────────────────────────────
+            "fall_detected":   payload.get("fall_detected", False),
+            "alerts":          json.dumps(payload.get("alerts", [])),  # array → JSON string para Supabase
         }
 
         supabase.table("sensor_readings").insert(row).execute()
-        print(f"Fila insertada en Supabase")
+        print(f"[Supabase] Fila insertada — alertas: {payload.get('alerts', [])}")
 
+    except json.JSONDecodeError as e:
+        print(f"[Error] Payload inválido: {e}")
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"[Error] {e}")
+
+
+# ─────────────────────────────────────────────
+# Arranque
+# ─────────────────────────────────────────────
 
 mqtt_client = mqtt.Client()
 mqtt_client.tls_set(tls_version=ssl.PROTOCOL_TLS)
@@ -97,7 +216,11 @@ mqtt_client.username_pw_set(MQTT_USER, MQTT_PASSWORD)
 mqtt_client.on_connect = on_connect
 mqtt_client.on_message = on_message
 mqtt_client.connect(MQTT_BROKER, MQTT_PORT)
-flask_thread = threading.Thread(target=lambda: app.run(host="0.0.0.0", port=PORT))
+
+flask_thread = threading.Thread(
+    target=lambda: app.run(host="0.0.0.0", port=PORT, use_reloader=False)
+)
 flask_thread.daemon = True
 flask_thread.start()
+
 mqtt_client.loop_forever()
