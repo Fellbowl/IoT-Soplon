@@ -27,6 +27,18 @@ PORT           = int(os.getenv("PORT", 5000))
 app = Flask(__name__)
 CORS(app, origins=[ALLOWED_ORIGIN])
 
+
+def parse_alerts(value):
+    if isinstance(value, list):
+        return value
+    if isinstance(value, str):
+        try:
+            parsed = json.loads(value)
+            return parsed if isinstance(parsed, list) else []
+        except json.JSONDecodeError:
+            return []
+    return []
+
 # ─────────────────────────────────────────────
 # Endpoints REST
 # ─────────────────────────────────────────────
@@ -66,9 +78,11 @@ def readings():
             .limit(limit)
             .execute()
         )
-        return jsonify(list(reversed(response.data)))
+        rows = [dict(row, alerts=parse_alerts(row.get("alerts"))) for row in reversed(response.data)]
+        return jsonify(rows)
 
-    return jsonify(response.data)
+    rows = [dict(row, alerts=parse_alerts(row.get("alerts"))) for row in response.data]
+    return jsonify(rows)
 
 
 @app.route("/api/alerts")
@@ -95,7 +109,8 @@ def alerts():
         .execute()
     )
 
-    return jsonify(response.data)
+    rows = [dict(row, alerts=parse_alerts(row.get("alerts"))) for row in response.data]
+    return jsonify(rows)
 
 
 @app.route("/api/session/summary")
@@ -119,7 +134,7 @@ def session_summary():
         .execute()
     )
 
-    data = response.data
+    data = [dict(row, alerts=parse_alerts(row.get("alerts"))) for row in response.data]
     if not data:
         return jsonify({"error": "no data"}), 404
 
@@ -131,7 +146,7 @@ def session_summary():
 
     alert_counts = {}
     for r in data:
-        for a in (r.get("alerts") or []):
+        for a in parse_alerts(r.get("alerts")):
             alert_counts[a] = alert_counts.get(a, 0) + 1
 
     return jsonify({
@@ -210,7 +225,7 @@ def on_message(client, userdata, msg):
 # Arranque
 # ─────────────────────────────────────────────
 
-mqtt_client = mqtt.Client()
+mqtt_client = mqtt.Client(client_id="soplon-bridge-01")
 mqtt_client.tls_set(tls_version=ssl.PROTOCOL_TLS)
 mqtt_client.username_pw_set(MQTT_USER, MQTT_PASSWORD)
 mqtt_client.on_connect = on_connect

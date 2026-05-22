@@ -5,7 +5,7 @@ import {
 } from "recharts";
 
 // ─── Config ───────────────────────────────────────────────────────────────────
-const BRIDGE_URL  = import.meta.env.VITE_BRIDGE_URL || "http://localhost:5000";
+const BRIDGE_URL  = (import.meta.env.VITE_BRIDGE_URL || "").replace(/\/$/, "");
 const POLL_MS     = 1500;
 const MAX_LIVE_PTS = 120;  // ~2 min de datos live
 
@@ -18,6 +18,18 @@ const WIND_CROSS  =  25;
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 const fmt = (v, d = 1) => (v == null ? "—" : Number(v).toFixed(d));
+const normalizeAlerts = (alerts) => {
+  if (Array.isArray(alerts)) return alerts;
+  if (typeof alerts === "string") {
+    try {
+      const parsed = JSON.parse(alerts);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  }
+  return [];
+};
 const timeLabel = (iso) => {
   if (!iso) return "";
   const d = new Date(iso);
@@ -522,11 +534,17 @@ export default function Dashboard() {
     const mapped = readings.map(r => ({
       ...r,
       t: timeLabel(r.timestamp),
+      alerts: normalizeAlerts(r.alerts),
     }));
     return mapped;
   }, []);
 
   const fetchData = useCallback(async () => {
+    if (!BRIDGE_URL) {
+      setConnected(false);
+      return;
+    }
+
     try {
       const res = await fetch(`${BRIDGE_URL}/api/readings`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
