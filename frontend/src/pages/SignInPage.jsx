@@ -7,8 +7,8 @@ export default function SignInPage() {
       <SignIn 
         routing="path" 
         path="/sign-in" 
-        forceRedirectUrl="/dashboard"
-        signUpUrl="/sign-up" // Buena práctica definirlo aquí también
+        fallbackRedirectUrl="/dashboard"
+        signUpUrl="/sign-up"
       />
     </div>
   )
