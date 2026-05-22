@@ -300,6 +300,7 @@ def build_mqtt_client() -> mqtt.Client:
     if MQTT_USER:
         client.username_pw_set(MQTT_USER, MQTT_PASS)
     client.tls_set(tls_version=ssl.PROTOCOL_TLS_CLIENT)
+    client.enable_logger(log)
     def on_connect(c, u, f, rc):
         if rc == 0:
             log.info("MQTT conectado correctamente")
