@@ -9,12 +9,28 @@ import SignUpPage from './pages/SignUpPage.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+const APP_URL = import.meta.env.VITE_APP_URL || window.location.origin
 
 function AppRoutes() {
   const navigate = useNavigate()
 
+  // Clerk Dev (pk_test_) necesita navegar a URLs absolutas de clerk.accounts.dev
+  // durante el dev-browser handshake. React Router ignora URLs absolutas,
+  // así que las redirigimos con window.location.
+  const clerkNavigate = (to) => {
+    if (to.startsWith('http')) {
+      window.location.href = to
+    } else {
+      navigate(to)
+    }
+  }
+
   return (
-    <ClerkProvider publishableKey={PUBLISHABLE_KEY} navigate={(to) => navigate(to)}>
+    <ClerkProvider
+      publishableKey={PUBLISHABLE_KEY}
+      navigate={clerkNavigate}
+      allowedRedirectOrigins={[APP_URL]}
+    >
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
