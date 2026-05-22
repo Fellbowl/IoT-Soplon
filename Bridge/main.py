@@ -225,7 +225,7 @@ def on_message(client, userdata, msg):
 # Arranque
 # ─────────────────────────────────────────────
 
-mqtt_client = mqtt.Client(client_id="soplon-bridge-01")
+mqtt_client = mqtt.Client()
 mqtt_client.tls_set(tls_version=ssl.PROTOCOL_TLS)
 mqtt_client.username_pw_set(MQTT_USER, MQTT_PASSWORD)
 mqtt_client.on_connect = on_connect
