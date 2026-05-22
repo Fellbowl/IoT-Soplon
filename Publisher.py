@@ -69,7 +69,7 @@ PORT         = int(os.getenv("MQTT_PORT", 8883))
 TOPIC        = os.getenv("MQTT_TOPIC", "soplon/readings")
 MQTT_USER    = os.getenv("MQTT_USER", "")
 MQTT_PASS    = os.getenv("MQTT_PASS", "")
-CA_CERT      = os.getenv("MQTT_CA_CERT", "")      # ruta al CA cert para TLS
+log.info(f"MQTT_USER='{MQTT_USER}' (len={len(MQTT_USER)}), MQTT_PASS len={len(MQTT_PASS)}")
 DEVICE_ID    = os.getenv("DEVICE_ID", "helmet-01")
 INTERVAL_S   = float(os.getenv("PUBLISH_INTERVAL_S", 1.0))
 
