@@ -98,8 +98,10 @@ FALL_ACCEL_THRESHOLD  = float(os.getenv("FALL_ACCEL_THRESHOLD", 3.0))   # múlti
 FALL_CONFIRM_CYCLES   = int(os.getenv("FALL_CONFIRM_CYCLES", 2))
 
 # ── Calibración HX710B ────────────────────────────────────────────────────────
-PRESSURE_OFFSET = int(os.getenv("PRESSURE_OFFSET", 0))
-PRESSURE_SCALE  = float(os.getenv("PRESSURE_SCALE", 1.0))
+PRESSURE_OFFSET      = int(os.getenv("PRESSURE_OFFSET", 0))
+PRESSURE_SCALE       = float(os.getenv("PRESSURE_SCALE", 1.0))
+PRESSURE_TARE_CYCLES = int(os.getenv("PRESSURE_TARE_CYCLES", 20))   # lecturas para auto-tara
+WIND_MAX_SANITY_KMH  = float(os.getenv("WIND_MAX_SANITY_KMH", 150.0))  # clamp de sanidad
 
 # ── Filtro EMA ────────────────────────────────────────────────────────────────
 EMA_ALPHA = float(os.getenv("EMA_ALPHA", 0.2))
@@ -160,21 +162,43 @@ def hx710b_read_raw() -> int:
         raw -= 0x1000000
     return raw
 
+_pressure_tare_offset: int = 0   # se sobreescribe en tare_pressure_sensor()
+
+def tare_pressure_sensor(cycles: int = PRESSURE_TARE_CYCLES) -> int:
+    """
+    Lee N muestras en reposo y establece el offset de tara global.
+    Llamar una vez al arranque con el sensor en calma (sin viento).
+    Retorna el offset calculado.
+    """
+    global _pressure_tare_offset
+    if not GPIO_AVAILABLE:
+        log.info("Tara HX710B omitida (GPIO no disponible)")
+        return 0
+    log.info(f"Tarando HX710B ({cycles} muestras) — mantener sin viento…")
+    readings = [hx710b_read_raw() for _ in range(cycles)]
+    _pressure_tare_offset = int(sum(readings) / len(readings))
+    log.info(f"Tara completada: offset={_pressure_tare_offset}")
+    return _pressure_tare_offset
+
 def read_pressure_pa() -> float:
-    """Retorna presión dinámica en Pascales (calibrada)."""
+    """Retorna presión dinámica en Pascales (calibrada y tarada)."""
     raw = hx710b_read_raw()
-    calibrated = (raw - PRESSURE_OFFSET) * PRESSURE_SCALE
-    # El sensor MPS20N0040D-S tiene fondo de escala ~40 kPa en 2^24 counts
-    # Conversión aproximada: 40000 Pa / 2^23 ≈ 0.00476 Pa/count
+    # Restar tara dinámica + offset manual de env
+    calibrated = (raw - _pressure_tare_offset - PRESSURE_OFFSET) * PRESSURE_SCALE
+    # MPS20N0040D-S: fondo de escala ~40 kPa en 2^23 counts
     pa = calibrated * (40000.0 / 8388608.0)
-    return max(pa, 0.0)   # presión dinámica es siempre ≥ 0
+    return max(pa, 0.0)
 
 def pressure_to_wind_kmh(pa: float) -> float:
     """Bernoulli inverso: v = sqrt(2 * q / rho), convertido a km/h."""
     if pa <= 0:
         return 0.0
     v_ms = math.sqrt(2.0 * pa / AIR_DENSITY_KGM3)
-    return v_ms * 3.6
+    kmh = v_ms * 3.6
+    if kmh > WIND_MAX_SANITY_KMH:
+        log.warning(f"Viento {kmh:.1f} km/h fuera de rango — descartado (pa={pa:.1f} Pa)")
+        return 0.0
+    return kmh
 
 # ─────────────────────────────────────────────
 # Lectura LM75A (temperatura)
@@ -320,6 +344,8 @@ def main():
     imu = mpu6050(0x68)
     imu.set_accel_range(mpu6050.ACCEL_RANGE_4G)
     imu.set_gyro_range(mpu6050.GYRO_RANGE_500DEG)
+
+    tare_pressure_sensor()
 
     fall_detector = FallDetector(FALL_ACCEL_THRESHOLD, FALL_CONFIRM_CYCLES)
     ema_pressure  = EMAFilter(EMA_ALPHA)
