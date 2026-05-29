@@ -94,8 +94,10 @@ WIND_FAVORABLE_KMH    = float(os.getenv("WIND_FAVORABLE_KMH", 10.0))  # >= favor
 WIND_CROSSWIND_KMH    = float(os.getenv("WIND_CROSSWIND_KMH", 25.0))  # >= peligroso cruzado
 
 # ── Caídas ────────────────────────────────────────────────────────────────────
-FALL_ACCEL_THRESHOLD  = float(os.getenv("FALL_ACCEL_THRESHOLD", 3.0))   # múltiplos de g
-FALL_CONFIRM_CYCLES   = int(os.getenv("FALL_CONFIRM_CYCLES", 2))
+FALL_ACCEL_THRESHOLD  = float(os.getenv("FALL_ACCEL_THRESHOLD", 3.0))   # g para detectar impacto
+FALL_STILL_THRESHOLD  = float(os.getenv("FALL_STILL_THRESHOLD", 1.5))   # g para confirmar inmovilidad
+FALL_CONFIRM_CYCLES   = int(os.getenv("FALL_CONFIRM_CYCLES", 2))         # ciclos quieto para confirmar caída
+FALL_WINDOW_CYCLES    = int(os.getenv("FALL_WINDOW_CYCLES", 5))          # ventana máx tras impacto
 
 # ── Calibración HX710B ────────────────────────────────────────────────────────
 PRESSURE_OFFSET      = int(os.getenv("PRESSURE_OFFSET", 0))
@@ -203,9 +205,13 @@ def pressure_to_wind_kmh(pa: float) -> float:
 # ─────────────────────────────────────────────
 # Lectura LM75A (temperatura)
 # ─────────────────────────────────────────────
-def read_lm75a_temperature(bus: smbus2.SMBus, addr: int = 0x48) -> float:
-    """Lee temperatura del LM75A. Retorna °C."""
-    raw = bus.read_i2c_block_data(addr, 0x00, 2)
+def read_lm75a_temperature(bus: smbus2.SMBus, addr: int = 0x48) -> float | None:
+    """Lee temperatura del LM75A. Retorna °C, o None si el sensor no responde."""
+    try:
+        raw = bus.read_i2c_block_data(addr, 0x00, 2)
+    except OSError as e:
+        log.warning(f"LM75A sin respuesta (addr=0x{addr:02X}): {e}")
+        return None
     temp_raw = (raw[0] << 8 | raw[1]) >> 5
     if temp_raw > 1023:
         temp_raw -= 2048
@@ -281,25 +287,53 @@ def evaluate_wind(wind_kmh: float, roll_deg: float) -> tuple[str, bool, bool]:
 # Detección de caídas
 # ─────────────────────────────────────────────
 class FallDetector:
-    def __init__(self, threshold_g: float, confirm_cycles: int):
-        self.threshold_g = threshold_g
-        self.confirm_cycles = confirm_cycles
-        self._counter = 0
+    """
+    Máquina de dos fases:
+      IDLE     → espera pico de impacto (total_g > threshold_g)
+      WAITING  → tras el pico, espera N ciclos con accel baja (inmovilidad)
+                 Si en la ventana no hay inmovilidad suficiente → vuelve a IDLE
+    """
+    _IDLE    = 0
+    _WAITING = 1
+
+    def __init__(self, threshold_g: float, still_threshold_g: float,
+                 confirm_cycles: int, window_cycles: int):
+        self.threshold_g      = threshold_g
+        self.still_threshold_g = still_threshold_g
+        self.confirm_cycles   = confirm_cycles
+        self.window_cycles    = window_cycles
+        self._state           = self._IDLE
+        self._still_count     = 0
+        self._window_count    = 0
+        self._detected        = False
 
     def update(self, accel: dict) -> bool:
-        """
-        Detecta caída por pico de aceleración total (impacto)
-        seguido de aceleración baja sostenida (inmovilidad post-caída).
-        """
         ax, ay, az = accel["x"], accel["y"], accel["z"]
         total_g = math.sqrt(ax**2 + ay**2 + az**2) / 9.81
 
-        if total_g > self.threshold_g:
-            self._counter += 1
-        else:
-            self._counter = max(0, self._counter - 1)
+        if self._state == self._IDLE:
+            if total_g > self.threshold_g:
+                log.debug(f"FallDetector: impacto {total_g:.2f}g — esperando inmovilidad")
+                self._state       = self._WAITING
+                self._still_count = 0
+                self._window_count = 0
+                self._detected    = False
 
-        return self._counter >= self.confirm_cycles
+        elif self._state == self._WAITING:
+            self._window_count += 1
+            if total_g < self.still_threshold_g:
+                self._still_count += 1
+            else:
+                self._still_count = 0   # movimiento → reiniciar conteo de quietud
+
+            if self._still_count >= self.confirm_cycles:
+                self._detected = True
+                self._state    = self._IDLE
+            elif self._window_count >= self.window_cycles:
+                log.debug("FallDetector: ventana agotada sin inmovilidad — descartado")
+                self._state = self._IDLE
+
+        return self._detected
 
 # ─────────────────────────────────────────────
 # Filtro EMA
@@ -347,7 +381,12 @@ def main():
 
     tare_pressure_sensor()
 
-    fall_detector = FallDetector(FALL_ACCEL_THRESHOLD, FALL_CONFIRM_CYCLES)
+    fall_detector = FallDetector(
+        threshold_g       = FALL_ACCEL_THRESHOLD,
+        still_threshold_g = FALL_STILL_THRESHOLD,
+        confirm_cycles    = FALL_CONFIRM_CYCLES,
+        window_cycles     = FALL_WINDOW_CYCLES,
+    )
     ema_pressure  = EMAFilter(EMA_ALPHA)
     ema_temp      = EMAFilter(EMA_ALPHA)
 
@@ -368,7 +407,10 @@ def main():
             pres_raw  = read_pressure_pa()
 
             # ── Filtrado EMA ──────────────────────────────────────────────────
-            temp_c    = ema_temp.update(temp_raw)
+            # Si temp_raw es None (sensor sin respuesta) se reutiliza el último valor del EMA
+            if temp_raw is not None:
+                ema_temp.update(temp_raw)
+            temp_c = ema_temp._value if ema_temp._value is not None else float("nan")
             pres_pa   = ema_pressure.update(pres_raw)
 
             # ── Procesamiento ─────────────────────────────────────────────────
