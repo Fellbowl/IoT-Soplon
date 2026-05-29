@@ -92,6 +92,7 @@ ROLL_MAX_DEG    = float(os.getenv("ROLL_MAX_DEG", 15.0))    # inclinación later
 AIR_DENSITY_KGM3      = float(os.getenv("AIR_DENSITY", 1.225))   # ~Bogotá ~1.0, ajustar
 WIND_FAVORABLE_KMH    = float(os.getenv("WIND_FAVORABLE_KMH", 10.0))  # >= favorable para adelantar
 WIND_CROSSWIND_KMH    = float(os.getenv("WIND_CROSSWIND_KMH", 25.0))  # >= peligroso cruzado
+WIND_DEADBAND_PA      = float(os.getenv("WIND_DEADBAND_PA", 2.0))     # Pa mínimos para registrar viento
 
 # ── Caídas ────────────────────────────────────────────────────────────────────
 FALL_ACCEL_THRESHOLD  = float(os.getenv("FALL_ACCEL_THRESHOLD", 3.0))   # g para detectar impacto
@@ -106,7 +107,7 @@ PRESSURE_TARE_CYCLES = int(os.getenv("PRESSURE_TARE_CYCLES", 20))   # lecturas p
 WIND_MAX_SANITY_KMH  = float(os.getenv("WIND_MAX_SANITY_KMH", 150.0))  # clamp de sanidad
 
 # ── Filtro EMA ────────────────────────────────────────────────────────────────
-EMA_ALPHA = float(os.getenv("EMA_ALPHA", 0.2))
+EMA_ALPHA = float(os.getenv("EMA_ALPHA", 0.15))
 
 # ─────────────────────────────────────────────
 # Inicialización GPIO
@@ -193,7 +194,7 @@ def read_pressure_pa() -> float:
 
 def pressure_to_wind_kmh(pa: float) -> float:
     """Bernoulli inverso: v = sqrt(2 * q / rho), convertido a km/h."""
-    if pa <= 0:
+    if pa <= WIND_DEADBAND_PA:
         return 0.0
     v_ms = math.sqrt(2.0 * pa / AIR_DENSITY_KGM3)
     kmh = v_ms * 3.6
@@ -205,13 +206,9 @@ def pressure_to_wind_kmh(pa: float) -> float:
 # ─────────────────────────────────────────────
 # Lectura LM75A (temperatura)
 # ─────────────────────────────────────────────
-def read_lm75a_temperature(bus: smbus2.SMBus, addr: int = 0x48) -> float | None:
-    """Lee temperatura del LM75A. Retorna °C, o None si el sensor no responde."""
-    try:
-        raw = bus.read_i2c_block_data(addr, 0x00, 2)
-    except OSError as e:
-        log.warning(f"LM75A sin respuesta (addr=0x{addr:02X}): {e}")
-        return None
+def read_lm75a_temperature(bus: smbus2.SMBus, addr: int = 0x48) -> float:
+    """Lee temperatura del LM75A. Retorna °C."""
+    raw = bus.read_i2c_block_data(addr, 0x00, 2)
     temp_raw = (raw[0] << 8 | raw[1]) >> 5
     if temp_raw > 1023:
         temp_raw -= 2048
@@ -407,10 +404,7 @@ def main():
             pres_raw  = read_pressure_pa()
 
             # ── Filtrado EMA ──────────────────────────────────────────────────
-            # Si temp_raw es None (sensor sin respuesta) se reutiliza el último valor del EMA
-            if temp_raw is not None:
-                ema_temp.update(temp_raw)
-            temp_c = ema_temp._value if ema_temp._value is not None else float("nan")
+            temp_c    = ema_temp.update(temp_raw)
             pres_pa   = ema_pressure.update(pres_raw)
 
             # ── Procesamiento ─────────────────────────────────────────────────
