@@ -2,6 +2,10 @@
 
 > Real-time posture, wind, and safety monitoring for cyclists — from sensor to dashboard.
 
+## 🚀 Live Demo
+
+**[io-t-soplon.vercel.app](https://io-t-soplon.vercel.app)**
+
 ![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi-A22846?style=flat&logo=raspberrypi&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
 ![MQTT](https://img.shields.io/badge/MQTT%20TLS%208883-660066?style=flat&logo=mqtt&logoColor=white)
