@@ -320,7 +320,6 @@ If the Bridge logs `PGRST204`, a column referenced in the INSERT does not exist 
 
 **Juan Pablo Arenas** · Mechatronics Engineering · Pontificia Universidad Javeriana, Bogotá  
 GitHub: [@Fellbowl](https://github.com/Fellbowl)  
-LinkedIn: [POR CONFIRMAR]  
 
 ---
 
