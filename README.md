@@ -178,11 +178,11 @@ create table sensor_readings (
 
 ```env
 # MQTT
-MQTT_BROKER=ea90d3f6d7e244689a216f26cc1d804e.s1.eu.hivemq.cloud
+MQTT_BROKER=<your-hivemq-cluster>.hivemq.cloud
 MQTT_PORT=8883
-MQTT_TOPIC=iot/sensor/readings
-MQTT_USER=iot-soplon
-MQTT_PASS=<your-password>
+MQTT_TOPIC=<your/mqtt/topic>
+MQTT_USER=<your-mqtt-user>
+MQTT_PASS=<your-mqtt-password>
 MQTT_CA_CERT=                    # leave blank to use system CAs (HiveMQ Cloud)
 DEVICE_ID=soplon-helmet-01
 
@@ -226,13 +226,13 @@ EMA_ALPHA=0.2
 SUPABASE_URL=https://<project>.supabase.co
 SUPABASE_SECRET_KEY=<service-role-key>
 
-MQTT_BROKER=ea90d3f6d7e244689a216f26cc1d804e.s1.eu.hivemq.cloud
+MQTT_BROKER=<your-hivemq-cluster>.hivemq.cloud
 MQTT_PORT=8883
-MQTT_TOPIC=iot/sensor/readings
-MQTT_USER=iot-soplon
-MQTT_PASSWORD=<your-password>
+MQTT_TOPIC=<your/mqtt/topic>
+MQTT_USER=<your-mqtt-user>
+MQTT_PASSWORD=<your-mqtt-password>
 
-ALLOWED_ORIGIN=https://io-t-soplon.vercel.app
+ALLOWED_ORIGIN=<your-vercel-url>
 PORT=5000
 ```
 
@@ -243,7 +243,7 @@ PORT=5000
 ### 4. Frontend — `frontend/.env.production`
 
 ```env
-VITE_BRIDGE_URL=https://iot-soplon-bridge.onrender.com
+VITE_BRIDGE_URL=https://<your-bridge>.onrender.com
 ```
 
 Run locally:
@@ -267,8 +267,8 @@ VITE_CLERK_PUBLISHABLE_KEY=pk_live_...
 
 Clerk Dashboard → Redirects → add to allowed redirect URLs:
 ```
-https://io-t-soplon.vercel.app/dashboard
-https://io-t-soplon.vercel.app/
+https://<your-vercel-url>/dashboard
+https://<your-vercel-url>/
 ```
 
 > **Note:** Clerk Production instances require a custom domain — `*.vercel.app` is
@@ -320,6 +320,7 @@ If the Bridge logs `PGRST204`, a column referenced in the INSERT does not exist 
 
 **Juan Pablo Arenas** · Mechatronics Engineering · Pontificia Universidad Javeriana, Bogotá  
 GitHub: [@Fellbowl](https://github.com/Fellbowl)  
+LinkedIn: [POR CONFIRMAR]  
 
 ---
 
